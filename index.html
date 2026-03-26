@@ -82,6 +82,12 @@ nav.hidden{transform:translateY(-100%)}
   letter-spacing:.1em;text-transform:uppercase;color:var(--text-sub);
   padding:.5rem 0;border-bottom:1px solid var(--border-light);transition:color .3s}
 .nav-mobile a:hover{color:var(--text)}
+.lang-toggle{font-family:var(--font-display);font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;background:none;border:1.5px solid var(--border);
+  padding:.3rem .6rem;color:var(--text-sub);transition:all .3s var(--ease);margin-left:.8rem}
+.lang-toggle:hover{border-color:var(--text);color:var(--text)}
+[data-en]{transition:opacity .3s}
+.lang-switching [data-en]{opacity:0}
 @media(max-width:640px){
   .nav-links{display:none}
   .nav-burger{display:flex}
@@ -402,6 +408,7 @@ footer a:hover{color:var(--text)}
     <a href="#projects">実績</a>
     <a href="#contact">お問い合わせ</a>
   </div>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
   <button class="nav-burger" id="navBurger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('navMobile').classList.toggle('open')">
     <span></span><span></span><span></span>
   </button>
@@ -427,13 +434,13 @@ footer a:hover{color:var(--text)}
     <div class="mask-reveal-jp">
       <p class="hero-name-jp"><span>小松 尚平</span></p>
     </div>
-    <p class="hero-desc">
+    <p class="hero-desc" data-en="Tackling social challenges through design and technology.&lt;br&gt;Healthcare &amp; Mental Health / War Damage &amp; Disaster / VR / Digital Archive / Security">
       デザインとテクノロジーで社会課題に向き合う。<br>
       医療・メンタルヘルス / 戦災・災害 / VR / デジタルアーカイブ / セキュリティ
     </p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-dark">取材・登壇のご依頼</a>
-      <a href="works/80design.html" class="btn btn-outline">デザインの相談 &rarr;</a>
+      <a href="#contact" class="btn btn-dark" data-en="Press &amp; Speaking">取材・登壇のご依頼</a>
+      <a href="80design/" class="btn btn-outline" data-en="Design Inquiry &amp;rarr;">デザインの相談 &rarr;</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -462,13 +469,13 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>ABOUT</span></div>
-        <div class="section-sublabel">小松尚平について</div>
+        <div class="section-sublabel" data-en="About Shohei Komatsu">小松尚平について</div>
       </div>
       <div>
-        <div class="about-catch reveal">
+        <div class="about-catch reveal" data-en="Making the invisible&lt;br&gt;into something you can experience.">
           見えないものを、<br>体験できるものに変える。
         </div>
-        <div class="about-body reveal reveal-d1">
+        <div class="about-body reveal reveal-d1" data-en="As a VR researcher and design engineer, I work on R&amp;D utilizing VR and AI in healthcare, education, and disaster prevention. At BiPSEE, I lead Japan's first VR digital therapeutics for regulatory approval. At the University of Tokyo, I develop the War Damage VR system.">
           VR研究者 / デザインエンジニアとして、
           医療・教育・防災の領域でVR・AIを活用した研究開発に取り組んでいます。
           BiPSEEでは日本初のVRデジタル治療の実用化を目指し、
@@ -517,7 +524,7 @@ footer a:hover{color:var(--text)}
             <p>うつ病に対するVRデジタル療法の開発。反芻焦点化認知行動療法にVR介入を組み合わせ、プログラム医療機器としての薬事承認を目指す。</p>
           </div>
           <div class="research-card">
-            <h3><a href="works/sensai-vr.html">War Damage VR</a></h3>
+            <h3><a href="wardamagevr/">War Damage VR</a></h3>
             <div class="rc-jp">戦災VR</div>
             <p>戦災・災害の記憶を3D Tilesで再構築し、心理的安全なバーチャル空間で社会課題を体感させるシステム。東京大学渡邉研究室にて開発。</p>
           </div>
@@ -707,7 +714,7 @@ footer a:hover{color:var(--text)}
           <div class="project-item reveal">
             <div class="project-num">02</div>
             <div class="project-info">
-              <h3><a href="works/sensai-vr.html">戦災VR</a></h3>
+              <h3><a href="wardamagevr/">戦災VR</a></h3>
               <p>3D Tilesを活用した戦災VRシステム。心理的安全な空間で社会課題を体験的に伝達。東京大学渡邉研究室。</p>
             </div>
             <div class="project-tags"><span class="tag">3D Tiles</span><span class="tag">Archive</span><span class="tag">Education</span></div>
@@ -844,7 +851,7 @@ footer a:hover{color:var(--text)}
             <div class="contact-card">
               <h3>デザインのご相談</h3>
               <p>中間マージンなしでフリーランスのデザイナー・映像クリエイターを直接ご紹介。大学・行政向けの実績多数。</p>
-              <a href="works/80design.html" class="btn btn-outline">80design を見る &rarr;</a>
+              <a href="80design/" class="btn btn-outline">80design を見る &rarr;</a>
             </div>
           </div>
         </div>
@@ -914,6 +921,32 @@ footer a:hover{color:var(--text)}
     last=st;
   },{passive:true});
 })();
+
+// ===== Language toggle =====
+let currentLang='ja';
+function toggleLang(){
+  let btn=document.getElementById('langToggle');
+  document.body.classList.add('lang-switching');
+  setTimeout(()=>{
+    if(currentLang==='ja'){
+      currentLang='en';
+      btn.textContent='JP';
+      document.querySelectorAll('[data-en]').forEach(el=>{
+        el._jaText=el.innerHTML;
+        el.innerHTML=el.getAttribute('data-en');
+      });
+      document.documentElement.lang='en';
+    }else{
+      currentLang='ja';
+      btn.textContent='EN';
+      document.querySelectorAll('[data-en]').forEach(el=>{
+        if(el._jaText)el.innerHTML=el._jaText;
+      });
+      document.documentElement.lang='ja';
+    }
+    setTimeout(()=>document.body.classList.remove('lang-switching'),50);
+  },150);
+}
 
 // ===== Mobile nav =====
 function closeMobileNav(){

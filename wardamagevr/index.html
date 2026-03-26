@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>戦災VR — Shohei Komatsu</title>
+<meta name="description" content="3D Tilesとデジタルアーカイブ技術を活用し、戦災の記憶を心理的安全なバーチャル空間で体験・継承するシステム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafaf8;
+  --bg-alt:#f2f1ed;
+  --surface:#fff;
+  --border:#e5e4e0;
+  --border-light:#eeede9;
+  --text:#1a1a18;
+  --text-secondary:#6b6b66;
+  --text-tertiary:#9c9c96;
+  --accent-warm:#8b5e3c;
+  --font-body:'Zen Kaku Gothic New','Sora',system-ui,sans-serif;
+  --font-display:'Sora',system-ui,sans-serif;
+  --font-serif:'Shippori Mincho B1',serif;
+  --font-mono:'IBM Plex Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --nav-h:64px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:#1a1a18;color:#fafaf8}
+
+/* GEOMETRIC CANVAS */
+#geo-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  background:rgba(250,250,248,.85);backdrop-filter:blur(20px) saturate(1.4);
+  border-bottom:1px solid var(--border-light)}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:.9rem;letter-spacing:-.03em}
+.nav-back{font-size:.8rem;font-weight:500;color:var(--text-secondary);display:flex;align-items:center;gap:.4rem;
+  transition:color .3s}
+.nav-back:hover{color:var(--text)}
+
+/* HERO */
+.work-hero{padding:calc(var(--nav-h) + 4rem) clamp(1.5rem,4vw,4rem) 3rem;
+  position:relative;overflow:hidden;z-index:1}
+.work-hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(var(--border-light) 1px,transparent 1px),linear-gradient(90deg,var(--border-light) 1px,transparent 1px);
+  background-size:80px 80px;opacity:.4;pointer-events:none}
+.work-hero-content{position:relative;max-width:720px;
+  opacity:0;transform:translateY(24px);animation:revealUp .8s .2s var(--ease-out) forwards}
+.work-badge{font-family:var(--font-mono);font-size:.68rem;font-weight:500;
+  color:var(--text-tertiary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.work-title{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;
+  line-height:1.15;letter-spacing:-.02em;margin-bottom:.8rem}
+.work-subtitle{font-size:.9rem;color:var(--text-secondary);line-height:2;max-width:560px}
+@keyframes revealUp{to{opacity:1;transform:translateY(0)}}
+
+/* CONTENT */
+.work-content{max-width:720px;margin:0 auto;padding:2rem clamp(1.5rem,4vw,4rem) 4rem;position:relative;z-index:1}
+.work-section{margin-bottom:3rem;opacity:0;transform:translateY(24px);transition:all .7s var(--ease-out)}
+.work-section.visible{opacity:1;transform:none}
+.work-section h2{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:.8rem;
+  padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.work-section p{font-size:.88rem;color:var(--text-secondary);line-height:2}
+.work-section p+p{margin-top:.8rem}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}
+@media(max-width:640px){.info-grid{grid-template-columns:1fr}}
+.info-card{padding:1rem;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
+.info-card .label{font-family:var(--font-mono);font-size:.62rem;font-weight:600;color:var(--text-tertiary);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+.info-card .value{font-size:.82rem;font-weight:500;line-height:1.5}
+
+/* IMAGE PLACEHOLDER */
+.image-placeholder{width:100%;aspect-ratio:16/9;border-radius:6px;
+  background:var(--bg-alt);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-tertiary);font-size:.78rem;margin:2rem 0;text-align:center}
+
+/* TECH TAGS */
+.tech-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.8rem}
+.tech-tag{font-family:var(--font-mono);font-size:.62rem;font-weight:500;padding:.25rem .55rem;
+  border-radius:4px;border:1px solid var(--border);color:var(--text-secondary);letter-spacing:.03em}
+
+/* RELATED */
+.related-section{padding:3rem clamp(1.5rem,4vw,4rem);background:var(--bg-alt);position:relative;z-index:1}
+.related-section h2{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;text-align:center;margin-bottom:1.5rem}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.6rem;max-width:720px;margin:0 auto}
+.related-card{padding:1.2rem;border:1px solid var(--border);border-radius:6px;background:var(--surface);
+  transition:all .3s var(--ease-out);display:block}
+.related-card:hover{border-color:var(--text-tertiary);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.related-card h3{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
+.related-card p{font-size:.75rem;color:var(--text-secondary);line-height:1.6}
+
+/* FOOTER */
+footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px solid var(--border-light);
+  font-size:.7rem;color:var(--text-tertiary);position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<canvas id="geo-canvas"></canvas>
+
+<nav>
+  <a href="../" class="nav-logo">shohei.k</a>
+  <a href="../" class="nav-back">&larr; Back</a>
+</nav>
+
+<div class="work-hero">
+  <div class="work-hero-grid"></div>
+  <div class="work-hero-content">
+    <div class="work-badge">Works / Research Project</div>
+    <h1 class="work-title">戦災VR</h1>
+    <p class="work-subtitle">
+      3D Tilesとデジタルアーカイブ技術を活用し、戦災の記憶を心理的安全なバーチャル空間で体験・継承するシステム。
+      東京大学 渡邉英徳研究室にて開発。
+    </p>
+  </div>
+</div>
+
+<div class="work-content">
+
+  <div class="work-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Affiliation</div>
+        <div class="value">東京大学 大学院学際情報学府<br>渡邉英徳研究室</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Role</div>
+        <div class="value">特任研究員 / プロジェクトリード<br>VR体験設計・開発</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Period</div>
+        <div class="value">2022 — Present</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Exhibition</div>
+        <div class="value">大阪・関西万博 国連パビリオン<br>NHK / TBS 等メディア多数</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-placeholder">
+    画像を追加<br><small>&lt;img src="path/to/image.jpg"&gt; に差し替えてください</small>
+  </div>
+
+  <div class="work-section">
+    <h2>概要</h2>
+    <p>
+      戦災VRは、第二次世界大戦中の空襲や原爆被害の記憶を、3D Tiles技術を用いてバーチャル空間に再構築するプロジェクトです。
+      古写真、証言、歴史資料をもとに、当時の街並みや被害状況をVR空間内で体験できるシステムを開発しています。
+    </p>
+    <p>
+      従来の写真や映像だけでは伝えきれない空間的・感覚的な体験を、心理的安全性に配慮したデザインで提供することで、
+      戦争体験の次世代への継承と、平和教育への新しいアプローチを実現します。
+    </p>
+  </div>
+
+  <div class="work-section">
+    <h2>アプローチ</h2>
+    <p>
+      3D Tiles規格を採用し、大規模な3Dデータを効率的にストリーミング配信。
+      ユーザーは自由にバーチャル空間内を移動し、被災地の様子を体感できます。
+      心理的安全性を担保するため、体験の強度を段階的に調整できるインタラクション設計を導入しています。
+    </p>
+    <p>
+      古写真のカラー化技術（渡邉研究室の知見）と組み合わせ、モノクロ写真からリアルな色彩を復元。
+      証言音声やテキストと連動させることで、より深い理解と共感を促すマルチモーダルな体験を実現しています。
+    </p>
+  </div>
+
+  <div class="work-section">
+    <h2>技術スタック</h2>
+    <div class="tech-tags">
+      <span class="tech-tag">3D Tiles</span>
+      <span class="tech-tag">WebXR</span>
+      <span class="tech-tag">Three.js</span>
+      <span class="tech-tag">Unity</span>
+      <span class="tech-tag">Photogrammetry</span>
+      <span class="tech-tag">GIS</span>
+      <span class="tech-tag">Digital Archive</span>
+      <span class="tech-tag">VR Interaction Design</span>
+    </div>
+  </div>
+
+  <div class="work-section">
+    <h2>メディア掲載</h2>
+    <p>
+      NHK「首都圏ネットワーク」にて戦災VRプロジェクトが特集されたほか、
+      NHK Eテレ「科学の扉、開けちゃいました。」、NHK「ブラタモリ」東京大学SP、
+      TBS NEWS DIGなど複数のテレビ番組で取り上げられています。
+    </p>
+    <p>
+      2025年の大阪・関西万博では国連パビリオンにて「零式水上偵察機VR」とともに展示。
+      TBSとの共同制作による歴史継承VRコンテンツとして公開されました。
+    </p>
+  </div>
+
+  <div class="work-section">
+    <h2>関連論文</h2>
+    <p>
+      <strong>3D Tilesを用いた戦災VRシステムの開発</strong><br>
+      日本バーチャルリアリティ学会 学術大会論文集（2023）
+    </p>
+  </div>
+
+  <div class="image-placeholder">
+    追加の画像やスクリーンショット<br><small>&lt;img src="path/to/image.jpg"&gt; に差し替えてください</small>
+  </div>
+
+</div>
+
+<div class="related-section">
+  <h2>関連プロジェクト</h2>
+  <div class="related-grid">
+    <a href="#" class="related-card">
+      <h3>VRデジタル療法</h3>
+      <p>うつ病向けVRデジタル療法。BiPSEE &times; 高知大学医学部の産学連携。</p>
+    </a>
+    <a href="#" class="related-card">
+      <h3>零式水上偵察機VR</h3>
+      <p>大阪・関西万博 国連パビリオン展示。TBSとの共同制作。</p>
+    </a>
+    <a href="#" class="related-card">
+      <h3>古写真VR</h3>
+      <p>古写真と証言から戦災の記憶をVR空間に復元する次世代継承プロジェクト。</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Shohei Komatsu</p>
+</footer>
+
+<script>
+(function(){
+  const els=document.querySelectorAll('.work-section');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
+  },{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+// ===== GEOMETRIC MOTION ANIMATION =====
+(function(){
+  const canvas=document.getElementById('geo-canvas');
+  const ctx=canvas.getContext('2d');
+  let w,h;
+  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}
+  window.addEventListener('resize',resize);resize();
+
+  const palette=[
+    {r:140,g:94,b:60,a:.06},{r:90,g:110,b:130,a:.05},
+    {r:120,g:140,b:100,a:.04},{r:160,g:120,b:80,a:.05},{r:100,g:90,b:120,a:.04}
+  ];
+
+  class Geo{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*w;this.y=Math.random()*h*2;this.size=Math.random()*18+6;
+      this.sides=Math.floor(Math.random()*3)+3;this.rot=Math.random()*Math.PI*2;
+      this.rotV=(Math.random()-.5)*.003;this.vy=-(Math.random()*.08+.02);
+      this.col=palette[Math.floor(Math.random()*palette.length)];
+      this.phase=Math.random()*Math.PI*2;this.filled=Math.random()>.7;
+      this.lineW=Math.random()>.5?1:.6;
+    }
+    update(t){
+      this.rot+=this.rotV;this.y+=this.vy;
+      this.x+=Math.sin(t*.0003+this.phase)*.15;
+      if(this.y<-this.size*3){this.y=h+this.size*3+Math.random()*200;this.x=Math.random()*w}
+    }
+    draw(){
+      ctx.save();ctx.translate(this.x,this.y-window.scrollY*.15);ctx.rotate(this.rot);
+      ctx.beginPath();
+      for(let i=0;i<this.sides;i++){
+        const a=(Math.PI*2/this.sides)*i-Math.PI/2;
+        const px=Math.cos(a)*this.size,py=Math.sin(a)*this.size;
+        i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+      }
+      ctx.closePath();const{r,g,b,a}=this.col;
+      if(this.filled){ctx.fillStyle=`rgba(${r},${g},${b},${a*.5})`;ctx.fill()}
+      ctx.strokeStyle=`rgba(${r},${g},${b},${a*1.5})`;ctx.lineWidth=this.lineW;ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  const geos=[];for(let i=0;i<30;i++)geos.push(new Geo());
+  const dots=[];
+  for(let i=0;i<40;i++){
+    dots.push({x:Math.random()*w,y:Math.random()*h*2,r:Math.random()*2+.5,
+      vy:-(Math.random()*.04+.01),col:palette[Math.floor(Math.random()*palette.length)],
+      phase:Math.random()*Math.PI*2});
+  }
+
+  let t=0;
+  function animate(){
+    t++;ctx.clearRect(0,0,w,h);
+    for(let i=0;i<geos.length;i++){
+      for(let j=i+1;j<geos.length;j++){
+        const ax=geos[i].x,ay=geos[i].y-window.scrollY*.15;
+        const bx=geos[j].x,by=geos[j].y-window.scrollY*.15;
+        const dx=ax-bx,dy=ay-by,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<180){ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);
+          ctx.strokeStyle=`rgba(140,120,100,${.025*(1-dist/180)})`;ctx.lineWidth=.4;ctx.stroke()}
+      }
+    }
+    geos.forEach(g=>{g.update(t);g.draw()});
+    dots.forEach(d=>{
+      d.y+=d.vy;d.x+=Math.sin(t*.0006+d.phase)*.08;
+      if(d.y<-10){d.y=h+10;d.x=Math.random()*w}
+      const{r,g,b,a}=d.col;ctx.beginPath();
+      ctx.arc(d.x,d.y-window.scrollY*.08,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${r},${g},${b},${a*1.5})`;ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+</body>
+</html>
