@@ -163,6 +163,12 @@ nav.hidden{transform:translateY(-100%)}
 .mask-reveal-jp .hero-name-jp::after{animation:maskSlide .8s .5s var(--ease) forwards}
 .mask-reveal-jp .hero-name-jp span{animation:textShow .001s .84s forwards}
 
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;
+  opacity:0;transform:translateX(-20px);animation:slideIn .8s .95s var(--ease) forwards}
+.hero-tag{font-family:var(--font-display);font-size:.68rem;font-weight:600;
+  padding:.35rem .8rem;border:1.5px solid var(--text);color:var(--text);
+  letter-spacing:.03em;transition:all .3s var(--ease)}
+.hero-tag:hover{background:var(--text);color:#fff}
 .hero-desc{font-size:clamp(.88rem,1.1vw,1rem);color:var(--text-sub);line-height:2.2;
   max-width:480px;
   opacity:0;transform:translateX(-20px);animation:slideIn .8s .9s var(--ease) forwards}
@@ -434,10 +440,16 @@ footer a:hover{color:var(--text)}
     <div class="mask-reveal-jp">
       <p class="hero-name-jp"><span>小松 尚平</span></p>
     </div>
-    <p class="hero-desc" data-en="Tackling social challenges through design and technology.&lt;br&gt;Healthcare &amp; Mental Health / War Damage &amp; Disaster / VR / Digital Archive / Security">
-      デザインとテクノロジーで社会課題に向き合う。<br>
-      医療・メンタルヘルス / 戦災・災害 / VR / デジタルアーカイブ / セキュリティ
+    <p class="hero-desc" data-en="Tackling social challenges through design and technology.">
+      デザインとテクノロジーで社会課題に向き合う。
     </p>
+    <div class="hero-tags">
+      <span class="hero-tag" data-en="Healthcare">医療・メンタルヘルス</span>
+      <span class="hero-tag" data-en="War Damage &amp; Disaster">戦災・災害</span>
+      <span class="hero-tag" data-en="VR">VR</span>
+      <span class="hero-tag" data-en="Digital Archive">デジタルアーカイブ</span>
+      <span class="hero-tag" data-en="Security">セキュリティ</span>
+    </div>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-dark" data-en="Press &amp; Speaking">取材・登壇のご依頼</a>
       <a href="80design/" class="btn btn-outline" data-en="Design Inquiry &amp;rarr;">デザインの相談 &rarr;</a>
