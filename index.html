@@ -35,7 +35,13 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--text);color:#fff}
 
 /* VANTA BG */
-#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+section,.hero,.marquee{position:relative;z-index:1}
+section::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);z-index:-1;pointer-events:none}
+.about-section::before{background:rgba(245,244,240,.7)}
+.projects-section::before{background:rgba(245,244,240,.7)}
+.career-section::before{background:rgba(245,244,240,.7)}
+.video-section::before{background:rgba(245,244,240,.7)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
