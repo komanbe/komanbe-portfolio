@@ -35,8 +35,8 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--text);color:#fff}
 
 /* VANTA BG */
-#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3}
-#vanta-fog{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply}
+#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25}
+#vanta-fog{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4}
 section,.hero,.marquee{position:relative;z-index:1}
 section::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);z-index:-1;pointer-events:none}
 .about-section::before{background:rgba(245,244,240,.7)}
@@ -73,8 +73,8 @@ nav.hidden{transform:translateY(-100%)}
   margin-bottom:2.5rem;overflow:hidden}
 .hero-label span{display:inline-block;opacity:0;transform:translateY(100%);
   animation:letterUp .6s var(--ease) forwards}
-.hero-name{font-family:var(--font-display);font-size:clamp(4rem,11vw,9rem);font-weight:900;
-  line-height:.88;letter-spacing:-.05em;margin-bottom:.4rem}
+.hero-name{font-family:var(--font-display);font-size:clamp(4rem,11vw,9rem);font-weight:300;
+  line-height:.88;letter-spacing:-.04em;margin-bottom:.4rem}
 .hero-name .line{display:block;overflow:hidden}
 .hero-name .line span{display:inline-block;opacity:0;transform:translateY(105%);
   animation:letterUp .8s var(--ease) forwards}
@@ -337,7 +337,7 @@ footer a:hover{color:var(--text)}
       </div>
       <div>
         <div class="about-catch reveal">
-          そのこだわり、<br>誰かの夢中に変えてみせます。
+          見えないものを、<br>体験できるものに変える。
         </div>
         <div class="about-body reveal reveal-d1">
           VR研究者 / デザインエンジニアとして、
@@ -471,7 +471,7 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label">MEDIA</div>
-        <div class="section-sublabel">メディア出演・掲載</div>
+        <div class="section-sublabel">メディア出演</div>
       </div>
       <div>
         <div class="reveal">
@@ -485,26 +485,70 @@ footer a:hover{color:var(--text)}
           </div>
         </div>
         <div class="reveal">
-          <div class="media-cat-title">Events &amp; Exhibitions</div>
-          <div class="media-list">
-            <div class="media-item"><span class="media-tag expo">EXPO</span><div class="media-info"><h4>大阪・関西万博 国連パビリオン</h4><p>戦災VR・零式水上偵察機VRの展示</p></div></div>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="media-cat-title">Government &amp; Advisory</div>
-          <div class="media-list">
-            <div class="media-item"><span class="media-tag gov">経産省</span><div class="media-info"><h4>経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p>委員</p></div></div>
-            <div class="media-item"><span class="media-tag gov">総務省</span><div class="media-info"><h4>総務省「異能vation」ジェネレーションアワード</h4><p>2020年度 受賞（ユメノグラフィア）</p></div></div>
-            <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4>日本デザイン会議（DOO）</h4><p>日本デザインミュージアム設立研究委員会</p></div></div>
-            <div class="media-item"><span class="media-tag gov">港区</span><div class="media-info"><h4>港区 選定委員</h4><p>自治体選定委員</p></div></div>
-          </div>
-        </div>
-        <div class="reveal">
           <div class="media-cat-title">Web &amp; Press</div>
           <div class="media-list">
             <div class="media-item"><span class="media-tag web">PIVOT</span><div class="media-info"><h4>PIVOT EXTREME SCIENCE</h4><p>VR &times; 脳科学 &times; 哲学 — 茂木健一郎 &times; 竹下隆一郎（2024）</p></div></div>
             <div class="media-item"><span class="media-tag web">KDDI</span><div class="media-info"><h4>MUGENLABO Magazine</h4><p>VRで医療革命を！うつ病治療の新たな選択肢</p></div></div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1100px;margin:0 auto"></div>
+
+<!-- EXHIBITIONS -->
+<section id="exhibitions">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label">EXHIBITIONS</div>
+        <div class="section-sublabel">展示</div>
+      </div>
+      <div>
+        <div class="media-list reveal">
+          <div class="media-item"><span class="media-tag expo">EXPO</span><div class="media-info"><h4>大阪・関西万博 国連パビリオン</h4><p>戦災VR・零式水上偵察機VRの展示（2025）</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1100px;margin:0 auto"></div>
+
+<!-- AWARDS -->
+<section id="awards" class="about-section">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label">AWARDS</div>
+        <div class="section-sublabel">受賞</div>
+      </div>
+      <div>
+        <div class="media-list reveal">
+          <div class="media-item"><span class="media-tag gov">総務省</span><div class="media-info"><h4>総務省「異能vation」ジェネレーションアワード</h4><p>2020年度 受賞（ユメノグラフィア）</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1100px;margin:0 auto"></div>
+
+<!-- ADVISORY -->
+<section id="advisory">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label">ADVISORY</div>
+        <div class="section-sublabel">行政委員・審議会</div>
+      </div>
+      <div>
+        <div class="media-list reveal">
+          <div class="media-item"><span class="media-tag gov">経産省</span><div class="media-info"><h4>経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p>委員</p></div></div>
+          <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4>日本デザイン会議（DOO）</h4><p>日本デザインミュージアム設立研究委員会</p></div></div>
+          <div class="media-item"><span class="media-tag gov">港区</span><div class="media-info"><h4>港区 選定委員</h4><p>自治体選定委員</p></div></div>
         </div>
       </div>
     </div>
@@ -750,23 +794,23 @@ if(typeof VANTA!=='undefined'){
   });
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
 <script>
-if(typeof VANTA!=='undefined'&&VANTA.FOG){
-  VANTA.FOG({
+if(typeof VANTA!=='undefined'&&VANTA.CLOUDS){
+  VANTA.CLOUDS({
     el:'#vanta-fog',
     mouseControls:false,
     touchControls:false,
     gyroControls:false,
     minHeight:200,
     minWidth:200,
-    highlightColor:0xf5f4f0,
-    midtoneColor:0xe8e7e3,
-    lowlightColor:0xdddcda,
-    baseColor:0xffffff,
-    blurFactor:.4,
-    speed:.8,
-    zoom:.6
+    skyColor:0xf0efe8,
+    cloudColor:0xe5e4df,
+    cloudShadowColor:0xd8d7d2,
+    sunColor:0xffffff,
+    sunGlareColor:0xffffff,
+    sunlightColor:0xffffff,
+    speed:.6
   });
 }
 </script>
