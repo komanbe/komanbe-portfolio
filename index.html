@@ -35,8 +35,10 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--text);color:#fff}
 
 /* VANTA BG */
-#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25}
-#vanta-fog{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4}
+#vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  filter:url(#glass-distort)}
+#vanta-fog{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
+  filter:url(#glass-distort)}
 section,.hero,.marquee{position:relative;z-index:1}
 /* noise grain overlay on sections */
 section::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
@@ -106,32 +108,32 @@ nav.hidden{transform:translateY(-100%)}
   20%,100%{clip-path:none;transform:none}
 }
 
-/* TEXT REVEAL — black mask slide from left */
+/* TEXT REVEAL — black mask slide from left, text hidden until mask covers */
 .hero-name{font-family:var(--font-display);font-size:clamp(4rem,11vw,9rem);font-weight:300;
   line-height:.88;letter-spacing:-.04em;margin-bottom:.4rem;position:relative}
 .hero-name .line{display:block;overflow:hidden;position:relative}
-.hero-name .line span{display:inline-block;opacity:0;transform:translateX(-40px)}
+.hero-name .line span{display:inline-block;visibility:hidden}
 .hero-name .line::after{content:'';position:absolute;inset:0;background:var(--text);
-  transform:translateX(-101%)}
+  transform:translateX(-101%);z-index:1}
 .mask-reveal .line::after{animation:maskSlide 1s var(--ease) forwards}
-.mask-reveal .line:nth-child(2)::after{animation-delay:.12s}
-.mask-reveal .line span{animation:textAppear 0s .45s forwards}
+.mask-reveal .line:nth-child(2)::after{animation-delay:.15s}
+.mask-reveal .line span{animation:textShow .001s .42s forwards}
 .mask-reveal .line:nth-child(2) span{animation-delay:.57s}
 @keyframes maskSlide{
   0%{transform:translateX(-101%)}
-  45%{transform:translateX(0)}
+  42%{transform:translateX(0)}
   100%{transform:translateX(101%)}
 }
-@keyframes textAppear{to{opacity:1;transform:translateX(0)}}
+@keyframes textShow{to{visibility:visible}}
 
 /* sub elements — same mask style */
 .hero-name-jp{font-family:var(--font-serif);font-size:clamp(.9rem,1.6vw,1.15rem);font-weight:500;
   color:var(--text-sub);letter-spacing:.3em;margin:1.5rem 0 2.5rem;
   position:relative;overflow:hidden}
-.hero-name-jp span{display:inline-block;opacity:0;transform:translateX(-20px)}
-.hero-name-jp::after{content:'';position:absolute;inset:0;background:var(--text);transform:translateX(-101%)}
+.hero-name-jp span{display:inline-block;visibility:hidden}
+.hero-name-jp::after{content:'';position:absolute;inset:0;background:var(--text);transform:translateX(-101%);z-index:1}
 .mask-reveal-jp .hero-name-jp::after{animation:maskSlide .8s .5s var(--ease) forwards}
-.mask-reveal-jp .hero-name-jp span{animation:textAppear 0s .85s forwards}
+.mask-reveal-jp .hero-name-jp span{animation:textShow .001s .84s forwards}
 
 .hero-desc{font-size:clamp(.88rem,1.1vw,1rem);color:var(--text-sub);line-height:2.2;
   max-width:480px;
@@ -175,7 +177,13 @@ section{padding:clamp(5rem,10vw,10rem) clamp(2rem,5vw,5rem);position:relative;z-
 .section-left{position:sticky;top:calc(var(--nav-h) + 2rem)}
 @media(max-width:900px){.section-left{position:static}}
 .section-label{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:900;
-  letter-spacing:-.03em;text-transform:uppercase;line-height:1}
+  letter-spacing:-.03em;text-transform:uppercase;line-height:1;
+  position:relative;overflow:hidden;display:inline-block}
+.section-label span{display:inline-block;visibility:hidden}
+.section-label::after{content:'';position:absolute;inset:0;background:var(--text);
+  transform:translateX(-101%);z-index:1}
+.reveal.visible .section-label::after{animation:maskSlide .9s var(--ease) forwards}
+.reveal.visible .section-label span{animation:textShow .001s .38s forwards}
 .section-sublabel{font-size:.78rem;font-weight:500;color:var(--text-sub);margin-top:.5rem}
 .section-readmore{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
   font-family:var(--font-display);font-size:.68rem;font-weight:700;
@@ -185,7 +193,7 @@ section{padding:clamp(5rem,10vw,10rem) clamp(2rem,5vw,5rem);position:relative;z-
 .section-readmore:hover{color:var(--text);border-color:var(--text)}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal{opacity:0;transform:translateX(-30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
 
@@ -350,6 +358,14 @@ footer a:hover{color:var(--text)}
 </head>
 <body>
 
+<!-- SVG Glass Distortion Filter -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;pointer-events:none">
+  <filter id="glass-distort">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.012" numOctaves="3" seed="2" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
 <div id="vanta-fog"></div>
 <div id="vanta-bg"></div>
 
@@ -411,7 +427,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">ABOUT</div>
+        <div class="section-label"><span>ABOUT</span></div>
         <div class="section-sublabel">小松尚平について</div>
       </div>
       <div>
@@ -456,7 +472,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">RESEARCH</div>
+        <div class="section-label"><span>RESEARCH</span></div>
         <div class="section-sublabel">研究領域</div>
       </div>
       <div>
@@ -502,7 +518,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">VIDEO</div>
+        <div class="section-label"><span>VIDEO</span></div>
         <div class="section-sublabel">出演映像</div>
       </div>
       <div>
@@ -551,7 +567,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">MEDIA</div>
+        <div class="section-label"><span>MEDIA</span></div>
         <div class="section-sublabel">メディア出演</div>
       </div>
       <div>
@@ -584,7 +600,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">EXHIBITIONS</div>
+        <div class="section-label"><span>EXHIBITIONS</span></div>
         <div class="section-sublabel">展示</div>
       </div>
       <div>
@@ -603,7 +619,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">AWARDS</div>
+        <div class="section-label"><span>AWARDS</span></div>
         <div class="section-sublabel">受賞</div>
       </div>
       <div>
@@ -622,7 +638,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">ADVISORY</div>
+        <div class="section-label"><span>ADVISORY</span></div>
         <div class="section-sublabel">行政委員・審議会</div>
       </div>
       <div>
@@ -641,7 +657,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">PROJECTS</div>
+        <div class="section-label"><span>PROJECTS</span></div>
         <div class="section-sublabel">主なプロジェクト</div>
       </div>
       <div>
@@ -689,7 +705,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">CREATIVE</div>
+        <div class="section-label"><span>CREATIVE</span></div>
         <div class="section-sublabel">デザイン / Web制作</div>
       </div>
       <div>
@@ -735,7 +751,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">PAPERS</div>
+        <div class="section-label"><span>PAPERS</span></div>
         <div class="section-sublabel">論文・発表</div>
       </div>
       <div>
@@ -755,7 +771,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">CAREER</div>
+        <div class="section-label"><span>CAREER</span></div>
         <div class="section-sublabel">経歴</div>
       </div>
       <div>
@@ -775,7 +791,7 @@ footer a:hover{color:var(--text)}
   <div class="section-inner">
     <div class="section-layout">
       <div class="section-left reveal">
-        <div class="section-label">CONTACT</div>
+        <div class="section-label"><span>CONTACT</span></div>
         <div class="section-sublabel">つながる</div>
       </div>
       <div>
