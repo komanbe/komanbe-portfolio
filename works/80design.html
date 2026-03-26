@@ -81,6 +81,16 @@ section{padding:clamp(4rem,8vw,7rem) clamp(2rem,5vw,5rem)}
 .value-text h3{font-size:.88rem;font-weight:700;margin-bottom:.15rem}
 .value-text p{font-size:.78rem;color:var(--text-sub);line-height:1.6}
 
+.member-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+.member-card{text-align:center}
+.member-avatar{width:80px;height:80px;border-radius:50%;background:var(--bg-alt);border:1.5px solid var(--border);
+  margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--text-mute);letter-spacing:-.02em}
+.member-name{font-family:var(--font-display);font-size:.88rem;font-weight:700;margin-bottom:.1rem}
+.member-role{font-family:var(--font-display);font-size:.62rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.4rem}
+.member-bio{font-size:.75rem;color:var(--text-sub);line-height:1.6}
+
 .cta-block{text-align:center;padding:4rem 2rem}
 .cta-block h2{font-family:var(--font-serif);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;
   margin-bottom:1rem;line-height:1.6}
@@ -147,6 +157,39 @@ footer{padding:2rem clamp(2rem,5vw,5rem);border-top:1px solid var(--border-light
       <div class="service-card">
         <h3>Direction</h3>
         <p>プロジェクト全体のクリエイティブディレクション。要件定義からデリバリーまで伴走。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">MEMBERS</div>
+    <div class="section-sublabel">メンバー</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-avatar">SK</div>
+        <div class="member-name">小松 尚平</div>
+        <div class="member-role">Founder / Director</div>
+        <div class="member-bio">VR研究者・デザインエンジニア。東京大学特任研究員。全体のクリエイティブディレクションを担当。</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">YT</div>
+        <div class="member-name">田中 悠</div>
+        <div class="member-role">Design Lead</div>
+        <div class="member-bio">UIデザイナー。ブランディングからWebデザインまで、ビジュアル全般を統括。</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">MS</div>
+        <div class="member-name">佐藤 真理</div>
+        <div class="member-role">Engineer</div>
+        <div class="member-bio">フロントエンドエンジニア。インタラクティブな実装とパフォーマンス最適化を担当。</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">KN</div>
+        <div class="member-name">中村 健太</div>
+        <div class="member-role">Film / Motion</div>
+        <div class="member-bio">映像ディレクター。モーショングラフィックスからドキュメンタリーまで幅広く制作。</div>
       </div>
     </div>
   </div>
