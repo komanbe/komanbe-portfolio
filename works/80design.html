@@ -91,6 +91,19 @@ section{padding:clamp(4rem,8vw,7rem) clamp(2rem,5vw,5rem)}
   letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.4rem}
 .member-bio{font-size:.75rem;color:var(--text-sub);line-height:1.6}
 
+.works-list{display:flex;flex-direction:column}
+.work-item{display:grid;grid-template-columns:3.5rem 1fr auto;gap:1.5rem;align-items:center;
+  padding:1.2rem 0;border-bottom:1px solid var(--border);transition:padding-left .3s var(--ease)}
+.work-item:first-child{border-top:1px solid var(--border)}
+.work-item:hover{padding-left:.8rem}
+@media(max-width:640px){.work-item{grid-template-columns:1fr;gap:.4rem}}
+.work-num{font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--text-mute);letter-spacing:-.03em}
+.work-info h3{font-size:.88rem;font-weight:700;margin-bottom:.1rem}
+.work-info p{font-size:.75rem;color:var(--text-sub);line-height:1.5}
+.work-tags{display:flex;gap:.3rem;flex-wrap:wrap}
+.work-tag{font-family:var(--font-display);font-size:.54rem;font-weight:700;padding:.2rem .5rem;
+  border:1px solid var(--border);color:var(--text-mute);letter-spacing:.06em;text-transform:uppercase}
+
 .cta-block{text-align:center;padding:4rem 2rem}
 .cta-block h2{font-family:var(--font-serif);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;
   margin-bottom:1rem;line-height:1.6}
@@ -158,6 +171,63 @@ footer{padding:2rem clamp(2rem,5vw,5rem);border-top:1px solid var(--border-light
       <div class="service-card">
         <h3>Direction</h3>
         <p>プロジェクト全体のクリエイティブディレクション。要件定義からデリバリーまで伴走。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">WORKS</div>
+    <div class="section-sublabel">制作実績</div>
+    <div class="works-list">
+      <div class="work-item">
+        <div class="work-num">01</div>
+        <div class="work-info">
+          <h3>デザインシップ 2024 イベント映像</h3>
+          <p>日本最大級のデザインカンファレンスのオープニング映像・セッション間映像の企画制作。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Film</span><span class="work-tag">Motion</span></div>
+      </div>
+      <div class="work-item">
+        <div class="work-num">02</div>
+        <div class="work-info">
+          <h3>デザインシップ 生配信オペレーション</h3>
+          <p>カンファレンスのライブ配信（マルチカメラ・スイッチング・テロップ・アーカイブ配信）の設計・運用。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Live</span><span class="work-tag">Streaming</span></div>
+      </div>
+      <div class="work-item">
+        <div class="work-num">03</div>
+        <div class="work-info">
+          <h3>東京大学 英語Webサイト</h3>
+          <p>東京大学の国際広報向け英語Webサイトの情報設計・デザインディレクション。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Web</span><span class="work-tag">IA</span></div>
+      </div>
+      <div class="work-item">
+        <div class="work-num">04</div>
+        <div class="work-info">
+          <h3>カンファレンスノベルティ デザイン</h3>
+          <p>Tシャツ・トートバッグ・ステッカー等のグッズデザイン・入稿・発注管理。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Novelty</span><span class="work-tag">Goods</span></div>
+      </div>
+      <div class="work-item">
+        <div class="work-num">05</div>
+        <div class="work-info">
+          <h3>イベントポスター・キービジュアル</h3>
+          <p>カンファレンス・展示会向けのメインビジュアル・ポスター・SNSバナーの制作。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Poster</span><span class="work-tag">Visual</span></div>
+      </div>
+      <div class="work-item">
+        <div class="work-num">06</div>
+        <div class="work-info">
+          <h3>港区 平和都市宣言40周年 制作支援</h3>
+          <p>行政イベントに伴うクリエイティブ制作支援。</p>
+        </div>
+        <div class="work-tags"><span class="work-tag">Government</span><span class="work-tag">Event</span></div>
       </div>
     </div>
   </div>
