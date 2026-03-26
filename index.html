@@ -74,7 +74,26 @@ nav.hidden{transform:translateY(-100%)}
 .hero-label span{display:inline-block;opacity:0;transform:translateY(100%);
   animation:letterUp .6s var(--ease) forwards}
 .hero-name{font-family:var(--font-display);font-size:clamp(4rem,11vw,9rem);font-weight:300;
-  line-height:.88;letter-spacing:-.04em;margin-bottom:.4rem}
+  line-height:.88;letter-spacing:-.04em;margin-bottom:.4rem;position:relative}
+.hero-name .line span{position:relative}
+.hero-name .line span::before,.hero-name .line span::after{content:attr(data-text);position:absolute;left:0;top:0;
+  overflow:hidden;clip-path:inset(0);opacity:0;pointer-events:none}
+.hero-name .line span::before{animation:glitch1 4s infinite linear alternate-reverse;color:var(--text)}
+.hero-name .line span::after{animation:glitch2 4s infinite linear alternate-reverse;color:var(--text)}
+@keyframes glitch1{
+  0%,92%{opacity:0;clip-path:inset(0)}
+  93%{opacity:.7;clip-path:inset(20% 0 60% 0);transform:translateX(-3px)}
+  94%{opacity:0}
+  96%{opacity:.5;clip-path:inset(50% 0 20% 0);transform:translateX(2px)}
+  97%,100%{opacity:0}
+}
+@keyframes glitch2{
+  0%,94%{opacity:0;clip-path:inset(0)}
+  95%{opacity:.6;clip-path:inset(60% 0 10% 0);transform:translateX(4px)}
+  96%{opacity:0}
+  98%{opacity:.4;clip-path:inset(10% 0 70% 0);transform:translateX(-2px)}
+  99%,100%{opacity:0}
+}
 .hero-name .line{display:block;overflow:hidden}
 .hero-name .line span{display:inline-block;opacity:0;transform:translateY(105%);
   animation:letterUp .8s var(--ease) forwards}
@@ -269,6 +288,31 @@ footer{padding:2.5rem clamp(2rem,5vw,5rem);border-top:1px solid var(--border-lig
   letter-spacing:.06em;position:relative;z-index:1}
 footer a:hover{color:var(--text)}
 @media(max-width:640px){footer{flex-direction:column;gap:.5rem}}
+
+/* PROFILE MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(10,10,10,.45);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+  transition:opacity .4s var(--ease)}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-box{background:var(--surface);max-width:700px;width:92%;max-height:85vh;overflow-y:auto;
+  padding:clamp(2rem,4vw,3.5rem);position:relative;
+  border:1px solid var(--border);
+  transform:translateY(20px) scale(.97);transition:transform .4s var(--ease)}
+.modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:1.5px solid var(--border);
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1rem;color:var(--text-sub);
+  transition:all .3s var(--ease)}
+.modal-close:hover{border-color:var(--text);color:var(--text)}
+.modal-title{font-family:var(--font-display);font-size:1.4rem;font-weight:800;
+  letter-spacing:-.02em;text-transform:uppercase;margin-bottom:.3rem}
+.modal-subtitle{font-family:var(--font-serif);font-size:.85rem;color:var(--text-sub);margin-bottom:2rem}
+.modal-section{margin-bottom:1.8rem}
+.modal-section-label{font-family:var(--font-display);font-size:.62rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute);
+  margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1.5px solid var(--border)}
+.modal-body{font-size:.84rem;color:var(--text-sub);line-height:2}
+.modal-body strong{color:var(--text);font-weight:600}
 </style>
 </head>
 <body>
@@ -294,8 +338,8 @@ footer a:hover{color:var(--text)}
   <div class="hero-content">
     <p class="hero-label"><span style="animation-delay:.1s">V</span><span style="animation-delay:.14s">R</span><span style="animation-delay:.18s">&nbsp;</span><span style="animation-delay:.22s">R</span><span style="animation-delay:.26s">e</span><span style="animation-delay:.3s">s</span><span style="animation-delay:.34s">e</span><span style="animation-delay:.38s">a</span><span style="animation-delay:.42s">r</span><span style="animation-delay:.46s">c</span><span style="animation-delay:.5s">h</span><span style="animation-delay:.54s">e</span><span style="animation-delay:.58s">r</span><span style="animation-delay:.62s">&nbsp;</span><span style="animation-delay:.66s">&amp;</span><span style="animation-delay:.7s">&nbsp;</span><span style="animation-delay:.74s">D</span><span style="animation-delay:.78s">e</span><span style="animation-delay:.82s">s</span><span style="animation-delay:.86s">i</span><span style="animation-delay:.9s">g</span><span style="animation-delay:.94s">n</span><span style="animation-delay:.98s">&nbsp;</span><span style="animation-delay:1.02s">E</span><span style="animation-delay:1.06s">n</span><span style="animation-delay:1.1s">g</span><span style="animation-delay:1.14s">i</span><span style="animation-delay:1.18s">n</span><span style="animation-delay:1.22s">e</span><span style="animation-delay:1.26s">e</span><span style="animation-delay:1.3s">r</span></p>
     <h1 class="hero-name">
-      <span class="line"><span>Shohei</span></span>
-      <span class="line"><span>Komatsu</span></span>
+      <span class="line"><span data-text="Shohei">Shohei</span></span>
+      <span class="line"><span data-text="Komatsu">Komatsu</span></span>
     </h1>
     <p class="hero-name-jp">小松 尚平</p>
     <p class="hero-desc">
@@ -361,6 +405,9 @@ footer a:hover{color:var(--text)}
           <div class="role">
             <div class="role-info"><strong>LITEVIEW Inc.</strong><br><span>共同創業者（2015〜）</span></div>
           </div>
+        </div>
+        <div class="reveal reveal-d3" style="margin-top:1.5rem">
+          <button class="btn btn-outline" onclick="document.getElementById('profile-modal').classList.add('active')">Full Profile</button>
         </div>
       </div>
     </div>
@@ -721,6 +768,43 @@ footer a:hover{color:var(--text)}
     </div>
   </div>
 </section>
+
+<!-- PROFILE MODAL -->
+<div id="profile-modal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('profile-modal').classList.remove('active')">&times;</button>
+    <div class="modal-title">Shohei Komatsu</div>
+    <div class="modal-subtitle">小松 尚平</div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">Profile</div>
+      <div class="modal-body">
+        1989年（平成元年）生まれ。VR研究者、デザインエンジニア。<strong>東京大学大学院 情報学環 特任研究員</strong>、<strong>高知大学医学部 特任講師</strong>、<strong>株式会社BiPSEE 取締役CPO</strong>、<strong>一般社団法人デザインシップ 理事</strong>。東京大学では、キャンパスウェルビーイング推進アドバイザリーボード委員およびブランドスタジオ アドバイザーも兼任。
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">Career</div>
+      <div class="modal-body">
+        <strong>LITEVIEW株式会社</strong>（2015）および<strong>一般社団法人デザインシップ</strong>（2018）を共同創業。2021年からは高知大学医学部・株式会社BiPSEE 取締役として、日本初のVRデジタル療法の薬事承認を目指し、うつ病向けVR治療プロダクト開発を統括。2023年、東京大学大学院で「戦災VR」を開発。2024年、東京大学ブランドスタジオ設立に携わる。港区平和都市宣言40周年事業実行委員会、経済産業省エンタメ・クリエイティブ産業政策研究会、デザイン白書 2024 などに参加。
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">Awards</div>
+      <div class="modal-body">
+        グッドデザイン賞 / 日テレイマジナリウムアワード2023 XR部門大賞 / JAPAN Metaverse Awards 2025 ベストプロトタイプ賞 / 総務省「異能vation」ジェネレーションアワード 2020
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">Media</div>
+      <div class="modal-body">
+        NHKスペシャル「Z世代と"戦争"」（2023） / NHK「ニュースLIVE！ゆう5時」（2023） / NHK Eテレ「科学の扉、開けちゃいました。」（2024-2025） / PIVOT EXTREME SCIENCE 茂木健一郎 &times; 竹下隆一郎（2024）
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <p>&copy; 2026 Shohei Komatsu</p>
