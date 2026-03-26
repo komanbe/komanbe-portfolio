@@ -29,8 +29,8 @@
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;cursor:crosshair}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.8;overflow-x:hidden;cursor:crosshair}
-a,button{cursor:crosshair}
-a:hover,button:hover{cursor:crosshair}
+a,button,.btn,.social-link,.nav-links a,.reel-btn,.modal-close{cursor:pointer}
+a:hover,button:hover{cursor:pointer}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--text);color:#fff}
 
@@ -38,11 +38,13 @@ a{color:inherit;text-decoration:none}
 #vanta-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25}
 #vanta-fog{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4}
 section,.hero,.marquee{position:relative;z-index:1}
-section::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);z-index:-1;pointer-events:none}
-.about-section::before{background:rgba(245,244,240,.7)}
-.projects-section::before{background:rgba(245,244,240,.7)}
-.career-section::before{background:rgba(245,244,240,.7)}
-.video-section::before{background:rgba(245,244,240,.7)}
+/* noise grain overlay on sections */
+section::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:rgba(255,255,255,.6);
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  background-size:200px 200px}
+.about-section::before,.projects-section::before,.career-section::before,.video-section::before{
+  background-color:rgba(245,244,240,.75)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
@@ -73,39 +75,70 @@ nav.hidden{transform:translateY(-100%)}
   margin-bottom:2.5rem;overflow:hidden}
 .hero-label span{display:inline-block;opacity:0;transform:translateY(100%);
   animation:letterUp .6s var(--ease) forwards}
+/* BG GLITCH */
+.hero::before,.hero::after{content:'';position:absolute;inset:0;background:inherit;pointer-events:none;z-index:0}
+.hero::before{animation:bgGlitch1 3s steps(1,jump-end) infinite alternate both}
+.hero::after{animation:bgGlitch2 3s steps(1,jump-end) infinite alternate both}
+@keyframes bgGlitch1{
+  0%{clip-path:polygon(0 12%,100% 12%,100% 18%,0 18%);transform:translate(-1.5%,.2%)}
+  2%{clip-path:polygon(0 55%,100% 55%,100% 62%,0 62%);transform:translate(2%,-.3%)}
+  4%{clip-path:polygon(0 78%,100% 78%,100% 86%,0 86%);transform:translate(-3%,.1%)}
+  6%{clip-path:polygon(0 32%,100% 32%,100% 35%,0 35%);transform:translate(1.5%,.4%)}
+  8%{clip-path:polygon(0 5%,100% 5%,100% 13%,0 13%);transform:translate(-2%,-.2%)}
+  10%{clip-path:polygon(0 91%,100% 91%,100% 97%,0 97%);transform:translate(3%,.1%)}
+  12%{clip-path:polygon(0 42%,100% 42%,100% 50%,0 50%);transform:translate(-1%,-.5%)}
+  14%{clip-path:polygon(0 67%,100% 67%,100% 72%,0 72%);transform:translate(2.5%,.3%)}
+  16%{clip-path:polygon(0 20%,100% 20%,100% 28%,0 28%);transform:translate(-2.5%,-.1%)}
+  18%{clip-path:polygon(0 3%,100% 3%,100% 8%,0 8%);transform:translate(1%,.2%)}
+  20%,100%{clip-path:none;transform:none}
+}
+@keyframes bgGlitch2{
+  0%{clip-path:polygon(0 65%,100% 65%,100% 73%,0 73%);transform:translate(2%,-.4%)}
+  2%{clip-path:polygon(0 10%,100% 10%,100% 15%,0 15%);transform:translate(-3%,.2%)}
+  4%{clip-path:polygon(0 88%,100% 88%,100% 94%,0 94%);transform:translate(1.5%,.1%)}
+  6%{clip-path:polygon(0 40%,100% 40%,100% 48%,0 48%);transform:translate(-2%,-.3%)}
+  8%{clip-path:polygon(0 25%,100% 25%,100% 30%,0 30%);transform:translate(3.5%,.5%)}
+  10%{clip-path:polygon(0 50%,100% 50%,100% 58%,0 58%);transform:translate(-1%,-.1%)}
+  12%{clip-path:polygon(0 75%,100% 75%,100% 82%,0 82%);transform:translate(2%,.3%)}
+  14%{clip-path:polygon(0 2%,100% 2%,100% 9%,0 9%);transform:translate(-2.5%,-.2%)}
+  16%{clip-path:polygon(0 35%,100% 35%,100% 42%,0 42%);transform:translate(1%,.4%)}
+  18%{clip-path:polygon(0 58%,100% 58%,100% 63%,0 63%);transform:translate(-1.5%,.1%)}
+  20%,100%{clip-path:none;transform:none}
+}
+
+/* TEXT REVEAL — black mask slide from left */
 .hero-name{font-family:var(--font-display);font-size:clamp(4rem,11vw,9rem);font-weight:300;
   line-height:.88;letter-spacing:-.04em;margin-bottom:.4rem;position:relative}
-.hero-name .line span{position:relative}
-.hero-name .line span::before,.hero-name .line span::after{content:attr(data-text);position:absolute;left:0;top:0;
-  overflow:hidden;clip-path:inset(0);opacity:0;pointer-events:none}
-.hero-name .line span::before{animation:glitch1 4s infinite linear alternate-reverse;color:var(--text)}
-.hero-name .line span::after{animation:glitch2 4s infinite linear alternate-reverse;color:var(--text)}
-@keyframes glitch1{
-  0%,92%{opacity:0;clip-path:inset(0)}
-  93%{opacity:.7;clip-path:inset(20% 0 60% 0);transform:translateX(-3px)}
-  94%{opacity:0}
-  96%{opacity:.5;clip-path:inset(50% 0 20% 0);transform:translateX(2px)}
-  97%,100%{opacity:0}
+.hero-name .line{display:block;overflow:hidden;position:relative}
+.hero-name .line span{display:inline-block;opacity:0;transform:translateX(-40px)}
+.hero-name .line::after{content:'';position:absolute;inset:0;background:var(--text);
+  transform:translateX(-101%)}
+.mask-reveal .line::after{animation:maskSlide 1s var(--ease) forwards}
+.mask-reveal .line:nth-child(2)::after{animation-delay:.12s}
+.mask-reveal .line span{animation:textAppear 0s .45s forwards}
+.mask-reveal .line:nth-child(2) span{animation-delay:.57s}
+@keyframes maskSlide{
+  0%{transform:translateX(-101%)}
+  45%{transform:translateX(0)}
+  100%{transform:translateX(101%)}
 }
-@keyframes glitch2{
-  0%,94%{opacity:0;clip-path:inset(0)}
-  95%{opacity:.6;clip-path:inset(60% 0 10% 0);transform:translateX(4px)}
-  96%{opacity:0}
-  98%{opacity:.4;clip-path:inset(10% 0 70% 0);transform:translateX(-2px)}
-  99%,100%{opacity:0}
-}
-.hero-name .line{display:block;overflow:hidden}
-.hero-name .line span{display:inline-block;opacity:0;transform:translateY(105%);
-  animation:letterUp .8s var(--ease) forwards}
-.hero-name .line:nth-child(2) span{animation-delay:.15s}
+@keyframes textAppear{to{opacity:1;transform:translateX(0)}}
+
+/* sub elements — same mask style */
 .hero-name-jp{font-family:var(--font-serif);font-size:clamp(.9rem,1.6vw,1.15rem);font-weight:500;
   color:var(--text-sub);letter-spacing:.3em;margin:1.5rem 0 2.5rem;
-  opacity:0;animation:fadeUp .8s .5s var(--ease) forwards}
+  position:relative;overflow:hidden}
+.hero-name-jp span{display:inline-block;opacity:0;transform:translateX(-20px)}
+.hero-name-jp::after{content:'';position:absolute;inset:0;background:var(--text);transform:translateX(-101%)}
+.mask-reveal-jp .hero-name-jp::after{animation:maskSlide .8s .5s var(--ease) forwards}
+.mask-reveal-jp .hero-name-jp span{animation:textAppear 0s .85s forwards}
+
 .hero-desc{font-size:clamp(.88rem,1.1vw,1rem);color:var(--text-sub);line-height:2.2;
   max-width:480px;
-  opacity:0;animation:fadeUp .8s .65s var(--ease) forwards}
+  opacity:0;transform:translateX(-20px);animation:slideIn .8s .9s var(--ease) forwards}
 .hero-cta{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;
-  opacity:0;animation:fadeUp .8s .8s var(--ease) forwards}
+  opacity:0;transform:translateX(-20px);animation:slideIn .8s 1.1s var(--ease) forwards}
+@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2.2rem;
   font-family:var(--font-display);font-size:.78rem;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;transition:all .4s var(--ease);border:none;cursor:pointer}
@@ -337,11 +370,13 @@ footer a:hover{color:var(--text)}
 <div class="hero">
   <div class="hero-content">
     <p class="hero-label"><span style="animation-delay:.1s">V</span><span style="animation-delay:.14s">R</span><span style="animation-delay:.18s">&nbsp;</span><span style="animation-delay:.22s">R</span><span style="animation-delay:.26s">e</span><span style="animation-delay:.3s">s</span><span style="animation-delay:.34s">e</span><span style="animation-delay:.38s">a</span><span style="animation-delay:.42s">r</span><span style="animation-delay:.46s">c</span><span style="animation-delay:.5s">h</span><span style="animation-delay:.54s">e</span><span style="animation-delay:.58s">r</span><span style="animation-delay:.62s">&nbsp;</span><span style="animation-delay:.66s">&amp;</span><span style="animation-delay:.7s">&nbsp;</span><span style="animation-delay:.74s">D</span><span style="animation-delay:.78s">e</span><span style="animation-delay:.82s">s</span><span style="animation-delay:.86s">i</span><span style="animation-delay:.9s">g</span><span style="animation-delay:.94s">n</span><span style="animation-delay:.98s">&nbsp;</span><span style="animation-delay:1.02s">E</span><span style="animation-delay:1.06s">n</span><span style="animation-delay:1.1s">g</span><span style="animation-delay:1.14s">i</span><span style="animation-delay:1.18s">n</span><span style="animation-delay:1.22s">e</span><span style="animation-delay:1.26s">e</span><span style="animation-delay:1.3s">r</span></p>
-    <h1 class="hero-name">
+    <h1 class="hero-name mask-reveal">
       <span class="line"><span data-text="Shohei">Shohei</span></span>
       <span class="line"><span data-text="Komatsu">Komatsu</span></span>
     </h1>
-    <p class="hero-name-jp">小松 尚平</p>
+    <div class="mask-reveal-jp">
+      <p class="hero-name-jp"><span>小松 尚平</span></p>
+    </div>
     <p class="hero-desc">
       テクノロジーで想像力を拡張し、<br>
       まだ見ぬ体験を社会に届ける。
