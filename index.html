@@ -536,6 +536,8 @@ footer a:hover{color:var(--text)}
   transition:opacity .5s}
 .tategaki-left{left:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
 .tategaki-right{right:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
+.tategaki-scroll-reveal{opacity:0 !important;transform:translateY(-40%);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.tategaki-scroll-reveal.visible{opacity:.85 !important;transform:translateY(-50%)}
 .tategaki-jp{font-family:var(--font-serif);font-size:clamp(.85rem,1.2vw,1.05rem);font-weight:600;
   color:var(--text);opacity:.35;letter-spacing:.35em;text-orientation:mixed;line-height:1}
 .tategaki-en{position:absolute;bottom:-.5em;left:0;
@@ -582,6 +584,10 @@ footer a:hover{color:var(--text)}
 <div class="tategaki tategaki-left">
   <span class="tategaki-jp">研究とデザインのあいだで</span>
   <span class="tategaki-en">research and design</span>
+</div>
+<div class="tategaki tategaki-right tategaki-scroll-reveal">
+  <span class="tategaki-jp">つくりながら、問い続ける。</span>
+  <span class="tategaki-en">create and question</span>
 </div>
 
 <!-- NAV -->
@@ -1098,6 +1104,15 @@ footer a:hover{color:var(--text)}
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
   },{threshold:.06,rootMargin:'0px 0px -80px 0px'});
   els.forEach(el=>io.observe(el));
+})();
+
+// ===== Tategaki scroll reveal =====
+(function(){
+  const el=document.querySelector('.tategaki-scroll-reveal');
+  if(!el)return;
+  window.addEventListener('scroll',()=>{
+    el.classList.toggle('visible',window.scrollY>300);
+  },{passive:true});
 })();
 
 // ===== Nav hide on scroll =====
