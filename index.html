@@ -466,6 +466,17 @@ footer a:hover{color:var(--text)}
 }
 @media(hover:none){.cursor-lens{display:none}html,body,a,button{cursor:auto !important}}
 
+/* TOUCH BUBBLES — mobile only */
+.touch-bubble{position:fixed;pointer-events:none;z-index:9998;
+  border-radius:50%;border:1px solid rgba(100,180,200,.3);
+  background:radial-gradient(circle at 35% 35%,rgba(100,200,220,.1),rgba(160,120,200,.06),transparent 70%);
+  animation:bubbleFloat 1.6s var(--ease) forwards}
+@keyframes bubbleFloat{
+  0%{transform:scale(0) translateY(0);opacity:.8}
+  40%{transform:scale(1) translateY(-30px);opacity:.6}
+  100%{transform:scale(1.3) translateY(-80px);opacity:0}
+}
+
 /* SPLASH SCREEN */
 .splash{position:fixed;inset:0;z-index:10000;background:#fff;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1169,6 +1180,31 @@ document.querySelectorAll('.reel-card iframe').forEach(iframe=>{
     lens.style.left=lx+'px';lens.style.top=ly+'px';
     requestAnimationFrame(raf);
   })();
+})();
+
+// ===== TOUCH BUBBLES (mobile) =====
+(function(){
+  if(matchMedia('(hover:hover)').matches)return;
+  let last=0;
+  function spawnBubble(x,y){
+    const now=Date.now();
+    if(now-last<120)return;
+    last=now;
+    const b=document.createElement('div');
+    b.className='touch-bubble';
+    const size=Math.random()*30+15;
+    b.style.width=size+'px';b.style.height=size+'px';
+    b.style.left=(x-size/2+Math.random()*20-10)+'px';
+    b.style.top=(y-size/2)+'px';
+    document.body.appendChild(b);
+    b.addEventListener('animationend',()=>b.remove());
+  }
+  document.addEventListener('touchstart',e=>{
+    for(const t of e.touches)spawnBubble(t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    for(const t of e.touches)spawnBubble(t.clientX,t.clientY);
+  },{passive:true});
 })();
 
 // ===== TIME-BASED COLOR SHIFT =====
