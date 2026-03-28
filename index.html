@@ -535,9 +535,12 @@ footer a:hover{color:var(--text)}
   z-index:2;pointer-events:none;user-select:none;
   transition:opacity .5s}
 .tategaki-left{left:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
+.tategaki-left .tategaki-jp .char{display:inline-block;opacity:0;transform:translateX(4px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.tategaki-left.revealed .tategaki-jp .char{opacity:1;transform:translateX(0)}
+.tategaki-left .tategaki-en{opacity:0;transition:opacity .8s var(--ease) .6s}
+.tategaki-left.revealed .tategaki-en{opacity:.38}
 .tategaki-right{right:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
-.tategaki-scroll-reveal{opacity:0 !important;transform:translateY(-40%);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
-.tategaki-scroll-reveal.visible{opacity:.85 !important;transform:translateY(-50%)}
 .tategaki-jp{font-family:var(--font-serif);font-size:clamp(.85rem,1.2vw,1.05rem);font-weight:600;
   color:var(--text);opacity:.35;letter-spacing:.35em;text-orientation:mixed;line-height:1}
 .tategaki-en{position:absolute;bottom:-.5em;left:0;
@@ -584,10 +587,6 @@ footer a:hover{color:var(--text)}
 <div class="tategaki tategaki-left">
   <span class="tategaki-jp">研究とデザインのあいだで</span>
   <span class="tategaki-en">research and design</span>
-</div>
-<div class="tategaki tategaki-right tategaki-scroll-reveal">
-  <span class="tategaki-jp">つくりながら、問い続ける。</span>
-  <span class="tategaki-en">create and question</span>
 </div>
 
 <!-- NAV -->
@@ -1106,13 +1105,21 @@ footer a:hover{color:var(--text)}
   els.forEach(el=>io.observe(el));
 })();
 
-// ===== Tategaki scroll reveal =====
+// ===== Tategaki letter reveal =====
 (function(){
-  const el=document.querySelector('.tategaki-scroll-reveal');
-  if(!el)return;
-  window.addEventListener('scroll',()=>{
-    el.classList.toggle('visible',window.scrollY>300);
+  const tl=document.querySelector('.tategaki-left');
+  if(!tl)return;
+  const jp=tl.querySelector('.tategaki-jp');
+  if(jp){
+    const text=jp.textContent;
+    jp.innerHTML=text.split('').map((c,i)=>
+      `<span class="char" style="transition-delay:${i*0.08}s">${c}</span>`
+    ).join('');
+  }
+  window.addEventListener('scroll',function check(){
+    if(window.scrollY>150){tl.classList.add('revealed');window.removeEventListener('scroll',check)}
   },{passive:true});
+  if(window.scrollY>150)tl.classList.add('revealed');
 })();
 
 // ===== Nav hide on scroll =====
