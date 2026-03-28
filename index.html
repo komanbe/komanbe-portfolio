@@ -474,9 +474,9 @@ footer a:hover{color:var(--text)}
 
 /* TOUCH BUBBLES — mobile only */
 .touch-bubble{position:fixed;pointer-events:none;z-index:9998;
-  border-radius:50%;border:2px solid rgba(80,160,190,.7);
-  background:radial-gradient(circle at 35% 35%,rgba(80,190,210,.35),rgba(140,110,190,.2),transparent 70%);
-  box-shadow:0 0 12px rgba(80,160,190,.25),inset 0 0 6px rgba(255,255,255,.3);
+  border-radius:50%;border:1px solid rgba(100,180,200,.35);
+  background:radial-gradient(circle at 35% 35%,rgba(100,200,220,.15),rgba(160,120,200,.08),transparent 70%);
+  box-shadow:0 0 8px rgba(100,180,200,.1),inset 0 0 4px rgba(255,255,255,.2);
   animation:bubbleFloat 1.8s var(--ease) forwards}
 @keyframes bubbleFloat{
   0%{transform:scale(0) translateY(0);opacity:1}
@@ -543,7 +543,15 @@ footer a:hover{color:var(--text)}
   color:#8a7a6a;opacity:.38;letter-spacing:.05em;text-orientation:mixed;
   text-transform:lowercase;line-height:1;
   transform:translateX(-.1em)}
-@media(max-width:1000px){.tategaki{display:none}}
+@media(max-width:1000px){.tategaki{opacity:.3}
+  .tategaki-jp{font-size:.65rem}
+  .tategaki-left{left:.3rem}
+  .tategaki-right{display:none}
+}
+@media(max-width:480px){.tategaki{opacity:.2}
+  .tategaki-jp{font-size:.55rem}
+  .tategaki-left{left:.15rem}
+}
 </style>
 </head>
 <body>
