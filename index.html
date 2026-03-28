@@ -7,7 +7,7 @@
 <meta name="description" content="小松尚平 — VR研究者 / デザインエンジニア。医療・教育・防災の領域でVR・AIを活用した研究開発。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -27,8 +27,8 @@
   --ease-out:cubic-bezier(.16,1,.3,1);
   --nav-h:72px;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;cursor:crosshair}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.8;overflow-x:hidden;cursor:crosshair}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;cursor:none}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.8;overflow-x:hidden;cursor:none}
 a,button,.btn,.social-link,.nav-links a,.reel-btn,.modal-close{cursor:pointer}
 a:hover,button:hover{cursor:pointer}
 a{color:inherit;text-decoration:none}
@@ -95,7 +95,7 @@ nav.hidden{transform:translateY(-100%)}
 
 /* HERO */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:calc(var(--nav-h) + 3rem) clamp(2rem,5vw,5rem) 4rem;
+  padding:calc(var(--nav-h) + 3rem) clamp(2rem,5vw,5rem) 7rem;
   position:relative;z-index:1;overflow:hidden}
 .hero-overlay{position:absolute;inset:0;z-index:0;
   background:rgba(255,255,255,.5);pointer-events:none}
@@ -389,6 +389,71 @@ footer a:hover{color:var(--text)}
   margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1.5px solid var(--border)}
 .modal-body{font-size:.84rem;color:var(--text-sub);line-height:2}
 .modal-body strong{color:var(--text);font-weight:600}
+
+/* CURSOR LENS — organic blob */
+.cursor-lens{position:fixed;width:130px;height:130px;pointer-events:none;z-index:9999;
+  border:1px solid rgba(100,180,200,.25);
+  background:radial-gradient(circle at 35% 35%,rgba(100,200,220,.08),rgba(160,120,200,.06),transparent 70%);
+  backdrop-filter:hue-rotate(160deg) saturate(1.8) brightness(1.08) contrast(1.05);
+  -webkit-backdrop-filter:hue-rotate(160deg) saturate(1.8) brightness(1.08) contrast(1.05);
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform .4s var(--ease),opacity .4s,border-radius .6s;
+  opacity:0;
+  animation:blobMorph 5s ease-in-out infinite;
+  will-change:transform,left,top,border-radius}
+.cursor-lens.active{transform:translate(-50%,-50%) scale(1);opacity:1}
+.cursor-lens.on-btn{transform:translate(-50%,-50%) scale(.25);opacity:.2;
+  backdrop-filter:none;-webkit-backdrop-filter:none;background:none;
+  border-color:var(--text);animation:none;border-radius:50%}
+.cursor-lens::before{content:'';position:absolute;inset:-1px;
+  border:1px solid rgba(200,220,255,.12);
+  animation:blobMorph 5s .8s ease-in-out infinite;pointer-events:none}
+.cursor-lens::after{content:'';position:absolute;
+  top:18%;left:22%;width:28%;height:18%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.18),transparent);
+  filter:blur(4px);pointer-events:none}
+@keyframes blobMorph{
+  0%{border-radius:42% 58% 62% 38% / 46% 52% 48% 54%}
+  14%{border-radius:54% 46% 38% 62% / 58% 42% 58% 42%}
+  28%{border-radius:38% 62% 54% 46% / 42% 58% 38% 62%}
+  42%{border-radius:62% 38% 46% 54% / 54% 38% 62% 46%}
+  57%{border-radius:46% 54% 58% 42% / 38% 62% 42% 58%}
+  71%{border-radius:58% 42% 42% 58% / 62% 46% 54% 38%}
+  85%{border-radius:48% 52% 56% 44% / 52% 44% 56% 48%}
+  100%{border-radius:42% 58% 62% 38% / 46% 52% 48% 54%}
+}
+@media(hover:none){.cursor-lens{display:none}html,body,a,button{cursor:auto !important}}
+
+/* ABOUT WITH PHOTO — body text + photo side by side */
+.about-with-photo{display:flex;align-items:flex-start;gap:clamp(1.5rem,3vw,2.5rem);margin-bottom:2.5rem}
+.about-with-photo .about-body{flex:1;margin-bottom:0}
+@media(max-width:640px){.about-with-photo{flex-direction:column;gap:1.5rem}}
+
+/* ABOUT PHOTO */
+.about-photo{width:100%;max-width:180px;min-width:140px;aspect-ratio:3/4;overflow:hidden;
+  border:1px solid var(--border);position:relative;flex-shrink:0}
+.about-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3);
+  transition:filter .5s var(--ease)}
+.about-photo:hover img{filter:grayscale(0)}
+.about-photo-placeholder{width:100%;height:100%;background:var(--border-light);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:.65rem;font-weight:600;
+  color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+
+/* TATEGAKI — decorative vertical text with JP/EN layering */
+.tategaki{position:fixed;writing-mode:vertical-rl;
+  z-index:2;pointer-events:none;user-select:none;
+  transition:opacity .5s}
+.tategaki-left{left:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
+.tategaki-right{right:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
+.tategaki-jp{font-family:var(--font-serif);font-size:clamp(.85rem,1.2vw,1.05rem);font-weight:600;
+  color:var(--text);opacity:.35;letter-spacing:.35em;text-orientation:mixed;line-height:1}
+.tategaki-en{position:absolute;bottom:-.5em;left:0;
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.6vw,1.4rem);font-weight:300;font-style:italic;
+  color:#8a7a6a;opacity:.38;letter-spacing:.05em;text-orientation:mixed;
+  text-transform:lowercase;line-height:1;
+  transform:translateX(-.1em)}
+@media(max-width:1000px){.tategaki{display:none}}
 </style>
 </head>
 <body>
@@ -402,6 +467,19 @@ footer a:hover{color:var(--text)}
 </svg>
 
 <div id="vanta-bg"></div>
+
+<!-- CURSOR LENS -->
+<div class="cursor-lens" id="cursorLens"></div>
+
+<!-- TATEGAKI DECORATION -->
+<div class="tategaki tategaki-left">
+  <span class="tategaki-jp">研究とデザインのあいだで</span>
+  <span class="tategaki-en">research and design</span>
+</div>
+<div class="tategaki tategaki-right">
+  <span class="tategaki-jp">つくりながら、問い続ける。</span>
+  <span class="tategaki-en">building, while never stopping to question.</span>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -440,8 +518,8 @@ footer a:hover{color:var(--text)}
     <div class="mask-reveal-jp">
       <p class="hero-name-jp"><span>小松 尚平</span></p>
     </div>
-    <p class="hero-desc" data-en="Tackling social challenges through design and technology.">
-      デザインとテクノロジーで社会課題に向き合う。
+    <p class="hero-desc" data-en="Tackling social challenges through technology.">
+      テクノロジーで社会課題に向き合う。
     </p>
     <div class="hero-tags">
       <span class="hero-tag" data-en="Healthcare">医療・メンタルヘルス</span>
@@ -487,11 +565,16 @@ footer a:hover{color:var(--text)}
         <div class="about-catch reveal" data-en="Building, while&lt;br&gt;never stopping to question.">
           つくりながら、<br>問い続ける。
         </div>
-        <div class="about-body reveal reveal-d1" data-en="As a VR researcher and design engineer, I work on R&amp;D utilizing VR and AI in healthcare, education, and disaster prevention. At BiPSEE, I lead Japan's first VR digital therapeutics for regulatory approval. At the University of Tokyo, I develop the War Damage VR system.">
-          VR研究者 / デザインエンジニアとして、
-          医療・教育・防災の領域でVR・AIを活用した研究開発に取り組んでいます。
-          BiPSEEでは日本初のVRデジタル治療の実用化を目指し、
-          東京大学では戦災VRシステムの開発を推進しています。
+        <div class="about-with-photo reveal reveal-d1">
+          <div class="about-body" data-en="As a VR researcher and design engineer, I work on R&amp;D utilizing VR and AI in healthcare, education, and disaster prevention. At BiPSEE, I lead Japan's first VR digital therapeutics for regulatory approval. At the University of Tokyo, I develop the War Damage VR system.">
+            VR研究者 / デザインエンジニアとして、
+            医療・教育・防災の領域でVR・AIを活用した研究開発に取り組んでいます。
+            BiPSEEでは日本初のVRデジタル治療の実用化を目指し、
+            東京大学では戦災VRシステムの開発を推進しています。
+          </div>
+          <div class="about-photo">
+            <img src="photo.jpg" alt="Shohei Komatsu" onerror="this.parentElement.innerHTML='<div class=\'about-photo-placeholder\'>Photo</div>'">
+          </div>
         </div>
         <div class="role-list reveal reveal-d2">
           <div class="role">
@@ -991,6 +1074,48 @@ document.querySelectorAll('.reel-card iframe').forEach(iframe=>{
     if(ph)ph.style.display='none';
   }
 });
+
+// ===== CURSOR LENS =====
+(function(){
+  const lens=document.getElementById('cursorLens');
+  if(!lens||!matchMedia('(hover:hover)').matches)return;
+  let mx=0,my=0,lx=0,ly=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
+    if(!lens.classList.contains('active'))lens.classList.add('active')});
+  document.addEventListener('mouseleave',()=>lens.classList.remove('active'));
+  // hide lens on interactive elements
+  document.querySelectorAll('a,button,.btn,.social-link,.reel-btn,.modal-close,.nav-links a,.hero-tag,iframe,.video-container').forEach(el=>{
+    el.addEventListener('mouseenter',()=>lens.classList.add('on-btn'));
+    el.addEventListener('mouseleave',()=>lens.classList.remove('on-btn'));
+  });
+  (function raf(){
+    lx+=(mx-lx)*.15;ly+=(my-ly)*.15;
+    lens.style.left=lx+'px';lens.style.top=ly+'px';
+    requestAnimationFrame(raf);
+  })();
+})();
+
+// ===== TIME-BASED COLOR SHIFT =====
+(function(){
+  function updateColors(){
+    const h=new Date().getHours();
+    const m=new Date().getMinutes();
+    const t=(h*60+m)/(24*60); // 0-1 over 24h
+    // subtle hue shift: morning warm, afternoon cool, night deep
+    const hue=Math.round(200+t*40); // 200-240 range (blue-ish shift)
+    const sat=Math.round(15+Math.sin(t*Math.PI*2)*10); // 5-25
+    const light=Math.round(96-Math.sin(t*Math.PI)*4); // 92-96
+    document.documentElement.style.setProperty('--bg',`hsl(${hue},${sat}%,${light}%)`);
+    const altLight=Math.round(94-Math.sin(t*Math.PI)*4);
+    document.documentElement.style.setProperty('--bg-alt',`hsl(${hue},${sat}%,${altLight}%)`);
+    // border color shift
+    const borderLight=Math.round(88-Math.sin(t*Math.PI)*3);
+    document.documentElement.style.setProperty('--border',`hsl(${hue},${Math.round(sat*.6)}%,${borderLight}%)`);
+    document.documentElement.style.setProperty('--border-light',`hsl(${hue},${Math.round(sat*.4)}%,${Math.round(borderLight+3)}%)`);
+  }
+  updateColors();
+  setInterval(updateColors,60000); // update every minute
+})();
 
 // ===== VANTA.JS RINGS BACKGROUND =====
 </script>
