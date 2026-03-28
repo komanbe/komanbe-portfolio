@@ -7,7 +7,7 @@
 <meta name="description" content="小松尚平 — VR研究者 / デザインエンジニア。医療・教育・防災の領域でVR・AIを活用した研究開発。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Yuji+Mai&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -40,11 +40,11 @@ a{color:inherit;text-decoration:none}
 section,.hero,.marquee{position:relative;z-index:1}
 /* noise grain overlay on sections */
 section::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:rgba(255,255,255,.6);
+  background:var(--bg);opacity:.75;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
   background-size:200px 200px}
 .about-section::before,.projects-section::before,.career-section::before,.video-section::before{
-  background-color:rgba(245,244,240,.65)}
+  background:var(--bg-alt);opacity:.8}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
@@ -54,7 +54,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
   border-bottom:1px solid rgba(0,0,0,.04);
   transition:transform .6s var(--ease)}
 nav.hidden{transform:translateY(-100%)}
-.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:-.04em}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:-.04em;
+  display:flex;flex-direction:column;line-height:1.2;position:relative}
+.nav-role{font-size:.52rem;font-weight:500;letter-spacing:.08em;color:var(--text-mute);
+  text-transform:uppercase;margin-top:.1rem}
+.nav-jp-name{position:absolute;top:1.7rem;left:6.5rem;
+  font-family:'Yuji Mai',serif;font-size:.65rem;font-weight:400;
+  color:var(--text);opacity:.1;letter-spacing:.15em;pointer-events:none;white-space:nowrap}
 .nav-links{display:flex;gap:clamp(1.2rem,3vw,2.8rem)}
 .nav-links a{font-family:var(--font-display);font-size:.72rem;font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;color:var(--text-sub);
@@ -163,35 +169,69 @@ nav.hidden{transform:translateY(-100%)}
 .mask-reveal-jp .hero-name-jp::after{animation:maskSlide .8s .5s var(--ease) forwards}
 .mask-reveal-jp .hero-name-jp span{animation:textShow .001s .84s forwards}
 
-.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;
   opacity:0;transform:translateX(-20px);animation:slideIn .8s .95s var(--ease) forwards}
-.hero-tag{font-family:var(--font-display);font-size:.68rem;font-weight:600;
-  padding:.35rem .8rem;border:1.5px solid var(--text);color:var(--text);
+.hero-tag{font-family:var(--font-display);font-size:.65rem;font-weight:500;
+  padding:.3rem 0;color:var(--text-sub);border:none;
   letter-spacing:.03em;transition:all .3s var(--ease)}
-.hero-tag:hover{background:var(--text);color:#fff}
-.hero-desc{font-size:clamp(.88rem,1.1vw,1rem);color:var(--text-sub);line-height:2.2;
-  max-width:480px;
+.hero-tag::after{content:'／';margin-left:.4rem;opacity:.3}
+.hero-tag:last-child::after{display:none}
+.hero-tag:hover{color:var(--text)}
+.hero-desc{font-family:var(--font-serif);font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:600;color:var(--text);line-height:1.6;
+  max-width:none;letter-spacing:.06em;white-space:nowrap;
   opacity:0;transform:translateX(-20px);animation:slideIn .8s .9s var(--ease) forwards}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}
+.glitch::before{color:#7ab8c4;mix-blend-mode:multiply;animation:glitch1 3s infinite;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(120,180,200,.06) 2px,rgba(120,180,200,.06) 4px)}
+.glitch::after{color:#9a8abf;mix-blend-mode:multiply;animation:glitch2 3s infinite .1s;
+  background:repeating-linear-gradient(90deg,transparent,transparent 8px,rgba(150,130,190,.04) 8px,rgba(150,130,190,.04) 10px)}
+@keyframes glitch1{
+  0%,70%{clip-path:inset(0);transform:translate(0);opacity:0}
+  71%{clip-path:inset(15% 0 65% 0);transform:translate(-5px,1px);opacity:1}
+  74%{clip-path:inset(55% 0 15% 0);transform:translate(4px,-1px);opacity:1}
+  77%{clip-path:inset(5% 0 75% 0);transform:translate(-3px,0);opacity:1}
+  80%{clip-path:inset(35% 0 40% 0);transform:translate(6px,1px);opacity:1}
+  83%{clip-path:inset(70% 0 5% 0);transform:translate(-2px,-1px);opacity:.8}
+  86%{clip-path:inset(0);transform:translate(0);opacity:0}
+  89%{clip-path:inset(25% 0 55% 0);transform:translate(3px,0);opacity:.9}
+  92%,100%{clip-path:inset(0);transform:translate(0);opacity:0}
+}
+@keyframes glitch2{
+  0%,72%{clip-path:inset(0);transform:translate(0);opacity:0}
+  73%{clip-path:inset(45% 0 25% 0);transform:translate(5px,-1px);opacity:1}
+  76%{clip-path:inset(10% 0 70% 0);transform:translate(-4px,1px);opacity:1}
+  79%{clip-path:inset(60% 0 15% 0);transform:translate(3px,0);opacity:1}
+  82%{clip-path:inset(20% 0 50% 0);transform:translate(-6px,-1px);opacity:1}
+  85%{clip-path:inset(80% 0 0% 0);transform:translate(2px,1px);opacity:.8}
+  88%{clip-path:inset(0);transform:translate(0);opacity:0}
+  91%{clip-path:inset(50% 0 30% 0);transform:translate(-3px,0);opacity:.9}
+  94%,100%{clip-path:inset(0);transform:translate(0);opacity:0}
+}
 .hero-cta{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;
   opacity:0;transform:translateX(-20px);animation:slideIn .8s 1.1s var(--ease) forwards}
 @keyframes slideIn{to{opacity:1;transform:translateX(0)}}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2.2rem;
-  font-family:var(--font-display);font-size:.78rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;transition:all .4s var(--ease);border:none;cursor:pointer}
-.btn-dark{background:var(--text);color:#fff}
-.btn-dark:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
-.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--text)}
-.btn-outline:hover{background:var(--text);color:#fff;transform:translateY(-3px)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:600;letter-spacing:.04em;
+  transition:all .3s var(--ease);border:none;cursor:pointer;background:none;
+  color:var(--text);border-bottom:1px solid var(--text);text-transform:none}
+.btn-line{display:inline-block;width:1.2em;height:1px;background:var(--text);vertical-align:middle;margin-left:.6em;transition:width .4s var(--ease),background .3s}
+.btn:hover{color:#8a6a5a;border-bottom-color:#8a6a5a}
+.btn:hover .btn-line{width:2.5em;background:#8a6a5a}
+.btn-dark{}
+.btn-dark:hover{}
+.btn-outline{margin-left:.5rem}
+.btn-outline:hover{}
 
 .hero-scroll{position:absolute;bottom:3rem;left:clamp(2rem,5vw,5rem);z-index:2;
   display:flex;align-items:center;gap:1rem;
   font-family:var(--font-display);font-size:.6rem;font-weight:600;color:var(--text);
   letter-spacing:.2em;text-transform:uppercase;
   opacity:0;animation:slideIn .8s 1.2s var(--ease) forwards}
-.scroll-line{width:1px;height:40px;background:var(--text);position:relative;overflow:hidden}
-.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
-  background:var(--text);animation:scrollPulse 2s ease-in-out infinite}
-@keyframes scrollPulse{0%{top:-100%}50%{top:0}100%{top:100%}}
+.scroll-line{width:1px;height:48px;background:rgba(10,10,10,.15);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:50%;
+  background:var(--text);animation:scrollPulse 1.6s ease-in-out infinite}
+@keyframes scrollPulse{0%{top:-50%}100%{top:150%}}
 @keyframes letterUp{to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
@@ -424,6 +464,28 @@ footer a:hover{color:var(--text)}
 }
 @media(hover:none){.cursor-lens{display:none}html,body,a,button{cursor:auto !important}}
 
+/* SPLASH SCREEN */
+.splash{position:fixed;inset:0;z-index:10000;background:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .8s var(--ease),visibility .8s}
+.splash.done{opacity:0;visibility:hidden;pointer-events:none}
+.splash-name{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;
+  letter-spacing:-.03em;color:var(--text);opacity:0;transform:translateY(12px);
+  animation:splashIn .8s .3s var(--ease) forwards}
+.splash-name span{font-weight:400;color:var(--text-mute)}
+.splash-jp{font-family:'Yuji Mai',serif;font-size:clamp(.8rem,1.4vw,1rem);font-weight:400;
+  color:var(--text);opacity:0;letter-spacing:.25em;margin-top:.3rem;
+  animation:splashIn .6s .6s var(--ease) forwards}
+.splash-role{font-family:var(--font-display);font-size:.55rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute);
+  margin-top:.8rem;opacity:0;
+  animation:splashIn .6s .9s var(--ease) forwards}
+.splash-line{width:40px;height:1.5px;background:var(--text);margin-top:1.2rem;
+  transform:scaleX(0);transform-origin:center;
+  animation:splashLine .6s 1.2s var(--ease) forwards}
+@keyframes splashIn{to{opacity:1;transform:translateY(0)}}
+@keyframes splashLine{to{transform:scaleX(1)}}
+
 /* ABOUT WITH PHOTO — body text + photo side by side */
 .about-with-photo{display:flex;align-items:flex-start;gap:clamp(1.5rem,3vw,2.5rem);margin-bottom:2.5rem}
 .about-with-photo .about-body{flex:1;margin-bottom:0}
@@ -458,6 +520,14 @@ footer a:hover{color:var(--text)}
 </head>
 <body>
 
+<!-- SPLASH SCREEN -->
+<div class="splash" id="splash">
+  <div class="splash-name">Shohei Komatsu <span>/ Komanbe</span></div>
+  <div class="splash-jp">小松 尚平</div>
+  <div class="splash-role">VR Researcher & Design Engineer</div>
+  <div class="splash-line"></div>
+</div>
+
 <!-- SVG Glass Distortion Filter -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;pointer-events:none">
   <filter id="glass-distort">
@@ -476,14 +546,10 @@ footer a:hover{color:var(--text)}
   <span class="tategaki-jp">研究とデザインのあいだで</span>
   <span class="tategaki-en">research and design</span>
 </div>
-<div class="tategaki tategaki-right">
-  <span class="tategaki-jp">つくりながら、問い続ける。</span>
-  <span class="tategaki-en">building, while never stopping to question.</span>
-</div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo">Shohei Komatsu <span style="font-weight:400;color:var(--text-mute)">/ Komanbe</span></a>
+  <a href="index.html" class="nav-logo">Shohei Komatsu <span style="font-weight:400;color:var(--text-mute)">/ Komanbe</span><span class="nav-role">VR Researcher & Design Engineer</span><span class="nav-jp-name">小松 尚平</span></a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#research">研究</a>
@@ -510,17 +576,6 @@ footer a:hover{color:var(--text)}
 <div class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-label"><span style="animation-delay:.1s">V</span><span style="animation-delay:.14s">R</span><span style="animation-delay:.18s">&nbsp;</span><span style="animation-delay:.22s">R</span><span style="animation-delay:.26s">e</span><span style="animation-delay:.3s">s</span><span style="animation-delay:.34s">e</span><span style="animation-delay:.38s">a</span><span style="animation-delay:.42s">r</span><span style="animation-delay:.46s">c</span><span style="animation-delay:.5s">h</span><span style="animation-delay:.54s">e</span><span style="animation-delay:.58s">r</span><span style="animation-delay:.62s">&nbsp;</span><span style="animation-delay:.66s">&amp;</span><span style="animation-delay:.7s">&nbsp;</span><span style="animation-delay:.74s">D</span><span style="animation-delay:.78s">e</span><span style="animation-delay:.82s">s</span><span style="animation-delay:.86s">i</span><span style="animation-delay:.9s">g</span><span style="animation-delay:.94s">n</span><span style="animation-delay:.98s">&nbsp;</span><span style="animation-delay:1.02s">E</span><span style="animation-delay:1.06s">n</span><span style="animation-delay:1.1s">g</span><span style="animation-delay:1.14s">i</span><span style="animation-delay:1.18s">n</span><span style="animation-delay:1.22s">e</span><span style="animation-delay:1.26s">e</span><span style="animation-delay:1.3s">r</span></p>
-    <h1 class="hero-name mask-reveal">
-      <span class="line"><span data-text="Shohei">Shohei</span></span>
-      <span class="line"><span data-text="Komatsu">Komatsu</span></span>
-    </h1>
-    <div class="mask-reveal-jp">
-      <p class="hero-name-jp"><span>小松 尚平</span></p>
-    </div>
-    <p class="hero-desc" data-en="Tackling social challenges through technology.">
-      テクノロジーで社会課題に向き合う。
-    </p>
     <div class="hero-tags">
       <span class="hero-tag" data-en="Healthcare">医療・メンタルヘルス</span>
       <span class="hero-tag" data-en="War Damage &amp; Disaster">戦災・災害</span>
@@ -528,9 +583,12 @@ footer a:hover{color:var(--text)}
       <span class="hero-tag" data-en="Digital Archive">デジタルアーカイブ</span>
       <span class="hero-tag" data-en="Security">セキュリティ</span>
     </div>
+    <p class="hero-desc" data-en="Tackling social challenges through technology.">
+      <span class="glitch" data-text="テクノロジー">テクノロジー</span>で社会課題に向き合う。
+    </p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-dark" data-en="Press / Speaking / Research">取材・登壇・共同研究のご相談</a>
-      <a href="80design/" class="btn btn-outline" data-en="Design Inquiry &amp;rarr;">デザインの相談 &rarr;</a>
+      <a href="#contact" class="btn btn-dark" data-en="Press / Speaking / Research"><span>取材・登壇・共同研究のご相談</span><span class="btn-line"></span></a>
+      <a href="80design/" class="btn btn-outline" data-en="Design Inquiry"><span>デザインの相談</span><span class="btn-line"></span></a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -559,7 +617,6 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>ABOUT</span></div>
-        <div class="section-sublabel" data-en="About Shohei Komatsu">小松尚平について</div>
       </div>
       <div>
         <div class="about-catch reveal" data-en="Building, while&lt;br&gt;never stopping to question.">
@@ -1074,6 +1131,14 @@ document.querySelectorAll('.reel-card iframe').forEach(iframe=>{
     if(ph)ph.style.display='none';
   }
 });
+
+// ===== SPLASH SCREEN =====
+(function(){
+  const splash=document.getElementById('splash');
+  if(!splash)return;
+  setTimeout(()=>{splash.classList.add('done')},2200);
+  setTimeout(()=>{splash.remove()},3200);
+})();
 
 // ===== CURSOR LENS =====
 (function(){
