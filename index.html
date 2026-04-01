@@ -529,7 +529,7 @@ footer a:hover{color:var(--text)}
 /* INSTAGRAM SLIDER */
 .ig-slider{margin:2rem 0 0;overflow:hidden;position:relative;width:100%}
 .ig-slider-track{display:flex;gap:.8rem;width:max-content;
-  animation:igScroll 25s linear infinite}
+  animation:igScroll 45s linear infinite}
 .ig-slider-track:hover{animation-play-state:paused}
 @keyframes igScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ig-slider-item{flex:0 0 260px;height:260px;overflow:hidden;
@@ -543,7 +543,8 @@ footer a:hover{color:var(--text)}
   letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.6rem}
 .ig-slider-label a{color:var(--text-mute);text-decoration:none;pointer-events:auto}
 .ig-slider-label a:hover{color:var(--text)}
-@media(max-width:640px){.ig-slider-item{flex:0 0 200px;height:200px}}
+@media(max-width:640px){.ig-slider-item{flex:0 0 200px;height:200px}
+  .ig-slider-track{animation-duration:35s}}
 @media(max-width:640px){
   .hero-desc{white-space:normal;font-size:clamp(1.3rem,5.5vw,1.8rem)}
   .hero-cta{flex-direction:column;gap:.8rem}
