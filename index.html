@@ -607,11 +607,11 @@ footer a:hover{color:var(--text)}
   <a href="index.html" class="nav-logo">Shohei Komatsu <span style="font-weight:400;color:var(--text-mute)">/ Komanbe</span><span class="nav-role">VR Researcher & Design Engineer</span><span class="nav-jp-name">小松 尚平</span></a>
   <div class="nav-links">
     <a href="#about">About</a>
-    <a href="#research">研究</a>
-    <a href="#video">映像</a>
-    <a href="#media">メディア</a>
-    <a href="#projects">実績</a>
-    <a href="#contact">お問い合わせ</a>
+    <a href="#research" data-en="Research">研究</a>
+    <a href="#video" data-en="Video">映像</a>
+    <a href="#media" data-en="Media">メディア</a>
+    <a href="#projects" data-en="Projects">実績</a>
+    <a href="#contact" data-en="Contact">お問い合わせ</a>
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
   <button class="nav-burger" id="navBurger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('navMobile').classList.toggle('open')">
@@ -620,11 +620,11 @@ footer a:hover{color:var(--text)}
 </nav>
 <div class="nav-mobile" id="navMobile">
   <a href="#about" onclick="closeMobileNav()">About</a>
-  <a href="#research" onclick="closeMobileNav()">研究</a>
-  <a href="#video" onclick="closeMobileNav()">映像</a>
-  <a href="#media" onclick="closeMobileNav()">メディア</a>
-  <a href="#projects" onclick="closeMobileNav()">実績</a>
-  <a href="#contact" onclick="closeMobileNav()">お問い合わせ</a>
+  <a href="#research" onclick="closeMobileNav()" data-en="Research">研究</a>
+  <a href="#video" onclick="closeMobileNav()" data-en="Video">映像</a>
+  <a href="#media" onclick="closeMobileNav()" data-en="Media">メディア</a>
+  <a href="#projects" onclick="closeMobileNav()" data-en="Projects">実績</a>
+  <a href="#contact" onclick="closeMobileNav()" data-en="Contact">お問い合わせ</a>
 </div>
 
 <!-- HERO -->
@@ -635,7 +635,7 @@ footer a:hover{color:var(--text)}
       <span class="hero-tag" data-en="Healthcare &amp; Mental Health">医療・メンタルヘルス</span>
       <span class="hero-tag" data-en="War Damage &amp; Disaster">戦災・災害</span>
     </div>
-    <p class="hero-desc" data-en="Tackling social challenges through technology.">
+    <p class="hero-desc" data-en="Tackling social challenges&lt;br&gt;through technology.">
       <span class="glitch" data-text="テクノロジー">テクノロジー</span>で社会課題に向き合う。
     </p>
     <div class="hero-cta">
@@ -682,11 +682,11 @@ footer a:hover{color:var(--text)}
             東京大学では戦災VRシステムの開発を推進しています。
         </div>
         <div class="role-compact reveal reveal-d2">
-          <span>東京大学 特任研究員</span>
-          <span>高知大学医学部 特任講師</span>
+          <span data-en="UTokyo — Project Researcher">東京大学 特任研究員</span>
+          <span data-en="Kochi Univ. Med. — Lecturer">高知大学医学部 特任講師</span>
           <span>BiPSEE CPO</span>
-          <span>Designship 理事</span>
-          <span>LITEVIEW 共同創業者</span>
+          <span data-en="Designship — Board Member">Designship 理事</span>
+          <span data-en="LITEVIEW — Co-founder">LITEVIEW 共同創業者</span>
         </div>
         <div class="reveal reveal-d3" style="margin-top:1.5rem">
           <button class="btn btn-outline" onclick="document.getElementById('profile-modal').classList.add('active')">Full Profile</button>
@@ -720,29 +720,29 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>RESEARCH</span></div>
-        <div class="section-sublabel">研究領域</div>
+        <div class="section-sublabel" data-en="Research Areas">研究領域</div>
       </div>
       <div>
         <div class="research-grid reveal">
           <div class="research-card">
             <h3>VR Digital Therapy</h3>
-            <div class="rc-jp">VRデジタル療法</div>
-            <p>うつ病に対するVRデジタル療法の開発。反芻焦点化認知行動療法にVR介入を組み合わせ、プログラム医療機器としての薬事承認を目指す。</p>
+            <div class="rc-jp" data-en="VR Digital Therapeutics">VRデジタル療法</div>
+            <p data-en="Developing VR digital therapeutics for depression. Combining VR intervention with rumination-focused CBT, aiming for regulatory approval as a software as a medical device (SaMD).">うつ病に対するVRデジタル療法の開発。反芻焦点化認知行動療法にVR介入を組み合わせ、プログラム医療機器としての薬事承認を目指す。</p>
           </div>
           <div class="research-card">
             <h3><a href="wardamagevr/">War Damage VR</a></h3>
-            <div class="rc-jp">戦災VR</div>
-            <p>戦災・災害の記憶を3D Tilesで再構築し、心理的安全なバーチャル空間で社会課題を体感させるシステム。東京大学渡邉英徳研究室にて開発。</p>
+            <div class="rc-jp" data-en="War Damage VR">戦災VR</div>
+            <p data-en="Reconstructing war damage and disaster memories with 3D Tiles, enabling experiential understanding of social issues in a psychologically safe virtual space. Developed at the University of Tokyo, Watanabe Lab.">戦災・災害の記憶を3D Tilesで再構築し、心理的安全なバーチャル空間で社会課題を体感させるシステム。東京大学渡邉英徳研究室にて開発。</p>
           </div>
           <div class="research-card">
             <h3>Information Design</h3>
-            <div class="rc-jp">情報デザイン</div>
-            <p>複雑な情報を直感的に伝えるデザインエンジニアリング。技術と人間の接点をデザインの力で最適化。</p>
+            <div class="rc-jp" data-en="Information Design">情報デザイン</div>
+            <p data-en="Design engineering that communicates complex information intuitively. Optimizing the interface between technology and people through design.">複雑な情報を直感的に伝えるデザインエンジニアリング。技術と人間の接点をデザインの力で最適化。</p>
           </div>
           <div class="research-card">
             <h3>XR Experience</h3>
-            <div class="rc-jp">XR体験設計</div>
-            <p>VR/AR/MRを含むXR技術の体験設計方法論。没入感と安全性を両立するインタラクションデザイン。</p>
+            <div class="rc-jp" data-en="XR Experience Design">XR体験設計</div>
+            <p data-en="Experience design methodology for XR technologies including VR, AR, and MR. Interaction design that balances immersion with safety.">VR/AR/MRを含むXR技術の体験設計方法論。没入感と安全性を両立するインタラクションデザイン。</p>
           </div>
         </div>
       </div>
@@ -756,7 +756,7 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>VIDEO</span></div>
-        <div class="section-sublabel">出演映像</div>
+        <div class="section-sublabel" data-en="Featured Video">出演映像</div>
       </div>
       <div>
         <div class="reel-track reveal" id="reelTrack">
@@ -765,8 +765,8 @@ footer a:hover{color:var(--text)}
               <iframe src="https://www.youtube.com/embed/VKlj_DmoIgU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="reel-info">
-              <h4>VRは人間の想像力を拡張できるか</h4>
-              <p>PIVOT EXTREME SCIENCE — 茂木健一郎 &times; 竹下隆一郎（2024）</p>
+              <h4 data-en="Can VR Expand Human Imagination?">VRは人間の想像力を拡張できるか</h4>
+              <p data-en="PIVOT EXTREME SCIENCE — Ken Mogi &times; Ryuichiro Takeshita (2024)">PIVOT EXTREME SCIENCE — 茂木健一郎 &times; 竹下隆一郎（2024）</p>
             </div>
           </div>
         </div>
@@ -785,21 +785,21 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>MEDIA</span></div>
-        <div class="section-sublabel">メディア出演</div>
+        <div class="section-sublabel" data-en="Media Appearances">メディア出演</div>
       </div>
       <div>
         <div class="reveal">
           <div class="media-cat-title">Television</div>
           <div class="media-list">
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4>NHK Eテレ「科学の扉、開けちゃいました。～理系東大生のステキな好奇心～」</h4><p>戦災VR・うつ病治療VRの研究を紹介（2024-2025）</p></div></div>
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4>NHKスペシャル「Z世代と"戦争"」</h4><p>2023年放送</p></div></div>
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4>NHK「ニュースLIVE！ゆう5時」</h4><p>2023年放送</p></div></div>
+            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK E-TV &quot;Opening the Door of Science&quot;">NHK Eテレ「科学の扉、開けちゃいました。～理系東大生のステキな好奇心～」</h4><p data-en="Featuring War Damage VR and depression treatment VR research (2024-2025)">戦災VR・うつ病治療VRの研究を紹介（2024-2025）</p></div></div>
+            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK Special &quot;Gen Z and War&quot;">NHKスペシャル「Z世代と"戦争"」</h4><p data-en="Aired 2023">2023年放送</p></div></div>
+            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK &quot;News LIVE! Yu 5 Ji&quot;">NHK「ニュースLIVE！ゆう5時」</h4><p data-en="Aired 2023">2023年放送</p></div></div>
           </div>
         </div>
         <div class="reveal">
           <div class="media-cat-title">Web &amp; Press</div>
           <div class="media-list">
-            <div class="media-item"><span class="media-tag web">PIVOT</span><div class="media-info"><h4>PIVOT EXTREME SCIENCE</h4><p>VR &times; 脳科学 &times; 哲学 — 茂木健一郎 &times; 竹下隆一郎（2024）</p></div></div>
+            <div class="media-item"><span class="media-tag web">PIVOT</span><div class="media-info"><h4>PIVOT EXTREME SCIENCE</h4><p data-en="VR &times; Neuroscience &times; Philosophy — Ken Mogi &times; Ryuichiro Takeshita (2024)">VR &times; 脳科学 &times; 哲学 — 茂木健一郎 &times; 竹下隆一郎（2024）</p></div></div>
           </div>
         </div>
       </div>
@@ -815,14 +815,14 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>AWARDS</span></div>
-        <div class="section-sublabel">受賞</div>
+        <div class="section-sublabel" data-en="Awards">受賞</div>
       </div>
       <div>
         <div class="media-list reveal">
-          <div class="media-item"><span class="media-tag award">2025</span><div class="media-info"><h4>JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</h4><p>平和構築メタバース 戦災VR</p></div></div>
-          <div class="media-item"><span class="media-tag award">2023</span><div class="media-info"><h4>日テレイマジナリウムアワード 2023 XR部門 大賞</h4><p>戦災VR</p></div></div>
-          <div class="media-item"><span class="media-tag award">2020</span><div class="media-info"><h4>総務省「異能vation」ジェネレーションアワード</h4><p>ユメノグラフィア</p></div></div>
-          <div class="media-item"><span class="media-tag award">2018</span><div class="media-info"><h4>グッドデザイン賞</h4><p>イヤースピーカー インエアー</p></div></div>
+          <div class="media-item"><span class="media-tag award">2025</span><div class="media-info"><h4 data-en="JAPAN Metaverse Awards 2025 — Best Prototype">JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</h4><p data-en="Peacebuilding Metaverse: War Damage VR">平和構築メタバース 戦災VR</p></div></div>
+          <div class="media-item"><span class="media-tag award">2023</span><div class="media-info"><h4 data-en="NTV Imaginarium Award 2023 — XR Grand Prize">日テレイマジナリウムアワード 2023 XR部門 大賞</h4><p data-en="War Damage VR">戦災VR</p></div></div>
+          <div class="media-item"><span class="media-tag award">2020</span><div class="media-info"><h4 data-en="MIC Inno-vation Generation Award">総務省「異能vation」ジェネレーションアワード</h4><p data-en="Yumenographia">ユメノグラフィア</p></div></div>
+          <div class="media-item"><span class="media-tag award">2018</span><div class="media-info"><h4 data-en="Good Design Award">グッドデザイン賞</h4><p data-en="Ear Speaker inair">イヤースピーカー インエアー</p></div></div>
         </div>
       </div>
     </div>
@@ -837,15 +837,15 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>ADVISORY</span></div>
-        <div class="section-sublabel">行政委員・審議会</div>
+        <div class="section-sublabel" data-en="Advisory &amp; Committees">行政委員・審議会</div>
       </div>
       <div>
         <div class="media-list reveal">
-          <div class="media-item"><span class="media-tag gov">東京大学</span><div class="media-info"><h4>東京大学 コミュニケーション戦略本部 ブランドスタジオ</h4><p>アドバイザー</p></div></div>
-          <div class="media-item"><span class="media-tag gov">東京大学</span><div class="media-info"><h4>東京大学 相談支援研究開発センター<br>キャンパスウェルビーイング推進アドバイザリーボード</h4><p>委員</p></div></div>
-          <div class="media-item"><span class="media-tag gov">経産省</span><div class="media-info"><h4>経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p>オブザーバー</p></div></div>
-          <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4>日本デザイン会議（DOO）</h4><p>日本デザインミュージアム設立研究委員会</p></div></div>
-          <div class="media-item"><span class="media-tag gov">港区</span><div class="media-info"><h4>港区 選定委員</h4><p>自治体選定委員</p></div></div>
+          <div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="University of Tokyo Brand Studio">東京大学 コミュニケーション戦略本部 ブランドスタジオ</h4><p data-en="Advisor">アドバイザー</p></div></div>
+          <div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="University of Tokyo<br>Campus Well-being Advisory Board">東京大学 相談支援研究開発センター<br>キャンパスウェルビーイング推進アドバイザリーボード</h4><p data-en="Board Member">委員</p></div></div>
+          <div class="media-item"><span class="media-tag gov" data-en="METI">経産省</span><div class="media-info"><h4 data-en="METI Entertainment &amp; Creative Industries Study Group">経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p data-en="Observer">オブザーバー</p></div></div>
+          <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4 data-en="Design Organization of Nippon (DOO)">日本デザイン会議（DOO）</h4><p data-en="Japan Design Museum Research Committee">日本デザインミュージアム設立研究委員会</p></div></div>
+          <div class="media-item"><span class="media-tag gov" data-en="Minato">港区</span><div class="media-info"><h4 data-en="Minato City Selection Committee">港区 選定委員</h4><p data-en="Municipal Committee Member">自治体選定委員</p></div></div>
         </div>
       </div>
     </div>
@@ -858,31 +858,31 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>PROJECTS</span></div>
-        <div class="section-sublabel">主なプロジェクト</div>
+        <div class="section-sublabel" data-en="Key Projects">主なプロジェクト</div>
       </div>
       <div>
         <div class="project-list">
           <div class="project-item reveal">
             <div class="project-num">01</div>
             <div class="project-info">
-              <h3>VRデジタル療法（プログラム医療機器）</h3>
-              <p>日本初の薬事承認を目指すうつ病向けVRデジタル療法。BiPSEEで開発。高知大学医学部と連携。</p>
+              <h3 data-en="VR Digital Therapeutics (SaMD)">VRデジタル療法（プログラム医療機器）</h3>
+              <p data-en="Japan's first VR digital therapeutics for depression, aiming for regulatory approval. Developed at BiPSEE in collaboration with Kochi University School of Medicine.">日本初の薬事承認を目指すうつ病向けVRデジタル療法。BiPSEEで開発。高知大学医学部と連携。</p>
             </div>
             <div class="project-tags"><span class="tag">VR</span><span class="tag">Medical</span><span class="tag">SaMD</span></div>
           </div>
           <div class="project-item reveal">
             <div class="project-num">02</div>
             <div class="project-info">
-              <h3><a href="wardamagevr/">戦災VR</a></h3>
-              <p>3D Tilesを活用した戦災VRシステム。心理的安全な空間で社会課題を体験的に伝達。東京大学渡邉英徳研究室。</p>
+              <h3><a href="wardamagevr/" data-en="War Damage VR">戦災VR</a></h3>
+              <p data-en="War damage VR system using 3D Tiles. Experiential communication of social issues in a psychologically safe space. University of Tokyo, Watanabe Lab.">3D Tilesを活用した戦災VRシステム。心理的安全な空間で社会課題を体験的に伝達。東京大学渡邉英徳研究室。</p>
             </div>
             <div class="project-tags"><span class="tag">3D Tiles</span><span class="tag">Archive</span><span class="tag">Education</span></div>
           </div>
           <div class="project-item reveal">
             <div class="project-num">03</div>
             <div class="project-info">
-              <h3>一般社団法人デザインシップ</h3>
-              <p>日本最大級のデザインカンファレンスを運営。デザインの力で社会をより良くするコミュニティ。</p>
+              <h3 data-en="Designship">一般社団法人デザインシップ</h3>
+              <p data-en="Operating one of Japan's largest design conferences. A community dedicated to improving society through the power of design.">日本最大級のデザインカンファレンスを運営。デザインの力で社会をより良くするコミュニティ。</p>
             </div>
             <div class="project-tags"><span class="tag">Design</span><span class="tag">Community</span><span class="tag">Conference</span></div>
           </div>
@@ -958,14 +958,14 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>CAREER</span></div>
-        <div class="section-sublabel">経歴</div>
+        <div class="section-sublabel" data-en="Career">経歴</div>
       </div>
       <div>
         <div class="timeline reveal">
-          <div class="timeline-item"><div class="timeline-year">Present</div><div class="timeline-title">東京大学 特任研究員</div><div class="timeline-desc">ブランドスタジオ / 学際情報学府にて戦災VRシステムを開発</div></div>
-          <div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title">高知大学医学部 特任講師 / BiPSEE CPO</div><div class="timeline-desc">うつ病向けVRデジタル療法・プログラム医療機器の開発を推進</div></div>
-          <div class="timeline-item"><div class="timeline-year">2018 — Present</div><div class="timeline-title">一般社団法人デザインシップ 理事</div><div class="timeline-desc">日本最大級のデザインカンファレンスを共同創設・運営</div></div>
-          <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-title">LITEVIEW Inc. 共同創業</div><div class="timeline-desc">独自の配信システムを開発。東京工業大学との研究も実施</div></div>
+          <div class="timeline-item"><div class="timeline-year">Present</div><div class="timeline-title" data-en="University of Tokyo — Project Researcher">東京大学 特任研究員</div><div class="timeline-desc" data-en="Developing War Damage VR system at Brand Studio / GSII">ブランドスタジオ / 学際情報学府にて戦災VRシステムを開発</div></div>
+          <div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title" data-en="Kochi University School of Medicine — Lecturer / BiPSEE CPO">高知大学医学部 特任講師 / BiPSEE CPO</div><div class="timeline-desc" data-en="Leading development of VR digital therapeutics and SaMD for depression">うつ病向けVRデジタル療法・プログラム医療機器の開発を推進</div></div>
+          <div class="timeline-item"><div class="timeline-year">2018 — Present</div><div class="timeline-title" data-en="Designship — Board Member">一般社団法人デザインシップ 理事</div><div class="timeline-desc" data-en="Co-founded and operating one of Japan's largest design conferences">日本最大級のデザインカンファレンスを共同創設・運営</div></div>
+          <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-title" data-en="LITEVIEW Inc. — Co-founder">LITEVIEW Inc. 共同創業</div><div class="timeline-desc" data-en="Developed a proprietary streaming system. Conducted research with Tokyo Institute of Technology">独自の配信システムを開発。東京工業大学との研究も実施</div></div>
         </div>
       </div>
     </div>
@@ -978,12 +978,12 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>CONTACT</span></div>
-        <div class="section-sublabel">つながる</div>
+        <div class="section-sublabel" data-en="Get in Touch">つながる</div>
       </div>
       <div>
         <div class="contact-grid">
           <div class="reveal">
-            <p class="contact-text">研究コラボレーション、講演依頼、取材のお問い合わせなど、お気軽にご連絡ください。</p>
+            <p class="contact-text" data-en="Feel free to reach out for research collaboration, speaking invitations, or press inquiries.">研究コラボレーション、講演依頼、取材のお問い合わせなど、お気軽にご連絡ください。</p>
             <div class="social-links">
               <a href="https://x.com/komanbe" target="_blank" rel="noopener" class="social-link">X @komanbe</a>
               <a href="https://www.threads.com/@komanbe" target="_blank" rel="noopener" class="social-link">Threads</a>
@@ -997,9 +997,9 @@ footer a:hover{color:var(--text)}
           </div>
           <div class="reveal" style="display:flex;flex-direction:column;gap:1rem">
             <div class="contact-card">
-              <h3>研究のご相談・お問い合わせ</h3>
-              <p>VR &times; 医療、デジタルアーカイブ、デザインエンジニアリングに関するコラボレーションを歓迎します。</p>
-              <a href="https://x.com/komanbe" target="_blank" rel="noopener" class="btn btn-dark">XのDMで連絡</a>
+              <h3 data-en="Research Inquiries">研究のご相談・お問い合わせ</h3>
+              <p data-en="Welcoming collaboration on VR &times; healthcare, digital archives, and design engineering.">VR &times; 医療、デジタルアーカイブ、デザインエンジニアリングに関するコラボレーションを歓迎します。</p>
+              <a href="https://x.com/komanbe" target="_blank" rel="noopener" class="btn btn-dark" data-en="DM on X">XのDMで連絡</a>
             </div>
             <!-- <div class="contact-card">
               <h3>デザインのご相談</h3>
