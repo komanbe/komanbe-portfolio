@@ -313,15 +313,15 @@ section{padding:clamp(5rem,10vw,10rem) clamp(2rem,5vw,5rem);position:relative;z-
   background:var(--border);border:1px solid var(--border);overflow:hidden}
 @media(max-width:640px){.research-grid{grid-template-columns:1fr}}
 .research-card{background:var(--surface);padding:clamp(1.5rem,2.5vw,2.2rem);
-  transition:background .4s var(--ease)}
+  position:relative;overflow:hidden;transition:background .4s var(--ease)}
 .research-card:hover{background:var(--bg-alt)}
-.research-card h3{font-family:var(--font-display);font-size:.88rem;font-weight:800;
-  letter-spacing:-.01em;margin-bottom:.4rem;text-transform:uppercase}
-.research-card h3 a{border-bottom:1.5px solid transparent;transition:border-color .3s}
-.research-card h3 a:hover{border-color:var(--text)}
-.research-card .rc-jp{font-family:var(--font-body);font-size:.82rem;font-weight:500;
-  color:var(--text-sub);margin-bottom:.6rem}
-.research-card p{font-size:.78rem;color:var(--text-mute);line-height:1.8}
+.research-card h3{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;
+  color:rgba(0,0,0,.045);letter-spacing:-.02em;line-height:1.1;text-transform:uppercase;margin-bottom:-.2em}
+.research-card h3 a{border-bottom:none;color:inherit}
+.research-card h3 a:hover{border-bottom:none}
+.research-card .rc-jp{font-family:var(--font-serif);font-size:1.05rem;font-weight:700;
+  color:var(--text);position:relative;z-index:1;margin-bottom:.6rem}
+.research-card p{font-size:.78rem;color:var(--text-mute);line-height:1.8;position:relative;z-index:1}
 
 /* VIDEO */
 .video-section{background:var(--bg-alt)}
@@ -852,7 +852,7 @@ footer a:hover{color:var(--text)}
       <div>
         <div class="media-list reveal">
           <div class="media-item"><span class="media-tag gov">東京大学</span><div class="media-info"><h4>東京大学 コミュニケーション戦略本部 ブランドスタジオ</h4><p>アドバイザー</p></div></div>
-          <div class="media-item"><span class="media-tag gov">東京大学</span><div class="media-info"><h4>東京大学 相談支援研究開発センター, キャンパスウェルビーイング推進アドバイザリーボード</h4><p>委員</p></div></div>
+          <div class="media-item"><span class="media-tag gov">東京大学</span><div class="media-info"><h4>東京大学 相談支援研究開発センター<br>キャンパスウェルビーイング推進アドバイザリーボード</h4><p>委員</p></div></div>
           <div class="media-item"><span class="media-tag gov">経産省</span><div class="media-info"><h4>経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p>オブザーバー</p></div></div>
           <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4>日本デザイン会議（DOO）</h4><p>日本デザインミュージアム設立研究委員会</p></div></div>
           <div class="media-item"><span class="media-tag gov">港区</span><div class="media-info"><h4>港区 選定委員</h4><p>自治体選定委員</p></div></div>
