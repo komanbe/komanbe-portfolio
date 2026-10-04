@@ -390,6 +390,69 @@ section{padding:clamp(5rem,10vw,10rem) clamp(2rem,5vw,5rem);position:relative;z-
 .tag{font-family:var(--font-display);font-size:.56rem;font-weight:700;padding:.2rem .5rem;
   border:1px solid var(--border);color:var(--text-mute);letter-spacing:.06em;text-transform:uppercase}
 
+
+/* WORKS */
+.works-index{display:flex;flex-direction:column;gap:.35rem;margin-top:1.4rem}
+.works-index a{font-size:.72rem;font-weight:500;color:var(--text-sub);border-left:1.5px solid var(--border);padding-left:.7rem;transition:all .3s var(--ease)}
+.works-index a:hover{color:var(--text);border-color:var(--text)}
+@media(max-width:900px){.works-index{flex-direction:row;flex-wrap:wrap;gap:.4rem .9rem}}
+.works-group{margin-bottom:3.5rem;scroll-margin-top:calc(var(--nav-h) + 1rem)}
+.works-group:last-child{margin-bottom:0}
+.works-group-title{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1.5px solid var(--border)}
+.works-group-title .wg-en{font-family:var(--font-display);font-size:.66rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.works-group-title .wg-ja{font-family:var(--font-serif);font-size:1.1rem;font-weight:700}
+.works-group-title .wg-count{margin-left:auto;font-family:var(--font-display);font-size:.66rem;font-weight:800;color:var(--text-mute)}
+.works-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:640px){.works-grid{grid-template-columns:1fr}}
+.work-card{background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);scroll-margin-top:calc(var(--nav-h) + 1rem)}
+.work-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.06)}
+/* an odd last card spans the row, image beside the text */
+.work-card.wide{grid-column:1/-1;flex-direction:row}
+.work-card.wide .work-media{flex:0 0 52%;aspect-ratio:auto;min-height:260px}
+@media(max-width:640px){.work-card.wide{flex-direction:column}.work-card.wide .work-media{flex:none;aspect-ratio:16/10;min-height:0}}
+.work-media{aspect-ratio:16/10;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;background:var(--border-light);overflow:hidden}
+.work-media img{width:100%;height:100%;min-width:0;display:block;object-fit:cover;background:#f3f4f6}
+.work-media img.contain{object-fit:contain;padding:.5rem}
+.work-body{padding:1rem 1.2rem 1.2rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+.work-meta{font-family:var(--font-display);font-size:.62rem;font-weight:700;letter-spacing:.04em;color:var(--text-mute);line-height:1.5}
+.work-card h3{font-family:var(--font-serif);font-size:.98rem;font-weight:700;line-height:1.5}
+.work-card p{font-size:.76rem;color:var(--text-sub);line-height:1.85}
+.work-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.1rem}
+.work-badges span{font-size:.58rem;font-weight:700;padding:.18rem .5rem;border:1px solid var(--border);color:var(--text-sub);line-height:1.5}
+.work-links{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-top:auto;padding-top:.3rem}
+.work-links a{font-size:.68rem;font-weight:700;border-bottom:1.5px solid var(--border);padding-bottom:.1rem;transition:border-color .3s}
+.work-links a:hover{border-color:var(--text)}
+.work-credit{font-size:.58rem;color:var(--text-mute);line-height:1.5}
+.media-item .media-tag{min-width:66px;flex:0 0 auto}
+.media-tag.award{border-color:#96780a;color:#96780a}
+html[lang=en] .works-group-title .wg-en{display:none}
+.rc-links{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.8rem;position:relative;z-index:1}
+.rc-links a{font-size:.66rem;font-weight:700;color:var(--text-sub);border-bottom:1.5px solid var(--border);padding-bottom:.1rem;transition:all .3s}
+.rc-links a:hover{color:var(--text);border-color:var(--text)}
+.pub-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem}
+@media(max-width:640px){.pub-counts{grid-template-columns:repeat(2,1fr)}}
+.pub-count{background:var(--surface);padding:1rem 1.1rem}
+.pub-count .num{display:block;font-family:var(--font-display);font-size:1.9rem;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.pub-count .lbl{display:block;font-size:.66rem;color:var(--text-sub);margin-top:.3rem;line-height:1.5}
+.pub-cat-ja{margin-left:.8rem;font-family:var(--font-body);letter-spacing:.04em;text-transform:none}
+#publications .pub-list{margin-bottom:2.5rem}
+.pub-authors{color:var(--text-sub)}
+.pub-authors strong{color:var(--text);font-weight:700}
+.pub-title{color:var(--text);font-weight:600}
+.pub-venue{color:var(--text-sub)}
+.pub-venue strong{color:var(--text);font-weight:700}
+.pub-tag{display:inline-block;font-size:.58rem;font-weight:700;padding:.05rem .45rem;border:1px solid var(--border);color:var(--text-sub);margin-left:.2rem;vertical-align:1px}
+.pub-link{font-family:var(--font-display);font-size:.62rem;font-weight:700;border-bottom:1.5px solid var(--border);margin-left:.4rem}
+.pub-link:hover{border-color:var(--text)}
+.pub-more{font-size:.76rem;color:var(--text-sub)}
+.pub-more a{font-weight:600;border-bottom:1px solid var(--border)}
+
+.media-tag.press{border-color:#2040d0;color:#2040d0}
+.media-tag.video{border-color:#c03030;color:#c03030}
+.media-info h4 a{border-bottom:1px solid var(--border);transition:border-color .3s}
+.media-info h4 a:hover{border-color:var(--text)}
+
 /* PUBLICATIONS */
 .pub-list{display:flex;flex-direction:column}
 .pub-item{display:flex;gap:1rem;align-items:flex-start;padding:.8rem 0;
@@ -609,8 +672,8 @@ footer a:hover{color:var(--text)}
 
 <!-- TATEGAKI DECORATION -->
 <div class="tategaki tategaki-left">
-  <span class="tategaki-jp">研究とデザインのあいだで</span>
-  <span class="tategaki-en">research and design</span>
+  <span class="tategaki-jp">研究とテクノロジーの間で</span>
+  <span class="tategaki-en">research and technology</span>
 </div>
 
 <!-- NAV -->
@@ -619,9 +682,10 @@ footer a:hover{color:var(--text)}
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#research" data-en="Research">研究</a>
-    <a href="#video" data-en="Video">映像</a>
+    <a href="#publications" data-en="Papers">論文</a>
+    <a href="#projects" data-en="Works">実績</a>
+    <a href="#career" data-en="Career">経歴</a>
     <a href="#media" data-en="Media">メディア</a>
-    <a href="#projects" data-en="Projects">実績</a>
     <a href="#contact" data-en="Contact">お問い合わせ</a>
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
@@ -632,9 +696,10 @@ footer a:hover{color:var(--text)}
 <div class="nav-mobile" id="navMobile">
   <a href="#about" onclick="closeMobileNav()">About</a>
   <a href="#research" onclick="closeMobileNav()" data-en="Research">研究</a>
-  <a href="#video" onclick="closeMobileNav()" data-en="Video">映像</a>
+  <a href="#publications" onclick="closeMobileNav()" data-en="Papers">論文</a>
+  <a href="#projects" onclick="closeMobileNav()" data-en="Works">実績</a>
+  <a href="#career" onclick="closeMobileNav()" data-en="Career">経歴</a>
   <a href="#media" onclick="closeMobileNav()" data-en="Media">メディア</a>
-  <a href="#projects" onclick="closeMobileNav()" data-en="Projects">実績</a>
   <a href="#contact" onclick="closeMobileNav()" data-en="Contact">お問い合わせ</a>
 </div>
 
@@ -645,16 +710,16 @@ footer a:hover{color:var(--text)}
     <div class="hero-tags">
       <span class="hero-tag" data-en="Healthcare &amp; Mental Health">医療・メンタルヘルス</span>
       <span class="hero-tag" data-en="War Damage &amp; Disaster">戦災・災害</span>
+      <span class="hero-tag" data-en="Design Education">デザイン教育</span>
     </div>
-    <p class="hero-desc" data-en="Tackling social challenges&lt;br&gt;through technology.">
-      <span class="glitch" data-text="テクノロジー">テクノロジー</span>で社会課題に向き合う。
+    <p class="hero-desc" data-en="Tackling social challenges&lt;br&gt;through design.">
+      <span style="white-space:nowrap"><span class="glitch" data-text="デザイン">デザイン</span>で</span><wbr>社会課題に向き合う。
     </p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-dark" data-en="Press / Speaking / Research"><span class="btn-line"></span><span>取材・登壇・研究のご相談</span></a>
-      <!-- <a href="80design/" class="btn btn-outline" data-en="Design Inquiry"><span class="btn-line"></span><span>デザインの相談</span></a> -->
     </div>
   </div>
-  <div class="hero-bg-text">VR<br>Archive<br>Security</div>
+  <div class="hero-bg-text">VR<br>Archive<br>Design</div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>SCROLL</span>
@@ -664,14 +729,7 @@ footer a:hover{color:var(--text)}
 <!-- MARQUEE -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>Virtual Reality</span><span>&mdash;</span><span>Digital Therapeutics</span><span>&mdash;</span>
-    <span>Design Engineering</span><span>&mdash;</span><span>Medical VR</span><span>&mdash;</span>
-    <span>War Damage VR</span><span>&mdash;</span><span>Digital Mental Health</span><span>&mdash;</span>
-    <span>Information Design</span><span>&mdash;</span><span>XR Experience</span><span>&mdash;</span>
-    <span>Virtual Reality</span><span>&mdash;</span><span>Digital Therapeutics</span><span>&mdash;</span>
-    <span>Design Engineering</span><span>&mdash;</span><span>Medical VR</span><span>&mdash;</span>
-    <span>War Damage VR</span><span>&mdash;</span><span>Digital Mental Health</span><span>&mdash;</span>
-    <span>Information Design</span><span>&mdash;</span><span>XR Experience</span><span>&mdash;</span>
+    <span>Virtual Reality</span><span>&mdash;</span><span>Eye Tracking</span><span>&mdash;</span><span>Digital Archives</span><span>&mdash;</span><span>War Damage VR</span><span>&mdash;</span><span>Digital Mental Health</span><span>&mdash;</span><span>Digital Therapeutics</span><span>&mdash;</span><span>Design Engineering</span><span>&mdash;</span><span>Design Education</span><span>&mdash;</span><span>Virtual Reality</span><span>&mdash;</span><span>Eye Tracking</span><span>&mdash;</span><span>Digital Archives</span><span>&mdash;</span><span>War Damage VR</span><span>&mdash;</span><span>Digital Mental Health</span><span>&mdash;</span><span>Digital Therapeutics</span><span>&mdash;</span><span>Design Engineering</span><span>&mdash;</span><span>Design Education</span><span>&mdash;</span>
   </div>
 </div>
 
@@ -686,15 +744,16 @@ footer a:hover{color:var(--text)}
         <div class="about-catch reveal" data-en="Building, while&lt;br&gt;never stopping to question.">
           つくりながら、<br>問い続ける。
         </div>
-        <div class="about-body reveal reveal-d1" data-en="As a VR researcher and design engineer, I work on R&amp;D utilizing VR and AI in healthcare, mental health, and war damage &amp; disaster fields. At BiPSEE, I lead Japan's first VR digital therapeutics for regulatory approval. At the University of Tokyo, I develop the War Damage VR system.">
+        <div class="about-body reveal reveal-d1" data-en="As a VR researcher and design engineer, I work on research and development using VR and AI in healthcare, mental health, war damage and disaster. At BiPSEE, I am working toward regulatory approval of Japan's first VR digital therapeutic. At the University of Tokyo, I develop the War Damage VR system. I also work with universities, government and design organizations to create places for design practice and design education.">
             VR研究者 / デザインエンジニアとして、
             医療・メンタルヘルス・戦災・災害の領域でVR・AIを活用した研究開発に取り組んでいます。
             BiPSEEでは日本初のVRデジタル治療の実用化を目指し、
             東京大学では戦災VRシステムの開発を推進しています。
+            あわせて、大学・行政・デザイン団体とともに、デザインの実践と教育の場づくりに取り組んでいます。
         </div>
         <div class="role-compact reveal reveal-d2">
           <span data-en="UTokyo — Project Researcher">東京大学 特任研究員</span>
-          <span data-en="Kochi Univ. Med. — Lecturer">高知大学医学部 特任講師</span>
+          <span data-en="Kochi Medical School — Specially Appointed Lecturer">高知大学医学部 特任講師</span>
           <span>BiPSEE CPO</span>
           <span data-en="Designship — Board Member">Designship 理事</span>
           <span data-en="LITEVIEW — Co-founder">LITEVIEW 共同創業者</span>
@@ -735,31 +794,103 @@ footer a:hover{color:var(--text)}
     <div class="section-layout">
       <div class="section-left reveal">
         <div class="section-label"><span>RESEARCH</span></div>
-        <div class="section-sublabel" data-en="Research Areas">研究領域</div>
+        <div class="section-sublabel" data-en="Research Themes">研究テーマ</div>
       </div>
       <div>
-        <div class="research-grid reveal">
-          <div class="research-card">
-            <h3>VR Digital Therapy</h3>
-            <div class="rc-jp" data-en="VR Digital Therapeutics">VRデジタル療法</div>
-            <p data-en="Developing VR digital therapeutics for depression. Combining VR intervention with rumination-focused CBT, aiming for regulatory approval as a software as a medical device (SaMD).">うつ病に対するVRデジタル療法の開発。反芻焦点化認知行動療法にVR介入を組み合わせ、プログラム医療機器としての薬事承認を目指す。</p>
-          </div>
-          <div class="research-card">
-            <h3><a href="wardamagevr/">War Damage VR</a></h3>
-            <div class="rc-jp" data-en="War Damage VR">戦災VR</div>
-            <p data-en="Reconstructing war damage and disaster memories with 3D Tiles, enabling experiential understanding of social issues in a psychologically safe virtual space. Developed at the University of Tokyo, Watanabe Lab.">戦災・災害の記憶を3D Tilesで再構築し、心理的安全なバーチャル空間で社会課題を体感させるシステム。東京大学渡邉英徳研究室にて開発。</p>
-          </div>
-          <div class="research-card">
-            <h3>Information Design</h3>
-            <div class="rc-jp" data-en="Information Design">情報デザイン</div>
-            <p data-en="Design engineering that communicates complex information intuitively. Optimizing the interface between technology and people through design.">複雑な情報を直感的に伝えるデザインエンジニアリング。技術と人間の接点をデザインの力で最適化。</p>
-          </div>
-          <div class="research-card">
-            <h3>XR Experience</h3>
-            <div class="rc-jp" data-en="XR Experience Design">XR体験設計</div>
-            <p data-en="Experience design methodology for XR technologies including VR, AR, and MR. Interaction design that balances immersion with safety.">VR/AR/MRを含むXR技術の体験設計方法論。没入感と安全性を両立するインタラクションデザイン。</p>
-          </div>
-        </div>
+        <div class="research-grid reveal"><div class="research-card"><h3>Gaze &amp; Body in VR</h3><div class="rc-jp" data-en="VR Experience, Gaze and Body">VR体験と視線・身体の計測</div><p data-en="I measure gaze, head movement and pupil response while people view historical photographs and exhibits in VR, and study how to bring the measurements back into experience design, such as gaze guidance by avatars and captions that appear as you look.">VRで歴史写真や展示を見るときの視線・頭部の動き・瞳孔反応を計測し、アバターによる視線誘導や、注視に応じて現れる解説など、計測結果を体験の設計に生かす方法を研究しています。</p><div class="rc-links"><a href="#publications" data-en="Papers &rarr;">論文一覧 &rarr;</a></div></div><div class="research-card"><h3>Digital Archives</h3><div class="rc-jp" data-en="Digital Archives and Memories of War and Disaster">デジタルアーカイブと戦災・災害の記憶</div><p data-en="I study how to turn war-damage photographs, 3D data and news footage into spaces you can walk through as your own avatar, and what visitors experience in exhibitions.">戦災の写真や3Dデータ、報道映像を、自分のアバターで歩ける空間にする方法と、展示での体験を研究しています。</p><div class="rc-links"><a href="wardamagevr/" data-en="War Damage VR &rarr;">戦災VR &rarr;</a><a href="#publications" data-en="Papers &rarr;">論文一覧 &rarr;</a></div></div><div class="research-card"><h3>Digital Mental Health</h3><div class="rc-jp" data-en="Mental Health and Technology">メンタルヘルスとテクノロジー</div><p data-en="Besides developing a VR digital therapeutic for depression, I am a co-author of a study on the mental health of VTubers and a statement on young people&#x27;s use of generative AI.">うつ病向けVRデジタル療法の開発に取り組むほか、Vライバーのメンタルヘルスに関する研究や、若者の生成AI利用に関する声明に共著者として参加しています。</p><div class="rc-links"><a href="#works-medical" data-en="Works &rarr;">実績 &rarr;</a><a href="#publications" data-en="Papers &rarr;">論文一覧 &rarr;</a></div></div><div class="research-card"><h3>Design &amp; Society</h3><div class="rc-jp" data-en="Design Practice and Education">デザインの実践と教育</div><p data-en="Through conferences, hackathons and work with universities and government, I create places to learn design together, and share the practice through articles and talks.">カンファレンスやハッカソン、大学・行政との協働を通じて、デザインを学び合う場づくりに取り組み、その実践を寄稿や登壇で共有しています。</p><div class="rc-links"><a href="#works-education" data-en="Works &rarr;">実績 &rarr;</a></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="about-section">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>PAPERS</span></div>
+        <div class="section-sublabel" data-en="Publications">論文・研究業績</div>
+      </div>
+      <div>
+        <div class="pub-counts reveal"><div class="pub-count"><span class="num">2</span><span class="lbl" data-en="Journal Papers">査読付き論文誌</span></div><div class="pub-count"><span class="num">7</span><span class="lbl" data-en="International Conferences">査読付き国際会議</span></div><div class="pub-count"><span class="num">3</span><span class="lbl" data-en="Invited Papers &amp;amp; Articles">招待論文・寄稿</span></div><div class="pub-count"><span class="num">16</span><span class="lbl" data-en="Talks &amp;amp; Symposia">学会発表・シンポジウム・講演</span></div></div><div class="reveal"><div class="media-cat-title">Journal Papers<span class="pub-cat-ja">査読付き論文誌</span></div><div class="pub-list"><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors">赤木謙太, <strong>小松尚平</strong>, 鳴海拓志</span> <span class="pub-title">「実店舗におけるフィジカル・デジタルアセット連動技術「XRT」の購買体験および所有価値への影響」</span> <span class="pub-venue">日本バーチャルリアリティ学会論文誌, Vol.31, No.2, pp.157-160, 2026年6月</span> <span class="pub-tag" data-en="Short paper">ショートペーパー</span> <span class="pub-tag" data-en="Co-first author">共同筆頭</span> <a class="pub-link" href="https://doi.org/10.18974/tvrsj.31.2_157" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2024</div><div class="pub-content"><span class="pub-authors">Asuka Sakuraya, Masayo Matsumura, <strong>Shohei Komatsu</strong>, Kotaro Imamura, Mako Iida, Norito Kawakami</span> <span class="pub-title">&quot;Statement on use of generative artificial intelligence by adolescents&quot;</span> <span class="pub-venue">Asian Journal of Psychiatry, Vol.94, 103947, 2024年4月</span> <a class="pub-link" href="https://doi.org/10.1016/j.ajp.2024.103947" target="_blank" rel="noopener">DOI</a></div></div></div></div><div class="reveal"><div class="media-cat-title">International Conferences<span class="pub-cat-ja">査読付き国際会議</span></div><div class="pub-list"><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors">Akimi Oyanagi, <strong>Shohei Komatsu</strong>, Michitaka Hirose</span> <span class="pub-title">&quot;Latent Profiles of Avatar-Mediated Streaming and Mental Health in VTubers: A Four-Profile Typology&quot;</span> <span class="pub-venue">HCII 2026: 28th International Conference on Human-Computer Interaction, Montreal, 2026年7月</span></div></div><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors">Kosuke Shimizu, <strong>Shohei Komatsu</strong>, Hidenori Watanave</span> <span class="pub-title">&quot;Behavioral Markers of Sustained Viewing in VR Museum Exploration: Head Stability, Gaze Dynamics, and Pupillary Response&quot;</span> <span class="pub-venue">ACM Symposium on Eye Tracking Research &amp; Applications (ETRA 2026) Short Papers, Marrakech, 2026年6月</span> <span class="pub-tag" data-en="Co-first author">共同筆頭</span> <a class="pub-link" href="https://doi.org/10.1145/3797246.3803054" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors">Kosuke Shimizu, <strong>Shohei Komatsu</strong>, Kazuhiro Hayashi, Keiichi Zempo</span> <span class="pub-title">&quot;Detecting Cross-Area Concept Links in HCI Using Persistent Homology&quot;</span> <span class="pub-venue">Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems, 2026年4月</span> <a class="pub-link" href="https://doi.org/10.1145/3772363.3798751" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors"><strong>Shohei Komatsu</strong>, Kosuke Shimizu, Hidenori Watanave</span> <span class="pub-title">&quot;Face Morphing as a Bridge from Self-Salience to Historical Understanding: A Pilot with Adolescents Viewing a Nagasaki Atomic Bomb Film&quot;</span> <span class="pub-venue">23rd International Conference of Asia Digital Art and Design Association (ADADA+CUMULUS 2025), pp.CP0201-CP0203, Tokyo, 2025年12月</span> <span class="pub-tag" data-en="Poster">ポスター</span> <span class="pub-tag" data-en="First author">筆頭</span> <a class="pub-link" href="https://doi.org/10.20668/adadapic.2025.0_CP0201" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors"><strong>Shohei Komatsu</strong>, Kosuke Shimizu, Hidenori Watanave</span> <span class="pub-title">&quot;The Effect of an Avatar on Gaze Guidance: An Eye-Tracking Study of Historical Photograph Appreciation&quot;</span> <span class="pub-venue">13th International Conference on Human-Agent Interaction (HAI &#x27;25), Yokohama, 2025年11月</span> <span class="pub-tag" data-en="Poster">ポスター</span> <span class="pub-tag" data-en="First author">筆頭</span> <a class="pub-link" href="https://doi.org/10.1145/3765766.3765857" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors">Kosuke Shimizu, <strong>Shohei Komatsu</strong>, Hidenori Watanave</span> <span class="pub-title">&quot;Floating Captions: Eyetracking-based Context-aware Captioning System for Immersive VR Contents&quot;</span> <span class="pub-venue">Proceedings of the 2025 Symposium on Eye Tracking Research and Applications (ETRA &#x27;25), pp.1-3, Tokyo, 2025年5月</span> <span class="pub-tag" data-en="Co-first author">共同筆頭</span> <a class="pub-link" href="https://doi.org/10.1145/3715669.3726816" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2014</div><div class="pub-content"><span class="pub-authors">Takehiko Yamaguchi, Paul Richard, Loïcia Hupon, <strong>Shohei Komatsu</strong>, Valérie Billaudeau</span> <span class="pub-title">&quot;Gamifying Educational Syllabus Using Bottom-up Exploring Goal Approach: A Prototype System&quot;</span> <span class="pub-venue">International Workshop on Applications in Information Technology (IWAIT 2014), 2014</span></div></div></div></div><div class="reveal"><div class="media-cat-title">Invited Papers &amp; Articles<span class="pub-cat-ja">招待論文・寄稿</span></div><div class="pub-list"><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong></span> <span class="pub-title">「広がりすぎたデザインを、接続する―一般社団法人デザインシップの実践―」</span> <span class="pub-venue">DESIGN PROTECT, No.151（日本特許情報機構）, 2026年</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong></span> <span class="pub-title">「DAデモ展示レポート：新たな備えを築くデジタルアーカイブ」</span> <span class="pub-venue">デジタルアーカイブ学会誌, Vol.9, No.2, 2025年5月</span> <a class="pub-link" href="https://doi.org/10.24506/jsda.9.2_67" target="_blank" rel="noopener">DOI</a></div></div><div class="pub-item"><div class="pub-year">2024</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>, 渡邉英徳</span> <span class="pub-title">「「戦災写真内を歩行可能なアバター・フレームシステム」の実展示」</span> <span class="pub-venue">デジタルアーカイブ学会誌, Vol.8, No.1, pp.21-24, 2024年</span> <span class="pub-tag" data-en="First author">筆頭</span></div></div></div></div><div class="reveal"><div class="media-cat-title">Talks &amp; Symposia<span class="pub-cat-ja">学会発表・シンポジウム・講演</span></div><div class="pub-list"><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>, 太田直樹, 深尾昌峰</span> <span class="pub-title">「法、市場、規範の手前で──“アーキテクチャ”から余白と更新を生み出すデザイン」</span> <span class="pub-venue">グッドデザイン賞「フォーカス・イシュー2025 発行記念イベント『デザインの自由と解放』」第5セッション, 東京ミッドタウン・デザインハブ, 2026年3月</span></div></div><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>（座長）</span> <span class="pub-venue">高知大学医学部「医療×VR学」講座・東京大学大学院医学系研究科デジタルメンタルヘルス講座 合同シンポジウム「テクノロジーを介した居場所形成の可能性―VR・メタバース・遠隔ロボットを活用する―」, オンライン, 2026年2月14日</span></div></div><div class="pub-item"><div class="pub-year">2026</div><div class="pub-content"><span class="pub-authors">川上玲, 北本朝展, <strong>小松尚平</strong>, 林和弘, 真鍋陸太郎, 渡邉英徳</span> <span class="pub-title">「リアルタイムデジタルアーカイブの実践：空間情報学の新たな役割―生成AI、3DGS、オープンサイエンス」</span> <span class="pub-venue">デジタルアーカイブ学会 第10回研究大会 サテライト企画セッション（DAOS主催）, オンライン, 2026年1月26日</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>, 清水紘輔, 楊欽, 渡邉英徳</span> <span class="pub-title">「AIによる“発見カード”生成を通じたSFプロトタイピング想像支援システム」</span> <span class="pub-venue">日本ソフトウェア科学会 インタラクティブシステムとソフトウェアに関するワークショップ（WISS 2025）, 2025年12月</span> <span class="pub-tag" data-en="First author">筆頭</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors">清水紘輔, 川内野穂香, <strong>小松尚平</strong></span> <span class="pub-title">「Signaling Letter: Visualizing Handwriting Dynamics with a Paper-Embedded Microphone」</span> <span class="pub-venue">Visual Computing 2025, 2025年9月</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors">渡邉英徳, 楊欽, <strong>小松尚平</strong>, 村山美耶子, 井原舞子, 川内野穂香</span> <span class="pub-title">「ワークショップ2 ミライの情報支援をみんなで考える」</span> <span class="pub-venue">第26回日本ロービジョン学会学術総会, 広島国際会議場, 2025年5月24日</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-venue">ジャミーラ・ガッダール, マリアム・カリーム, 鈴木聡, 梁田真樹子, <strong>小松尚平</strong>, 渡邉英徳（モデレーター）：パネル3「戦災とデジタルアーカイブ」; 国際シンポジウム「Beyond the Headlines—データ・メディア・テクノロジーで読み解くガザ危機の深層—」, 東京大学 情報学環・福武ホール, 2025年3月31日</span></div></div><div class="pub-item"><div class="pub-year">2025</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>, 浅野大介（石川県副知事）, 渡邉英徳（東京大学）, 鈴木聡（NHK）, 上甲鉄（読売新聞）, 清水雅楽乃（アステナホールディングス）, 素都明子（石川県）, 羽生田文登（Code for Noto）</span> <span class="pub-title">「これからの活用を考えるシンポジウム」</span> <span class="pub-venue">「災害デジタルアーカイブの最前線〜能登半島地震から1年・石川県デジタルアーカイブキックオフイベント〜」（主催：東京大学大学院情報学環・株式会社QUICK）, 石川県立図書館, 2025年1月15日</span></div></div><div class="pub-item"><div class="pub-year">2024</div><div class="pub-content"><span class="pub-venue">原田真喜子, 大井将生, 小川潤, 嘉村哲郎, 金甫榮, <strong>小松尚平</strong>, 中村覚：DAテック「多様な技術からDAを再考する」; デジタルアーカイブ学会 第9回研究大会 企画セッション3, 東京大学, 2024年11月2日</span></div></div><div class="pub-item"><div class="pub-year">2024</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong></span> <span class="pub-title">「デジタル技術は、孤独・孤立との向き合い方をどう変えるのか」</span> <span class="pub-venue">高知大学医学部「医療×VR学」講座・東京大学大学院医学系研究科デジタルメンタルヘルス講座 合同シンポジウム, 2024年</span></div></div><div class="pub-item"><div class="pub-year">2023</div><div class="pub-content"><span class="pub-venue">渡邉英徳（司会）, <strong>小松尚平</strong>, 鈴木親彦, 冨田萌衣, 長尾洋一郎, 原田真喜子, 樋口恭介：討論「『未来の本』の可能性」; 「みんなでつくる未来の本」プロジェクト発足記念フォーラム（第1回）, 東京大学大学院情報学環 講談社・メディアドゥ新しい本寄付講座, オンライン, 2023年10月26日</span></div></div><div class="pub-item"><div class="pub-year">2023</div><div class="pub-content"><span class="pub-authors">洪恒夫, 坂巻匡彦, 田島佳穂, <strong>小松尚平</strong></span> <span class="pub-title">「デザインミュージアム／デザイン教育の実践」</span> <span class="pub-venue">「社会変革に臨むデザインの真相（リサーチ・経営・教育編）」Designship 2023 × 世界デザイン会議東京2023 合同企画, 2023年9月19日</span></div></div><div class="pub-item"><div class="pub-year">2023</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong>, 渡邉英徳</span> <span class="pub-title">「3D Tilesを用いた戦災VRシステムの開発」</span> <span class="pub-venue">第28回日本バーチャルリアリティ学会大会論文集, 2023年9月</span> <span class="pub-tag" data-en="First author">筆頭</span></div></div><div class="pub-item"><div class="pub-year">2022</div><div class="pub-content"><span class="pub-authors"><strong>小松尚平</strong></span> <span class="pub-title">「メタバースとメンタルヘルスケア：その現状と可能性を探る」</span> <span class="pub-venue">高知大学医学部「医療×VR学」講座・東京大学大学院医学系研究科デジタルメンタルヘルス講座 合同シンポジウム（共催：日本VR医学会）, 2022年</span></div></div><div class="pub-item"><div class="pub-year">2021</div><div class="pub-content"><span class="pub-venue">「医療分野におけるVRプロダクト開発」; 第62回日本心身医学会総会ならびに学術講演会 抄録集, 2021年</span></div></div><div class="pub-item"><div class="pub-year">2021</div><div class="pub-content"><span class="pub-venue">「心身医療とVR」; 第62回日本心身医学会総会ならびに学術講演会, 2021年</span></div></div></div></div><p class="pub-more reveal" data-en="Other work is listed on &lt;a href=&quot;https://researchmap.jp/komanbe&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;researchmap&lt;/a&gt; and &lt;a href=&quot;https://scholar.google.com/citations?user=v5U4ES4AAAAJ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Google Scholar&lt;/a&gt;.">その他の業績は <a href="https://researchmap.jp/komanbe" target="_blank" rel="noopener">researchmap</a>／<a href="https://scholar.google.com/citations?user=v5U4ES4AAAAJ" target="_blank" rel="noopener">Google Scholar</a> をご覧ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>WORKS</span></div>
+        <div class="section-sublabel" data-en="Selected Works">実績</div>
+        <div class="works-index"><a href="#works-medical" data-en="Medical VR">医療VR</a><a href="#works-war" data-en="War Damage VR">戦災VR</a><a href="#works-practice" data-en="Design Practice">デザイン実践</a><a href="#works-education" data-en="Design Education">デザイン教育</a></div>
+      </div>
+      <div>
+        <div class="works-group reveal" id="works-medical"><div class="works-group-title"><span class="wg-en">Medical VR</span><span class="wg-ja" data-en="Medical VR">医療VR</span></div><div class="works-grid"><article class="work-card wide" id="work-vr-dtx"><div class="work-media n1"><img src="photos/works/vr-dtx-1.jpg" alt="VRゴーグルとスマートフォンアプリ" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Director and CPO (head of product development), BiPSEE Inc. — 2021–">取締役CPO・プロダクト開発統括（株式会社BiPSEE）　2021年〜</div><h3 data-en="VR Digital Therapeutics for Depression">うつ病向けVRデジタル療法</h3><p data-en="A VR digital therapeutic for depression, designed so patients can continue rumination-focused cognitive behavioral therapy (rumination: getting stuck in repetitive negative thinking) at home with a VR headset and a smartphone app. It is in development as software as a medical device. I oversee the work from experience design and software development to quality assurance and clinical development.">反すう（考えの堂々巡り）に焦点を当てた認知行動療法を、VRゴーグルとスマートフォンアプリで自宅で続けられるよう設計した、うつ病向けのVRデジタル療法（プログラム医療機器として開発中）。体験設計・ソフトウェア開発から品質保証・臨床開発までを統括しています。</p><div class="work-badges"><span data-en="Medical device (SaMD)">医療機器（SaMD）</span><span data-en="XR / VR">XR／VR</span></div><div class="work-credit" data-en="Image: BiPSEE Inc.">画像：株式会社BiPSEE</div></div></article></div></div><div class="works-group reveal" id="works-war"><div class="works-group-title"><span class="wg-en">War Damage VR</span><span class="wg-ja" data-en="War Damage VR">戦災VR</span></div><div class="works-grid"><article class="work-card wide" id="work-wardamagevr"><div class="work-media n2"><img src="photos/works/wardamagevr-1.jpg" alt="立体にした広島の戦災写真の中を歩くアバター" loading="lazy" class="cover"><img src="photos/works/wardamagevr-2.jpg" alt="来場者を3Dスキャンするブース（AVATARIUM）" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="R&amp;D lead, Hidenori Watanave Lab, The University of Tokyo — 2023–">研究開発統括（東京大学大学院 渡邉英徳研究室）　2023年〜</div><h3 data-en="War Damage VR: Walking Through Photographs and 3D Data as Your Own Avatar">戦災VR｜写真や3Dデータの中を、自分のアバターで歩く</h3><p data-en="A VR system that lets you walk through war-damage photographs and 3D data as an avatar made from a 3D scan of yourself. It has been exhibited at the Hiroshima Television headquarters (2023), the Nagasaki Atomic Bomb Museum (2025, 2026), the United Nations Pavilion at Expo 2025 Osaka, Kansai, and an exhibition held alongside the NPT Review Conference in New York (2026), among others.">戦災の写真や3Dデータの中を、3Dスキャンした自分のアバターで歩けるVR。広島テレビ本社（2023）、長崎原爆資料館（2025・2026）、大阪・関西万博の国連パビリオン（2025）、NPT再検討会議に合わせた展示（ニューヨーク、2026）などで展示しました。</p><div class="work-badges"><span data-en="NTV Imaginarium Award 2023, XR Grand Prize">日テレイマジナリウムアワード2023 XR部門大賞</span><span data-en="JAPAN Metaverse Awards 2025, Best Prototype Award">JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</span></div><div class="work-links"><a href="wardamagevr/" data-en="About War Damage VR &rarr;">戦災VRの紹介ページ &rarr;</a></div></div></article></div></div><div class="works-group reveal" id="works-practice"><div class="works-group-title"><span class="wg-en">Design Practice</span><span class="wg-ja" data-en="Design Practice">デザイン実践</span></div><div class="works-grid"><article class="work-card" id="work-lunchpack"><div class="work-media n1"><img src="photos/works/lunchpack-1.jpg" alt="東大ランチパックのパッケージ" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="Project coordination (UTokyo Brand Studio × Yamazaki Baking) — 2025–2026">企画運営（東京大学 ブランドスタジオ × 山崎製パン）　2025〜2026年</div><h3 data-en="UTokyo Lunch Pack: From a Student Idea to a Product">東大ランチパック｜学生の発案から商品化まで</h3><p data-en="A Lunch Pack (Yamazaki Baking&#x27;s packaged sandwich) developed by student staff of the UTokyo Brand Studio together with Yamazaki Baking, as a project for the University of Tokyo&#x27;s 150th anniversary. I worked alongside the students from workshop design through tasting and revisions, packaging and the press event. It was sold at Lawson stores in the Kanto region and the UTokyo Co-op in May–June 2026.">東京大学創立150周年の記念企画として、ブランドスタジオの学生スタッフと山崎製パンが開発したランチパック。ワークショップの設計から試食・改良、パッケージ、記者発表会までを伴走しました。2026年5〜6月に関東のローソンと東大生協で販売。</p><div class="work-badges"><span data-en="Product development">商品開発</span><span data-en="Workshops">ワークショップ</span></div><div class="work-credit" data-en="Image: Yamazaki Baking / The University of Tokyo">画像：山崎製パン／東京大学</div></div></article><article class="work-card" id="work-iii25"><div class="work-media n2"><img src="photos/works/iii25-1.jpg" alt="25周年のグッズ" loading="lazy" class="cover"><img src="photos/works/iii25-2.jpg" alt="記念式典の会場" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Logo, video and merchandise (Interfaculty Initiative in Information Studies, The University of Tokyo) — 2025">ロゴ・映像・グッズの制作（東京大学大学院 情報学環）　2025年</div><h3 data-en="Interfaculty Initiative in Information Studies 25th Anniversary: Logo, Video and Merchandise">情報学環 創立25周年｜ロゴ・映像・グッズ</h3><p data-en="For the 25th anniversary of the Interfaculty Initiative in Information Studies and the Graduate School of Interdisciplinary Information Studies at the University of Tokyo, I made the anniversary logo, the introductory video shown at the ceremony, and merchandise such as tote bags and button badges.">東京大学大学院情報学環・学際情報学府の創立25周年に向けて、記念ロゴ、記念式典で上映した紹介映像、トートバッグや缶バッジなどのグッズを制作しました。</p><div class="work-badges"><span data-en="Logo">ロゴ</span><span data-en="Video">映像</span><span data-en="Merchandise">グッズ</span></div><div class="work-links"><a href="https://www.youtube.com/watch?v=qOfUjl5oFr0" target="_blank" rel="noopener" data-en="Introductory video (YouTube) &rarr;">紹介映像（YouTube） &rarr;</a><a href="https://www.iii.u-tokyo.ac.jp/research/report20251128" target="_blank" rel="noopener" data-en="Ceremony report &rarr;">式典の報告（情報学環） &rarr;</a></div><div class="work-credit" data-en="Right: Interfaculty Initiative in Information Studies">右：東京大学大学院情報学環</div></div></article><article class="work-card" id="work-collective-memory"><div class="work-media n2"><img src="photos/works/collective-memory-1.jpg" alt="集合的記憶の教育モデルの図" loading="lazy" class="cover"><img src="photos/works/collective-memory-2.jpg" alt="検討段階のスケッチ" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Diagrams and slides for Prof. Jun Yamana (Graduate School of Education, The University of Tokyo) — 2021">図解・資料制作（東京大学大学院 教育学研究科 山名淳先生）　2021年</div><h3 data-en="Visualizing a Pedagogical Model of Collective Memory">集合的記憶の教育モデルの図解</h3><p data-en="Working from Prof. Yamana&#x27;s theoretical diagram, I visualized a model of education and collective memory over weekly meetings: bubbles for what has not yet become meaning and cubes for media where meaning has settled, set within the educational space (the dome) where memory is passed on. The work was compiled into presentation slides.">山名淳先生の理論図をもとに、集合的記憶から教育を考えるモデルを、週1回の打ち合わせを重ねて図にしました。意味になる前のものを泡、意味が固まったメディアをキューブとして描き、記憶を受け渡す教育の場（ドーム）とあわせて発表用の資料にまとめています。</p><div class="work-badges"><span data-en="Diagrams">図解</span><span data-en="Information design">情報設計</span></div></div></article><article class="work-card" id="work-gdp-map"><div class="work-media n1"><img src="photos/works/gdp-map-1.jpg" alt="核兵器GDPリスクマップの画面" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Visualization design and development — 2026">可視化の設計・実装　2026年</div><h3 data-en="Nuclear Weapons GDP Risk Map (CIVIL ATLAS)">核兵器GDPリスクマップ（CIVIL ATLAS）</h3><p data-en="An interactive map that traces how cities and supply chains are connected across 40 cities and 176 sites, and estimates the economic value that could be lost under each scenario. Planned by 書置屋本舗みずたろう (Mizutaro), with cooperation from the Hidenori Watanave Lab, The University of Tokyo.">40都市・176拠点の都市と供給網のつながりを地図でたどり、シナリオごとに失われうる経済価値を試算して示すインタラクティブマップ。企画は書置屋本舗みずたろう、協力は東京大学大学院 渡邉英徳研究室。</p><div class="work-badges"><span data-en="Data visualization">データ可視化</span><span data-en="Web">Web</span></div><div class="work-links"><a href="https://komanbe.github.io/nuclear-gdp-risk-map/" target="_blank" rel="noopener" data-en="Open the map &rarr;">マップを開く &rarr;</a><a href="https://note.com/mizutaro0515/n/n2fbc252e2dbb" target="_blank" rel="noopener" data-en="Article (note) &rarr;">紹介記事（note） &rarr;</a></div></div></article><article class="work-card" id="work-minato"><div class="work-media n2"><img src="photos/works/minato-1.jpg" alt="港区平和都市宣言40周年の記念ロゴ" loading="lazy" class="contain"><img src="photos/works/minato-2.jpg" alt="港区「みなとNEWS」で紹介された戦災VRの講座" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="Executive committee member, Minato City Peace City Declaration 40th Anniversary Project — 2024–">実行委員（港区平和都市宣言40周年事業）　2024年〜</div><h3 data-en="Minato City Peace City Declaration 40th Anniversary: Logo, Video and War Testimonies">港区 平和都市宣言40周年｜ロゴ・映像・体験集</h3><p data-en="As a member of the executive committee for the 40th anniversary of Minato City&#x27;s Peace City Declaration, I made the anniversary logo and video and served as an interviewer for the fourth collection of war and war-damage testimonies. I have also run War Damage VR workshops for the city&#x27;s youth peace group.">港区平和都市宣言40周年事業の実行委員として、記念ロゴと映像を制作し、「戦争・戦災体験集（第4集）」ではインタビュアーを務めました。区内の平和青年団には、戦災VRのワークショップを行っています。</p><div class="work-badges"><span data-en="Logo and video">ロゴ・映像</span><span data-en="Interviews">インタビュー</span><span data-en="Workshops">ワークショップ</span></div><div class="work-links"><a href="https://www.city.minato.tokyo.jp/jinken/40th/portal.html" target="_blank" rel="noopener" data-en="Minato City 40th anniversary &rarr;">港区 平和都市宣言40周年 &rarr;</a></div><div class="work-credit" data-en="Right: Minato City, Minato NEWS">右：港区「みなとNEWS」</div></div></article><article class="work-card" id="work-m360"><div class="work-media n1"><img src="photos/works/m360-1.jpg" alt="M360の製品サイト" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="Web design (&amp;COLOR LLC) — 2018">Webデザイン（アンドカラー合同会社）　2018年</div><h3 data-en="M360 Ear Speaker Website">イヤースピーカー M360 製品サイト</h3><p data-en="An ear speaker that plays sound just in front of the ear instead of inside it. I designed the website that communicates the product&#x27;s concept. The product received a 2018 Good Design Award.">耳に挿し込まず、耳の手前で鳴らすイヤースピーカー。製品の世界観を伝えるWebサイトのデザインを担当しました。製品は2018年度グッドデザイン賞を受賞。</p><div class="work-badges"><span data-en="Good Design Award 2018 (product)">グッドデザイン賞 2018（製品）</span><span data-en="Web design">Webデザイン</span></div></div></article><article class="work-card" id="work-pulit"><div class="work-media n1"><img src="photos/works/pulit-1.jpg" alt="配信の仕組みの図" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="Co-founder and design engineer — 2015–2021">共同創業・デザインエンジニア　2015〜2021年</div><h3 data-en="Pulit (now LITEVIEW)">Pulit（現 LITEVIEW）</h3><p data-en="A Tokyo Institute of Technology spin-off. Applying the university&#x27;s image-processing technology (digital watermarking), we built a system that delivers video just by passing along an image. I designed and developed the service and the app.">東京工業大学発のベンチャー。同大学の画像処理技術（電子透かし）を応用し、画像を受け渡すだけで動画を届けられる配信の仕組みを開発しました。サービスとアプリの設計・開発を担当。</p><div class="work-badges"><span data-en="MIC ICT Challenge (conditionally selected)">総務省ICTチャレンジ 条件付き採択</span><span data-en="UI design and development">UIデザイン・実装</span></div><div class="work-links"><a href="https://gunosy.co.jp/news/159" target="_blank" rel="noopener" data-en="TV digest distribution on Gunosy (2019) &rarr;">グノシーでの番組ダイジェスト配信（2019） &rarr;</a></div></div></article><article class="work-card" id="work-yumenographia"><div class="work-media n2"><img src="photos/works/yumenographia-1.jpg" alt="ユメノグラフィアのキャラクター" loading="lazy" class="cover"><img src="photos/works/yumenographia-2.jpg" alt="VR空間の部屋" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Development support (web design) — 2019–2020">開発協力（Webデザイン）　2019〜2020年</div><h3 data-en="Yumenographia">ユメノグラフィア</h3><p data-en="I supported the development of Yumenographia, a service by Ichikara Inc. (now ANYCOLOR Inc.) for one-on-one conversations with characters in VR. It was nominated in the Generation Award category of the INNO-vation Program 2020 (Ministry of Internal Affairs and Communications).">VR空間でキャラクターと1対1で会話できるコミュニケーションサービス（いちから株式会社、現 ANYCOLOR）の開発に協力しました。総務省「異能vation」2020 ジェネレーションアワード部門にノミネート。</p><div class="work-badges"><span data-en="INNO-vation 2020 nominee">異能vation 2020 ノミネート</span><span data-en="Web design">Webデザイン</span></div><div class="work-credit" data-en="Images: Ichikara Inc. (now ANYCOLOR)">画像：いちから株式会社（現 ANYCOLOR）</div></div></article><article class="work-card wide" id="work-art"><div class="work-media n2"><img src="photos/works/art-1.jpg" alt="レンタルあかちゃんゆうえんち" loading="lazy" class="cover"><img src="photos/works/art-2.jpg" alt="VOICE◁" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="As an engineer — 2018–2019">エンジニアとして参加　2018〜2019年</div><h3 data-en="Art and Exhibitions: Works I Contributed to as an Engineer">アート・展示｜エンジニアとして関わった作品</h3><p data-en="I worked as an engineer on contemporary art exhibitions, including the AR work &quot;Daisan Heimen&quot;, viewed on two iPads (Hametsu*After, Roppongi Hills A/D Gallery); the iPad work &quot;VOICE◁&quot;, whose waveform moves with a guide&#x27;s voice (Ishinomaki, Miyagi); &quot;Catharsis no Kishibe&quot; (TOKYO2021 art exhibition); and &quot;Rental Akachan Yuenchi&quot; (Aichi Triennale 2019).">現代アートの展示にエンジニアとして参加しました。2台のiPadで見るAR作品「第三平面」（『破滅*アフター』六本木ヒルズ A/Dギャラリー）、ガイドの声に合わせて波形が揺れるiPad作品「VOICE◁」（石巻市）、「カタルシスの岸辺」（TOKYO2021 美術展）、「レンタルあかちゃんゆうえんち」（あいちトリエンナーレ2019）など。</p><div class="work-badges"><span data-en="AR">AR</span><span data-en="Unity">Unity</span><span data-en="Arduino">Arduino</span></div><div class="work-credit" data-en="Photos: left, Shohei Komatsu; right, Hayato Kano">写真：左 本人撮影／右 鹿野颯斗</div></div></article></div></div><div class="works-group reveal" id="works-education"><div class="works-group-title"><span class="wg-en">Design Education</span><span class="wg-ja" data-en="Design Education">デザイン教育</span></div><div class="works-grid"><article class="work-card" id="work-designship"><div class="work-media n2"><img src="photos/works/designship-1.jpg" alt="Designship 2024 のメインステージ" loading="lazy" class="cover"><img src="photos/works/designship-2.jpg" alt="Designship 2024 の会場" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Co-founder and board member, Designship — 2018–">共同創業・理事（一般社団法人デザインシップ）　2018年〜</div><h3 data-en="Designship Design Conference">デザインカンファレンス「Designship」</h3><p data-en="An annual conference for learning about design across fields and professions, endorsed by the Ministry of Economy, Trade and Industry since its first edition in 2018. In 2025, more than 80 speakers from 60 organizations took part, with over 2,500 attendees in total.">領域や職種を越えてデザインを学び合う場として、2018年の初回から経済産業省の後援を受けて毎年開催しています。2025年は60団体・80名以上が登壇し、のべ2,500名以上が参加しました。</p><div class="work-badges"><span data-en="Conference">カンファレンス</span><span data-en="Community">場づくり</span></div><div class="work-credit" data-en="Photos: Designship">写真：一般社団法人デザインシップ</div></div></article><article class="work-card" id="work-hack1"><div class="work-media n2"><img src="photos/works/hack1-1.jpg" alt="Hack-1グランプリ2025 キックオフのチームの話し合い" loading="lazy" class="cover"><img src="photos/works/hack1-2.jpg" alt="デモデーでのピッチ" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Planning and organization — 2025–">企画運営　2025年〜</div><h3 data-en="Student Hackathon &quot;Hack-1 Grand Prix&quot; and Startup Support">学生ハッカソン「Hack-1グランプリ」・起業支援</h3><p data-en="A hackathon where design students and engineering students form teams and build a product in about a month. I design the program from kickoff to demo day. In 2025, 113 students from across Japan applied; in 2026 the hackathon was run in partnership with the Japan Industrial Designers&#x27; Association (JIDA). Since 2026 I have also planned and designed the training program of DESIGN FOUNDER STUDIO, a startup studio for design students (a Tokyo Metropolitan Government TOKYO SUTEAM project), co-planned with the Hidenori Watanave Lab, The University of Tokyo.">デザインを学ぶ学生とエンジニアリングを学ぶ学生がチームを組み、約1か月でプロダクトを開発するハッカソン。キックオフからデモデーまでのプログラムを設計しています（2025年は全国から113名がエントリー、2026年は日本インダストリアルデザイン協会と連携）。2026年からは、デザイン系大学生の起業を支援する DESIGN FOUNDER STUDIO（東京都 TOKYO SUTEAM 協定事業）で、東京大学大学院 渡邉英徳研究室との共同企画として育成プログラムを企画・設計しています。</p><div class="work-badges"><span data-en="Hackathon">ハッカソン</span><span data-en="Startup support">起業支援</span></div><div class="work-credit" data-en="Photos: Designship">写真：一般社団法人デザインシップ</div></div></article><article class="work-card" id="work-jida"><div class="work-media n1"><img src="photos/works/jida-1.jpg" alt="JIDA NODE #01（2026年）" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="Member — Aug 2026–">部会員　2026年8月〜</div><h3 data-en="Japan Industrial Designers&#x27; Association (JIDA) — Medical, Engineering and Design Collaboration Research Group">日本インダストリアルデザイン協会（JIDA）医・工・デザイン連携研究部会</h3><p data-en="I am a member of a research group working to raise the quality of design for medical devices and healthcare products. I spoke at the startup cross session at JIDA SUMMIT 2025 and at JIDA NODE #01 (2026).">医療機器・ヘルスケア用品のデザインの質を高めるための部会に参加しています。JIDA SUMMIT 2025 のスタートアップ・クロスセッションと、JIDA NODE #01（2026年）で登壇しました。</p><div class="work-badges"><span data-en="Medical × design">医療×デザイン</span><span data-en="Talks">登壇</span></div><div class="work-credit" data-en="Photo: Japan Industrial Designers&#x27; Association (JIDA)">写真：日本インダストリアルデザイン協会（JIDA）</div></div></article><article class="work-card" id="work-writing"><div class="work-media n2"><img src="photos/works/writing-1.jpg" alt="DESIGN PROTECT No.151 の寄稿の見出し" loading="lazy" class="contain"><img src="photos/works/writing-2.jpg" alt="デザイン白書2024の表紙" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="Invited article 2026 / Contributor 2024">招待寄稿 2026年／協力 2024年</div><h3 data-en="Writing and the Design White Paper">寄稿・デザイン白書</h3><p data-en="I wrote an invited article on Designship&#x27;s work for DESIGN PROTECT No.151 (Japan Patent Information Organization). I am also credited as a contributor to the Design White Paper 2024 (supervised by METI&#x27;s Design Policy Office and published by the Japan Institute of Design Promotion), which includes an article on Designship 2023.">『DESIGN PROTECT』No.151（日本特許情報機構）に、一般社団法人デザインシップの取り組みについて寄稿しました。経済産業省デザイン政策室が監修した「デザイン白書2024」（日本デザイン振興会）には、Designship 2023 の記事が掲載されています（協力）。</p><div class="work-badges"><span data-en="Article">寄稿</span><span data-en="White paper">白書</span></div><div class="work-credit" data-en="Left: DESIGN PROTECT No.151, Japan Patent Information Organization; right: Design White Paper 2024, Japan Institute of Design Promotion">左：日本特許情報機構『DESIGN PROTECT』No.151／右：日本デザイン振興会『デザイン白書2024』</div></div></article><article class="work-card" id="work-sfp"><div class="work-media n2"><img src="photos/works/sfp-1.jpg" alt="発見カードのUI試作" loading="lazy" class="contain"><img src="photos/works/sfp-2.jpg" alt="WISSで使ったデモ画面" loading="lazy" class="contain"></div><div class="work-body"><div class="work-meta" data-en="WISS 2025 demo (Dec 2025) / Workshop at the Japanese Society for Low-vision Research and Rehabilitation annual meeting (May 2025)">WISS 2025 デモ発表（2025年12月）／日本ロービジョン学会 ワークショップ（2025年5月）</div><h3 data-en="Science Fiction Prototyping: Generating &quot;Discovery Cards&quot; with AI">SFプロトタイピング｜AIで「発見カード」を生成する</h3><p data-en="I designed a tool that takes a field of interest and uses AI to generate &quot;discovery cards&quot; (questions, short stories and images from viewpoints such as technology and institutions, body and emotion, and relationships and care), along with a workshop that uses the cards as prompts for discussion. With Kevin Yang and others, I also ran a workshop at the Japanese Society for Low-vision Research and Rehabilitation on the information support people with visual impairments need.">関心のある領域を入力すると、AIが「技術・制度」「身体・感情」「関係・ケア」などの観点から問いと短い物語、イメージを生成する仕組みと、カードを手がかりに対話しながら発想を広げるワークショップを設計しました。日本ロービジョン学会では、楊欽（Kevin Yang）さんらと、視覚障害のある方が求める情報支援を考えるワークショップを行いました。</p><div class="work-badges"><span data-en="Generative AI">生成AI</span><span data-en="Workshops">ワークショップ</span></div></div></article><article class="work-card" id="work-cfi"><div class="work-media n2"><img src="photos/works/cfi-1.jpg" alt="ジェンダライズプリマルのキービジュアル" loading="lazy" class="cover"><img src="photos/works/cfi-2.jpg" alt="観察ワークのスケッチ" loading="lazy" class="cover"></div><div class="work-body"><div class="work-meta" data-en="The University of Tokyo × Sony Group, Creative Futurists Initiative — 2024">東京大学 × ソニー CFI　2024年</div><h3 data-en="Genderize Primal: An Animal Mirror Ritual">ジェンダライズプリマル：動物鏡像儀式</h3><p data-en="Made by a team of nine graduate students, Sony employees and designers in the Creative Futurists Initiative, a joint program of the University of Tokyo and Sony Group. After observation exercises that challenge assumptions, we created a work that uses animal imagery and AI to raise questions about gender bias in society.">東京大学とソニーグループの越境的未来共創社会連携講座（CFI）で、院生・社員・デザイナー9名のチームで制作しました。前提を問い直す観察ワークを経て、動物の表象とAIで社会のジェンダーバイアスに問いを投げかける作品にまとめています。</p><div class="work-badges"><span data-en="Artwork">作品</span><span data-en="Team project">チーム制作</span></div><div class="work-credit" data-en="Photo (observation): Yasuaki Kakehi Laboratory / UTokyo × Sony Group Creative Futurists Initiative">写真（観察ワーク）：Yasuaki Kakehi Laboratory／東京大学×ソニーグループ Creative Futurists Initiative</div></div></article></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>CAREER</span></div>
+        <div class="section-sublabel" data-en="Career">経歴</div>
+      </div>
+      <div>
+        <div class="timeline reveal"><div class="timeline-item"><div class="timeline-year">2024 — Present</div><div class="timeline-title" data-en="Project Researcher, Interfaculty Initiative in Information Studies, The University of Tokyo">東京大学大学院 情報学環 特任研究員</div><div class="timeline-desc" data-en="Research and development of War Damage VR at the Hidenori Watanave Lab">渡邉英徳研究室で戦災VRの研究開発</div></div><div class="timeline-item"><div class="timeline-year">2024 — Present</div><div class="timeline-title" data-en="Advisor, Communication Strategy Office, The University of Tokyo">東京大学 コミュニケーション戦略本部 アドバイザー</div><div class="timeline-desc" data-en="Planning and coordination of projects such as the UTokyo Lunch Pack">東大ランチパックなどの企画運営</div></div><div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title" data-en="Director and CPO, BiPSEE Inc.">株式会社BiPSEE 取締役CPO</div><div class="timeline-desc" data-en="Leading development of VR digital therapeutics for depression (software as a medical device)">うつ病向けVRデジタル療法（プログラム医療機器）の開発を統括</div></div><div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title" data-en="Specially Appointed Lecturer, Kochi Medical School, Kochi University">高知大学医学部 特任講師</div><div class="timeline-desc" data-en="Endowed course &quot;Medicine × VR&quot;">寄附講座「医療×VR学」</div></div><div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title" data-en="Doctoral Program, Graduate School of Interdisciplinary Information Studies, The University of Tokyo">東京大学大学院 学際情報学府 博士後期課程</div></div><div class="timeline-item"><div class="timeline-year">2018 — Present</div><div class="timeline-title" data-en="Co-founder and Board Member, Designship">一般社団法人デザインシップ 共同創業・理事</div><div class="timeline-desc" data-en="Organizing the annual design conference Designship since 2018">デザインカンファレンス「Designship」を2018年から毎年開催</div></div><div class="timeline-item"><div class="timeline-year">2015 — 2021</div><div class="timeline-title" data-en="Co-founder, Pulit Inc. (now LITEVIEW Inc.)">Pulit株式会社（現 LITEVIEW株式会社）共同創業</div><div class="timeline-desc" data-en="A Tokyo Institute of Technology spin-off; developed the distribution system and app as a design engineer">東京工業大学発ベンチャー。デザインエンジニアとして配信の仕組みとアプリを開発</div></div><div class="timeline-item"><div class="timeline-year">2014 — 2015</div><div class="timeline-title" data-en="Slogan Inc.">スローガン株式会社</div><div class="timeline-desc" data-en="Project leader in the engineering business">エンジニア事業のプロジェクトリーダー</div></div><div class="timeline-item"><div class="timeline-year">2008 — 2014</div><div class="timeline-title" data-en="Tokyo University of Science — B.Eng. and M.Eng., Applied Electronics">東京理科大学 基礎工学部 電子応用工学科・同大学院 修士課程</div><div class="timeline-desc" data-en="Master of Engineering">修士（工学）</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" class="about-section">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>AWARDS</span></div>
+        <div class="section-sublabel" data-en="Awards">受賞</div>
+      </div>
+      <div>
+        <div class="media-list reveal"><div class="media-item"><span class="media-tag award">2025</span><div class="media-info"><h4 data-en="JAPAN Metaverse Awards 2025 — Best Prototype Award">JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</h4><p data-en="Peacebuilding Metaverse: War Damage VR">平和構築メタバース 戦災VR</p></div></div><div class="media-item"><span class="media-tag award">2025</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://www.lib.u-tokyo.ac.jp/ja/library/contents/news/20251216&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Honorable Mention, &amp;quot;Design the UTokyo Library! Next Library Challenge 2030&amp;quot; (The University of Tokyo Library System)&lt;/a&gt;"><a href="https://www.lib.u-tokyo.ac.jp/ja/library/contents/news/20251216" target="_blank" rel="noopener">東京大学附属図書館「東大図書館をデザインせよ！Next Library Challenge 2030」健闘賞</a></h4><p data-en="Living Library VR">Living Library VR</p></div></div><div class="media-item"><span class="media-tag award">2024</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://toyokeizai.net/articles/-/827425&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Weekly Toyo Keizai &amp;quot;Sugoi Venture 100&amp;quot; (2024)&lt;/a&gt;"><a href="https://toyokeizai.net/articles/-/827425" target="_blank" rel="noopener">週刊東洋経済「すごいベンチャー100」2024年版</a></h4><p data-en="BiPSEE Inc. was selected">株式会社BiPSEEが選出</p></div></div><div class="media-item"><span class="media-tag award">2023</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://www.iii.u-tokyo.ac.jp/news/2023120819891&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;NTV Imaginarium Award 2023 — XR Grand Prize&lt;/a&gt;"><a href="https://www.iii.u-tokyo.ac.jp/news/2023120819891" target="_blank" rel="noopener">日テレイマジナリウムアワード 2023 XR部門 大賞</a></h4><p data-en="War Damage VR">戦災VR</p></div></div><div class="media-item"><span class="media-tag award">2020</span><div class="media-info"><h4 data-en="INNO-vation Program (Ministry of Internal Affairs and Communications) — Generation Award category, nominee">総務省「異能vation」ジェネレーションアワード部門 ノミネート</h4><p data-en="Yumenographia (development support)">ユメノグラフィア（開発協力）</p></div></div><div class="media-item"><span class="media-tag award">2018</span><div class="media-info"><h4 data-en="Good Design Award">グッドデザイン賞</h4><p data-en="In-air ear speaker M360 / M360bt (designed the product website)">インエアー方式イヤースピーカー M360／M360bt（製品Webサイトのデザインを担当）</p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY -->
+<section id="advisory">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>ADVISORY</span></div>
+        <div class="section-sublabel" data-en="Committees &amp;amp; Juries">委員・審査員</div>
+      </div>
+      <div>
+        <div class="media-list reveal"><div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="Communication Strategy Office, The University of Tokyo">東京大学 コミュニケーション戦略本部</h4><p data-en="Advisor (2024–)">アドバイザー（2024年〜）</p></div></div><div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="Campus Well-being Advisory Board, Center for Research on Counseling and Support Services, The University of Tokyo">東京大学 相談支援研究開発センター キャンパスウェルビーイング推進アドバイザリーボード</h4><p data-en="Board Member (2026–)">委員（2026年〜）</p></div></div><div class="media-item"><span class="media-tag gov">Nikkei</span><div class="media-info"><h4 data-en="Nikkei Intrapreneur Award 2026">日本経済新聞社「Intrapreneur Award 2026」</h4><p data-en="Judge">審査員</p></div></div><div class="media-item"><span class="media-tag gov" data-en="METI">経産省</span><div class="media-info"><h4 data-en="METI Study Group on Entertainment and Creative Industry Policy — Sector Committee (Design / Art)">経済産業省 エンタメ・クリエイティブ産業政策研究会 業種分野別専門委員会（デザイン／アート）</h4><p data-en="Observer (2025–2026)">オブザーバー（2025〜2026年）</p></div></div><div class="media-item"><span class="media-tag gov" data-en="Minato">港区</span><div class="media-info"><h4 data-en="Executive Committee, Minato City Peace City Declaration 40th Anniversary Project">港区平和都市宣言40周年事業 実行委員会</h4><p data-en="Member (2024–)">委員（2024年〜）</p></div></div><div class="media-item"><span class="media-tag gov" data-en="Minato">港区</span><div class="media-info"><h4 data-en="Minato City — Selection Committee for the MINATO Vision Drafting Support Contractor">港区 MINATOビジョン策定支援業務 委託事業候補者選考委員会</h4><p data-en="Selection committee member (2024–2025)">選考委員（2024〜2025年）</p></div></div><div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4 data-en="JAPAN DESIGN ORGANIZATIONS AS ONE (DOO) — Research Committee for Establishing a Japan Design Museum">日本デザイン団体協議会（DOO）ジャパン・デザイン・ミュージアム設立研究委員会</h4><p data-en="Observer (2024–)">オブザーバー（2024年〜）</p></div></div><div class="media-item"><span class="media-tag gov" data-en="Society">学会</span><div class="media-info"><h4 data-en="Japanese Society for Medical Virtual Reality (JSMVR) — Research Committee on VR Digital Therapeutics">日本VR医学会 VRデジタル治療薬研究委員会</h4><p data-en="Member (2021–)">委員（2021年〜）</p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1100px;margin:0 auto"></div>
+
+<!-- MEDIA -->
+<section id="media">
+  <div class="section-inner">
+    <div class="section-layout">
+      <div class="section-left reveal">
+        <div class="section-label"><span>MEDIA</span></div>
+        <div class="section-sublabel" data-en="Media">メディア</div>
+      </div>
+      <div>
+        <div class="reveal"><div class="media-cat-title">Television</div><div class="media-list"><div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK E-TV &quot;Opening the Door of Science&quot;">NHK Eテレ「科学の扉、開けちゃいました。～理系東大生のステキな好奇心～」</h4><p data-en="Featuring War Damage VR and VR for depression (2024–2025)">戦災VR・うつ病治療VRの研究を紹介（2024-2025）</p></div></div><div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK Special &quot;Gen Z and War&quot;">NHKスペシャル「Z世代と&quot;戦争&quot;」</h4><p data-en="Aired 2023">2023年放送</p></div></div><div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK &quot;News LIVE! Yu 5 Ji&quot;">NHK「ニュースLIVE！ゆう5時」</h4><p data-en="Aired 2023">2023年放送</p></div></div></div></div><div class="reveal"><div class="media-cat-title">Newspaper &amp; Web</div><div class="media-list"><div class="media-item"><span class="media-tag press" data-en="Yomiuri">読売</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://www.yomiuri.co.jp/local/kansai/news/20260831-GYO1T00021/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;The Yomiuri Shimbun — &amp;quot;81 Years After the War&amp;quot;&lt;/a&gt;"><a href="https://www.yomiuri.co.jp/local/kansai/news/20260831-GYO1T00021/" target="_blank" rel="noopener">読売新聞 特集「戦後81年」</a></h4><p data-en="2026">2026年</p></div></div><div class="media-item"><span class="media-tag web">Web</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://journal.g-mark.org/ja/posts/focusedissues2026_005&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Good Design Journal — FOCUSED ISSUES&lt;/a&gt;"><a href="https://journal.g-mark.org/ja/posts/focusedissues2026_005" target="_blank" rel="noopener">Good Design Journal「FOCUSED ISSUES」</a></h4><p data-en="2026">2026年</p></div></div><div class="media-item"><span class="media-tag web">Web</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://panora.tokyo/archives/150900&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;PANORA — Mental health survey of 193 VTubers (with Bond Inc.)&lt;/a&gt;"><a href="https://panora.tokyo/archives/150900" target="_blank" rel="noopener">PANORA：Vライバー193名のメンタルヘルス調査（ボンド株式会社の協力）</a></h4><p data-en="2026">2026年</p></div></div><div class="media-item"><span class="media-tag web">Web</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://distance.media/article/20241107000347/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Distance Media — interview with Prof. Hidenori Watanave on passing on memories of war&lt;/a&gt;"><a href="https://distance.media/article/20241107000347/" target="_blank" rel="noopener">Distance Media「〈東大・渡邉英徳教授に聴く〉テクノロジーで、体験していない戦争の記憶を継承できるのか？」</a></h4><p data-en="Featuring War Damage VR and old-photo VR (2024)">戦災VR・古写真VRを紹介（2024年）</p></div></div><div class="media-item"><span class="media-tag press" data-en="Mainichi">毎日</span><div class="media-info"><h4 data-en="&lt;a href=&quot;https://mainichi.jp/articles/20240401/ddl/k13/040/005000c&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;The Mainichi Shimbun, Tokyo edition&lt;/a&gt;"><a href="https://mainichi.jp/articles/20240401/ddl/k13/040/005000c" target="_blank" rel="noopener">毎日新聞 東京版</a></h4><p data-en="2024">2024年</p></div></div></div></div>
       </div>
     </div>
   </div>
@@ -784,203 +915,29 @@ footer a:hover{color:var(--text)}
               <p data-en="PIVOT EXTREME SCIENCE — Ken Mogi &times; Ryuichiro Takeshita (2024)">PIVOT EXTREME SCIENCE — 茂木健一郎 &times; 竹下隆一郎（2024）</p>
             </div>
           </div>
+
+          <div class="reel-card">
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/CRIXLKHk8bs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="reel-info">
+              <h4 data-en="The Frontiers of VR Research">VR研究の最前線</h4>
+              <p data-en="&quot;Minna Nani Yonderu?&quot; (2026)">みんななに読んでる？（2026）</p>
+            </div>
+          </div>
+          <div class="reel-card">
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/HOBUDgynYaU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="reel-info">
+              <h4 data-en="VR for Treating Depression: A Patent Strategy for the Core System">VRがうつ病治療に！？ 基盤となるシステムで特許を取る戦略</h4>
+              <p data-en="Japan Patent Office IP BASE — BiPSEE Inc.">特許庁 IP BASE — 株式会社BiPSEE</p>
+            </div>
+          </div>
         </div>
         <div class="reel-nav reveal">
           <button class="reel-btn" onclick="scrollReel(-1)" aria-label="Previous">&#8592;</button>
           <button class="reel-btn" onclick="scrollReel(1)" aria-label="Next">&#8594;</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MEDIA -->
-<section id="media">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>MEDIA</span></div>
-        <div class="section-sublabel" data-en="Media Appearances">メディア出演</div>
-      </div>
-      <div>
-        <div class="reveal">
-          <div class="media-cat-title">Television</div>
-          <div class="media-list">
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK E-TV &quot;Opening the Door of Science&quot;">NHK Eテレ「科学の扉、開けちゃいました。～理系東大生のステキな好奇心～」</h4><p data-en="Featuring War Damage VR and depression treatment VR research (2024-2025)">戦災VR・うつ病治療VRの研究を紹介（2024-2025）</p></div></div>
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK Special &quot;Gen Z and War&quot;">NHKスペシャル「Z世代と"戦争"」</h4><p data-en="Aired 2023">2023年放送</p></div></div>
-            <div class="media-item"><span class="media-tag nhk">NHK</span><div class="media-info"><h4 data-en="NHK &quot;News LIVE! Yu 5 Ji&quot;">NHK「ニュースLIVE！ゆう5時」</h4><p data-en="Aired 2023">2023年放送</p></div></div>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="media-cat-title">Web &amp; Press</div>
-          <div class="media-list">
-            <div class="media-item"><span class="media-tag web">PIVOT</span><div class="media-info"><h4>PIVOT EXTREME SCIENCE</h4><p data-en="VR &times; Neuroscience &times; Philosophy — Ken Mogi &times; Ryuichiro Takeshita (2024)">VR &times; 脳科学 &times; 哲学 — 茂木健一郎 &times; 竹下隆一郎（2024）</p></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider" style="max-width:1100px;margin:0 auto"></div>
-
-<!-- AWARDS -->
-<section id="awards" class="about-section">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>AWARDS</span></div>
-        <div class="section-sublabel" data-en="Awards">受賞</div>
-      </div>
-      <div>
-        <div class="media-list reveal">
-          <div class="media-item"><span class="media-tag award">2025</span><div class="media-info"><h4 data-en="JAPAN Metaverse Awards 2025 — Best Prototype">JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</h4><p data-en="Peacebuilding Metaverse: War Damage VR">平和構築メタバース 戦災VR</p></div></div>
-          <div class="media-item"><span class="media-tag award">2023</span><div class="media-info"><h4 data-en="NTV Imaginarium Award 2023 — XR Grand Prize">日テレイマジナリウムアワード 2023 XR部門 大賞</h4><p data-en="War Damage VR">戦災VR</p></div></div>
-          <div class="media-item"><span class="media-tag award">2020</span><div class="media-info"><h4 data-en="MIC Inno-vation Generation Award">総務省「異能vation」ジェネレーションアワード</h4><p data-en="Yumenographia">ユメノグラフィア</p></div></div>
-          <div class="media-item"><span class="media-tag award">2018</span><div class="media-info"><h4 data-en="Good Design Award">グッドデザイン賞</h4><p data-en="Ear Speaker inair">イヤースピーカー インエアー</p></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider" style="max-width:1100px;margin:0 auto"></div>
-
-<!-- ADVISORY -->
-<section id="advisory">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>ADVISORY</span></div>
-        <div class="section-sublabel" data-en="Advisory &amp; Committees">行政委員・審議会</div>
-      </div>
-      <div>
-        <div class="media-list reveal">
-          <div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="University of Tokyo Brand Studio">東京大学 コミュニケーション戦略本部 ブランドスタジオ</h4><p data-en="Advisor">アドバイザー</p></div></div>
-          <div class="media-item"><span class="media-tag gov">UTokyo</span><div class="media-info"><h4 data-en="University of Tokyo<br>Campus Well-being Advisory Board">東京大学 相談支援研究開発センター<br>キャンパスウェルビーイング推進アドバイザリーボード</h4><p data-en="Board Member">委員</p></div></div>
-          <div class="media-item"><span class="media-tag gov" data-en="METI">経産省</span><div class="media-info"><h4 data-en="METI Entertainment &amp; Creative Industries Study Group">経済産業省 エンタメ・クリエイティブ産業政策研究会</h4><p data-en="Observer">オブザーバー</p></div></div>
-          <div class="media-item"><span class="media-tag gov">DOO</span><div class="media-info"><h4 data-en="Design Organization of Nippon (DOO)">日本デザイン会議（DOO）</h4><p data-en="Japan Design Museum Research Committee">日本デザインミュージアム設立研究委員会</p></div></div>
-          <div class="media-item"><span class="media-tag gov" data-en="Minato">港区</span><div class="media-info"><h4 data-en="Minato City Selection Committee">港区 選定委員</h4><p data-en="Municipal Committee Member">自治体選定委員</p></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="projects-section">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>PROJECTS</span></div>
-        <div class="section-sublabel" data-en="Key Projects">主なプロジェクト</div>
-      </div>
-      <div>
-        <div class="project-list">
-          <div class="project-item reveal">
-            <div class="project-num">01</div>
-            <div class="project-info">
-              <h3 data-en="VR Digital Therapeutics (SaMD)">VRデジタル療法（プログラム医療機器）</h3>
-              <p data-en="Japan's first VR digital therapeutics for depression, aiming for regulatory approval. Developed at BiPSEE in collaboration with Kochi University School of Medicine.">日本初の薬事承認を目指すうつ病向けVRデジタル療法。BiPSEEで開発。高知大学医学部と連携。</p>
-            </div>
-            <div class="project-tags"><span class="tag">VR</span><span class="tag">Medical</span><span class="tag">SaMD</span></div>
-          </div>
-          <div class="project-item reveal">
-            <div class="project-num">02</div>
-            <div class="project-info">
-              <h3><a href="wardamagevr/" data-en="War Damage VR">戦災VR</a></h3>
-              <p data-en="War damage VR system using 3D Tiles. Experiential communication of social issues in a psychologically safe space. University of Tokyo, Watanabe Lab.">3D Tilesを活用した戦災VRシステム。心理的安全な空間で社会課題を体験的に伝達。東京大学渡邉英徳研究室。</p>
-            </div>
-            <div class="project-tags"><span class="tag">3D Tiles</span><span class="tag">Archive</span><span class="tag">Education</span></div>
-          </div>
-          <div class="project-item reveal">
-            <div class="project-num">03</div>
-            <div class="project-info">
-              <h3 data-en="Designship">Designship</h3>
-              <p data-en="Operating one of Japan's largest design conferences. A community dedicated to improving society through the power of design.">日本最大級のデザインカンファレンスを運営。デザインの力で社会をより良くするコミュニティ。</p>
-            </div>
-            <div class="project-tags"><span class="tag">Design</span><span class="tag">Community</span><span class="tag">Conference</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CREATIVE / 80DESIGN (hidden)
-<section id="creative" class="about-section">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>CREATIVE</span></div>
-        <div class="section-sublabel">デザイン / Web制作</div>
-      </div>
-      <div>
-        <div class="about-catch reveal">
-          テクノロジーとデザインの<br>交差点から生まれる表現。
-        </div>
-        <div class="about-body reveal reveal-d1">
-          主にデザインギルド「80design」の活動および、一般社団法人デザインシップとして関わった案件を中心に、情報設計とビジュアルデザインの両面からプロジェクトに取り組んでいます。
-        </div>
-        <div class="project-list">
-          <div class="project-item reveal">
-            <div class="project-num">01</div>
-            <div class="project-info">
-              <h3>東京大学 英語Webサイト</h3>
-              <p>東京大学の国際広報向け英語Webサイトの情報設計・デザインディレクション。</p>
-            </div>
-            <div class="project-tags"><span class="tag">Web</span><span class="tag">University</span><span class="tag">IA</span></div>
-          </div>
-          <div class="project-item reveal">
-            <div class="project-num">02</div>
-            <div class="project-info">
-              <h3>クリエイティブディレクション</h3>
-              <p>イベント・展示のビジュアルデザイン、映像制作、ブランドアイデンティティの構築。</p>
-            </div>
-            <div class="project-tags"><span class="tag">Direction</span><span class="tag">Visual</span><span class="tag">Event</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
-<!-- PUBLICATIONS (hidden)
-<section id="publications">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>PAPERS</span></div>
-        <div class="section-sublabel">論文・発表</div>
-      </div>
-      <div>
-        <div class="pub-list reveal">
-          <div class="pub-item"><div class="pub-year">2024</div><div class="pub-content"><strong>Adolescents' use of generative artificial intelligence</strong> — Asian Journal of Psychiatry</div></div>
-          <div class="pub-item"><div class="pub-year">2023</div><div class="pub-content"><strong>3D Tilesを用いた戦災VRシステムの開発</strong> — 日本バーチャルリアリティ学会 学術大会論文集</div></div>
-          <div class="pub-item"><div class="pub-year">2023</div><div class="pub-content"><strong>反芻焦点化認知行動療法におけるコンパッションに着目したVR介入の効果</strong> — 日本カウンセリング学会</div></div>
-          <div class="pub-item"><div class="pub-year">&mdash;</div><div class="pub-content">その他の業績は <a href="https://researchmap.jp/komanbe" target="_blank" rel="noopener" style="font-weight:600;border-bottom:1px solid var(--border)">researchmap</a> / <a href="https://scholar.google.com/citations?user=v5U4ES4AAAAJ" target="_blank" rel="noopener" style="font-weight:600;border-bottom:1px solid var(--border)">Google Scholar</a> をご覧ください。</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
-<!-- CAREER -->
-<section id="career" class="career-section">
-  <div class="section-inner">
-    <div class="section-layout">
-      <div class="section-left reveal">
-        <div class="section-label"><span>CAREER</span></div>
-        <div class="section-sublabel" data-en="Career">経歴</div>
-      </div>
-      <div>
-        <div class="timeline reveal">
-          <div class="timeline-item"><div class="timeline-year">2024 — Present</div><div class="timeline-title" data-en="University of Tokyo GSII — Project Researcher">東京大学 情報学環 特任研究員</div><div class="timeline-desc" data-en="Developing War Damage VR system at Watanabe Lab">渡邉英徳研究室にて戦災VRシステムを開発</div></div>
-          <div class="timeline-item"><div class="timeline-year">2021 — Present</div><div class="timeline-title" data-en="Kochi University School of Medicine — Lecturer / BiPSEE CPO">高知大学医学部 特任講師 / BiPSEE CPO</div><div class="timeline-desc" data-en="Leading development of VR digital therapeutics and SaMD for depression">うつ病向けVRデジタル療法・プログラム医療機器の開発を推進</div></div>
-          <div class="timeline-item"><div class="timeline-year">2018 — Present</div><div class="timeline-title" data-en="Designship — Board Member">一般社団法人デザインシップ 理事</div><div class="timeline-desc" data-en="Co-founded and operating one of Japan's largest design conferences">日本最大級のデザインカンファレンスを共同創設・運営</div></div>
-          <div class="timeline-item"><div class="timeline-year">2015 — 2021</div><div class="timeline-title" data-en="LITEVIEW Inc. — Co-founder">LITEVIEW Inc. 共同創業</div><div class="timeline-desc" data-en="Developed a proprietary streaming system. Conducted research with Tokyo Institute of Technology">独自の配信システムを開発。東京工業大学との研究も実施</div></div>
         </div>
       </div>
     </div>
@@ -1015,11 +972,6 @@ footer a:hover{color:var(--text)}
               <p data-en="Welcoming collaboration on VR &times; healthcare, digital archives, and design engineering.">VR &times; 医療、デジタルアーカイブ、デザインエンジニアリングに関するコラボレーションを歓迎します。</p>
               <a href="https://x.com/komanbe" target="_blank" rel="noopener" class="btn btn-dark" data-en="DM on X">XのDMで連絡</a>
             </div>
-            <!-- <div class="contact-card">
-              <h3>デザインのご相談</h3>
-              <p>中間マージンなしでフリーランスのデザイナー・映像クリエイターを直接ご紹介。大学・行政向けの実績多数。</p>
-              <a href="80design/" class="btn btn-outline">80design を見る &rarr;</a>
-            </div> -->
           </div>
         </div>
       </div>
@@ -1037,7 +989,7 @@ footer a:hover{color:var(--text)}
     <div class="modal-section">
       <div class="modal-section-label">Profile</div>
       <div class="modal-body">
-        1989年（平成元年）生まれ。VR研究者、デザインエンジニア。<strong>東京大学大学院 情報学環 特任研究員</strong>、<strong>高知大学医学部 特任講師</strong>、<strong>株式会社BiPSEE 取締役CPO</strong>、<strong>一般社団法人デザインシップ 理事</strong>。東京大学では、キャンパスウェルビーイング推進アドバイザリーボード委員およびブランドスタジオ アドバイザーも兼任。
+        1989年（平成元年）生まれ。VR研究者、デザインエンジニア。<strong>東京大学大学院 情報学環 特任研究員</strong>、<strong>高知大学医学部 特任講師</strong>、<strong>株式会社BiPSEE 取締役CPO</strong>、<strong>一般社団法人デザインシップ 理事</strong>。東京大学では、キャンパスウェルビーイング推進アドバイザリーボード委員およびコミュニケーション戦略本部 アドバイザーも兼任。
       </div>
     </div>
 
@@ -1051,14 +1003,14 @@ footer a:hover{color:var(--text)}
     <div class="modal-section">
       <div class="modal-section-label">Awards</div>
       <div class="modal-body">
-        グッドデザイン賞 / 日テレイマジナリウムアワード2023 XR部門大賞 / JAPAN Metaverse Awards 2025 ベストプロトタイプ賞 / 総務省「異能vation」ジェネレーションアワード 2020
+        JAPAN Metaverse Awards 2025 ベストプロトタイプ賞 / 日テレイマジナリウムアワード2023 XR部門大賞 / 総務省「異能vation」ジェネレーションアワード部門 ノミネート（2020） / グッドデザイン賞（2018、製品Webサイトのデザインを担当）
       </div>
     </div>
 
     <div class="modal-section">
       <div class="modal-section-label">Media</div>
       <div class="modal-body">
-        NHKスペシャル「Z世代と"戦争"」（2023） / NHK「ニュースLIVE！ゆう5時」（2023） / NHK Eテレ「科学の扉、開けちゃいました。」（2024-2025） / PIVOT EXTREME SCIENCE 茂木健一郎 &times; 竹下隆一郎（2024）
+        NHKスペシャル「Z世代と"戦争"」（2023） / NHK「ニュースLIVE！ゆう5時」（2023） / NHK Eテレ「科学の扉、開けちゃいました。」（2024-2025） / PIVOT EXTREME SCIENCE 茂木健一郎 &times; 竹下隆一郎（2024） / 毎日新聞（2024） / 読売新聞（2026） / Good Design Journal（2026）
       </div>
     </div>
   </div>

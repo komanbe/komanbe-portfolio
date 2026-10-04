@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>戦災VR — Shohei Komatsu</title>
-<meta name="description" content="3D Tilesとデジタルアーカイブ技術を活用し、戦災の記憶を心理的安全なバーチャル空間で体験・継承するシステム。">
+<meta name="description" content="戦災の写真や3Dデータの中を、3Dスキャンした自分のアバターで歩けるVR。東京大学大学院 渡邉英徳研究室。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Yuji+Mai&family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -100,6 +100,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
 .related-card h3{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
 .related-card p{font-size:.75rem;color:var(--text-secondary);line-height:1.6}
 
+/* FIGURES */
+.work-figure{margin:0 0 3rem}
+.work-figure img{width:100%;display:block;border-radius:6px;border:1px solid var(--border)}
+.work-figure figcaption,.fig-grid figcaption{font-size:.72rem;color:var(--text-tertiary);margin-top:.5rem;line-height:1.6}
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.6rem}
+@media(max-width:640px){.fig-grid{grid-template-columns:1fr}}
+.fig-grid figure{margin:0}
+.fig-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:6px;border:1px solid var(--border)}
+.credit{display:block;font-size:.64rem}
+/* STEPS */
+.step-list{list-style:none;display:grid;gap:1rem;margin-top:1rem}
+.step{display:grid;grid-template-columns:2.2rem 1fr;gap:.8rem;align-items:start}
+.step-num{font-family:var(--font-mono);font-size:.72rem;font-weight:600;width:2.2rem;height:2.2rem;border-radius:50%;
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);background:var(--surface)}
+.step h3{font-size:.92rem;font-weight:700;margin-bottom:.15rem}
+.step p{font-size:.84rem;color:var(--text-secondary);line-height:1.9}
+/* ROW LISTS */
+.row-list{list-style:none;margin-top:.4rem}
+.row-list li{display:grid;grid-template-columns:4.8rem 1fr;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border-light);font-size:.84rem;line-height:1.7}
+.row-year{font-family:var(--font-mono);font-size:.7rem;color:var(--text-tertiary);padding-top:.15rem}
+.row-text a{border-bottom:1px solid var(--border);transition:border-color .3s}
+.row-text a:hover{border-color:var(--text)}
+.row-sub{display:block;font-size:.74rem;color:var(--text-tertiary)}
 /* FOOTER */
 footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px solid var(--border-light);
   font-size:.7rem;color:var(--text-tertiary);position:relative;z-index:1}
@@ -153,8 +176,8 @@ footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px soli
 
 <div class="cursor-lens" id="cursorLens"></div>
 <div class="tategaki tategaki-left">
-  <span class="tategaki-jp">研究とデザインのあいだで</span>
-  <span class="tategaki-en">research and design</span>
+  <span class="tategaki-jp">研究とテクノロジーの間で</span>
+  <span class="tategaki-en">research and technology</span>
 </div>
 
 <canvas id="geo-canvas"></canvas>
@@ -170,8 +193,8 @@ footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px soli
     <div class="work-badge">Works / Research Project</div>
     <h1 class="work-title">戦災VR</h1>
     <p class="work-subtitle">
-      3D Tilesとデジタルアーカイブ技術を活用し、戦災の記憶を心理的安全なバーチャル空間で体験・継承するシステム。
-      東京大学 渡邉英徳研究室にて開発。
+      戦災の写真や3Dデータの中を、3Dスキャンした自分のアバターで歩けるVR。
+      東京大学大学院 渡邉英徳研究室で研究開発を統括しています。
     </p>
   </div>
 </div>
@@ -182,89 +205,77 @@ footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px soli
     <div class="info-grid">
       <div class="info-card">
         <div class="label">Affiliation</div>
-        <div class="value">東京大学 大学院学際情報学府<br>渡邉英徳研究室</div>
+        <div class="value">東京大学大学院 情報学環<br>渡邉英徳研究室</div>
       </div>
       <div class="info-card">
         <div class="label">Role</div>
-        <div class="value">特任研究員 / プロジェクトリード<br>VR体験設計・開発</div>
+        <div class="value">研究開発統括<br>体験設計・開発</div>
       </div>
       <div class="info-card">
         <div class="label">Period</div>
-        <div class="value">2022 — Present</div>
+        <div class="value">2023 — Present</div>
       </div>
       <div class="info-card">
-        <div class="label">Exhibition</div>
-        <div class="value">大阪・関西万博 国連パビリオン<br>NHK / TBS 等メディア多数</div>
+        <div class="label">Awards</div>
+        <div class="value">日テレイマジナリウムアワード2023 XR部門大賞<br>JAPAN Metaverse Awards 2025 ベストプロトタイプ賞</div>
       </div>
     </div>
   </div>
 
-  <div class="image-placeholder">
-    画像を追加<br><small>&lt;img src="path/to/image.jpg"&gt; に差し替えてください</small>
-  </div>
+  <figure class="work-figure work-section">
+    <img src="img/avatar-in-photo.jpg" alt="立体にした広島の戦災写真の中を歩くアバター">
+    <figcaption>立体にした広島の戦災写真の中を、アバターで歩く</figcaption>
+  </figure>
 
   <div class="work-section">
     <h2>概要</h2>
     <p>
-      戦災VRは、第二次世界大戦中の空襲や原爆被害の記憶を、3D Tiles技術を用いてバーチャル空間に再構築するプロジェクトです。
-      古写真、証言、歴史資料をもとに、当時の街並みや被害状況をVR空間内で体験できるシステムを開発しています。
+      戦災VRは、戦災の写真や3Dデータの中を、来場者が3Dスキャンした自分のアバターで歩けるVRです。
+      写真に地面や歩ける範囲を設定して奥行きのある空間にし、その中に自分の身体を置くことで、
+      写真を外から見るだけでなく、その場所にいる視点から当時の状況を考えられるようにしています。
     </p>
     <p>
-      従来の写真や映像だけでは伝えきれない空間的・感覚的な体験を、心理的安全性に配慮したデザインで提供することで、
-      戦争体験の次世代への継承と、平和教育への新しいアプローチを実現します。
+      広島・長崎の戦災写真に加えて、ウクライナやガザの3Dデータ、報道映像から生成した空間も扱っています。
     </p>
   </div>
 
   <div class="work-section">
-    <h2>アプローチ</h2>
-    <p>
-      3D Tiles規格を採用し、大規模な3Dデータを効率的にストリーミング配信。
-      ユーザーは自由にバーチャル空間内を移動し、被災地の様子を体感できます。
-      心理的安全性を担保するため、体験の強度を段階的に調整できるインタラクション設計を導入しています。
-    </p>
-    <p>
-      古写真のカラー化技術（渡邉研究室の知見）と組み合わせ、モノクロ写真からリアルな色彩を復元。
-      証言音声やテキストと連動させることで、より深い理解と共感を促すマルチモーダルな体験を実現しています。
-    </p>
+    <h2>制作工程</h2>
+    <ol class="step-list"><li class="step"><span class="step-num">01</span><div><h3>写真を立体にする</h3><p>戦災写真に地面・歩ける範囲・遮蔽物を設定し、2Dの写真を奥行きのある空間にします（Unity）。</p></div></li><li class="step"><span class="step-num">02</span><div><h3>自分の身体を入れる</h3><p>AVATARIUM（PocketRD）で来場者を3Dスキャンし、本人のアバターとして写真の中を歩けるようにします。</p></div></li><li class="step"><span class="step-num">03</span><div><h3>映像から3D空間へ</h3><p>アルジャジーラとの共同開発（東京大学大学院情報学環 メディア・コンテンツ総合研究機構とアルジャジーラ・メディア・ネットワークのMOUに基づく）では、数秒の報道映像から3D Gaussian Splattingで空間を生成し、映像に映っていない建物の奥まで歩いて入れるようにしています。</p></div></li><li class="step"><span class="step-num">04</span><div><h3>複数人で同じ場所へ</h3><p>3D Tiles／Cesium for Unityで地図上に配置した空間に、複数人がアバターで集まれるようにしています。</p></div></li></ol>
+    <div class="fig-grid"><figure><img src="img/scan-booth.jpg" alt="来場者を3Dスキャンするブース（AVATARIUM）" loading="lazy"><figcaption>来場者を3Dスキャンするブース（AVATARIUM）</figcaption></figure><figure><img src="img/footage-to-3dgs.jpg" alt="報道映像（左）と、3D Gaussian Splattingで生成した空間（右）" loading="lazy"><figcaption>報道映像（左）と、3D Gaussian Splattingで生成した空間（右）<span class="credit">Original footage provided by Al Jazeera</span></figcaption></figure><figure><img src="img/multiuser.jpg" alt="複数人がアバターで同じ空間に入るデモ" loading="lazy"><figcaption>複数人がアバターで同じ空間に入るデモ</figcaption></figure><figure><img src="img/metaverse-award.jpg" alt="JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）" loading="lazy"><figcaption>JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）</figcaption></figure></div>
   </div>
 
   <div class="work-section">
-    <h2>技術スタック</h2>
+    <h2>展示</h2>
+    <ul class="row-list"><li><span class="row-year">2026</span><span class="row-text">NPT再検討会議に合わせた展示（日本生協連・東京大学大学院 渡邉英徳研究室）<span class="row-sub">ミレニアムヒルトン・ニューヨーク・ワン UN プラザ</span></span></li><li><span class="row-year">2026</span><span class="row-text">ミライの平和活動展 in 長崎 〜テクノロジーでつながる世界〜<span class="row-sub">長崎原爆資料館・ベネックス長崎ブリックホール</span></span></li><li><span class="row-year">2025</span><span class="row-text">特別展「つなぐ、つながる」（渡邉英徳研究室）<span class="row-sub">大阪・関西万博 国際連合パビリオン</span></span></li><li><span class="row-year">2025</span><span class="row-text">ミライの平和活動展 in 長崎（来場者のアバターが映画『長崎―閃光の影で―』の場面や戦時写真に入り込む展示）<span class="row-sub">長崎原爆資料館</span></span></li><li><span class="row-year">2024</span><span class="row-text">ミライの平和活動展 in 長崎<span class="row-sub">長崎市役所</span></span></li><li><span class="row-year">2023–24</span><span class="row-text">東京都現代美術館「MOTアニュアル extra」（日テレイマジナリウムアワード2023 XR部門大賞受賞作として）<span class="row-sub">東京都現代美術館</span></span></li><li><span class="row-year">2023</span><span class="row-text">ミライの平和活動展〜テクノロジーでつながる世界〜<span class="row-sub">広島テレビ本社</span></span></li><li><span class="row-year">2023</span><span class="row-text">IVS2023 Kyoto<span class="row-sub">みやこめっせ京都</span></span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>受賞</h2>
+    <ul class="row-list"><li><span class="row-year">2025</span><span class="row-text">JAPAN Metaverse Awards 2025 ベストプロトタイプ賞（平和構築メタバース 戦災VR）</span></li><li><span class="row-year">2023</span><span class="row-text"><a href="https://www.iii.u-tokyo.ac.jp/news/2023120819891" target="_blank" rel="noopener">日テレイマジナリウムアワード2023 XR部門大賞</a></span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>メディア</h2>
+    <ul class="row-list"><li><span class="row-year">2026</span><span class="row-text"><a href="https://www.yomiuri.co.jp/local/kansai/news/20260831-GYO1T00021/" target="_blank" rel="noopener">読売新聞 特集「戦後81年」</a></span></li><li><span class="row-year">2025–26</span><span class="row-text">港区「みなとNEWS」（港区平和青年団の講座での戦災VRの講義）</span></li><li><span class="row-year">2024–</span><span class="row-text">NHK Eテレ「科学の扉、開けちゃいました。～理系東大生のステキな好奇心～」</span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://distance.media/article/20241107000347/" target="_blank" rel="noopener">Distance Media「〈東大・渡邉英徳教授に聴く〉テクノロジーで、体験していない戦争の記憶を継承できるのか？」</a></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://mainichi.jp/articles/20240401/ddl/k13/040/005000c" target="_blank" rel="noopener">毎日新聞 東京版</a></span></li><li><span class="row-year">2023</span><span class="row-text">NHKスペシャル「Z世代と&quot;戦争&quot;」</span></li><li><span class="row-year">2023</span><span class="row-text">NHK「ニュースLIVE！ゆう5時」</span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>論文・発表</h2>
+    <ul class="row-list"><li><span class="row-year">2025</span><span class="row-text">国際シンポジウム「Beyond the Headlines」パネル「戦災とデジタルアーカイブ」登壇（東京大学 情報学環・福武ホール）</span></li><li><span class="row-year">2024</span><span class="row-text">小松尚平, 渡邉英徳「「戦災写真内を歩行可能なアバター・フレームシステム」の実展示」デジタルアーカイブ学会誌, Vol.8, No.1, pp.21-24（招待）</span></li><li><span class="row-year">2023</span><span class="row-text">小松尚平, 渡邉英徳「3D Tilesを用いた戦災VRシステムの開発」第28回日本バーチャルリアリティ学会大会論文集</span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>技術</h2>
     <div class="tech-tags">
-      <span class="tech-tag">3D Tiles</span>
-      <span class="tech-tag">WebXR</span>
-      <span class="tech-tag">Three.js</span>
       <span class="tech-tag">Unity</span>
-      <span class="tech-tag">Photogrammetry</span>
-      <span class="tech-tag">GIS</span>
+      <span class="tech-tag">3D Tiles</span>
+      <span class="tech-tag">Cesium for Unity</span>
+      <span class="tech-tag">3D Gaussian Splatting</span>
+      <span class="tech-tag">3D Scanning (AVATARIUM)</span>
       <span class="tech-tag">Digital Archive</span>
       <span class="tech-tag">VR Interaction Design</span>
     </div>
-  </div>
-
-  <div class="work-section">
-    <h2>メディア掲載</h2>
-    <p>
-      NHK「首都圏ネットワーク」にて戦災VRプロジェクトが特集されたほか、
-      NHK Eテレ「科学の扉、開けちゃいました。」、NHK「ブラタモリ」東京大学SP、
-      TBS NEWS DIGなど複数のテレビ番組で取り上げられています。
-    </p>
-    <p>
-      2025年の大阪・関西万博では国連パビリオンにて「零式水上偵察機VR」とともに展示。
-      TBSとの共同制作による歴史継承VRコンテンツとして公開されました。
-    </p>
-  </div>
-
-  <div class="work-section">
-    <h2>関連論文</h2>
-    <p>
-      <strong>3D Tilesを用いた戦災VRシステムの開発</strong><br>
-      日本バーチャルリアリティ学会 学術大会論文集（2023）
-    </p>
-  </div>
-
-  <div class="image-placeholder">
-    追加の画像やスクリーンショット<br><small>&lt;img src="path/to/image.jpg"&gt; に差し替えてください</small>
   </div>
 
 </div>
@@ -272,17 +283,17 @@ footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px soli
 <div class="related-section">
   <h2>関連プロジェクト</h2>
   <div class="related-grid">
-    <a href="#" class="related-card">
-      <h3>VRデジタル療法</h3>
-      <p>うつ病向けVRデジタル療法。BiPSEE &times; 高知大学医学部の産学連携。</p>
+    <a href="../#work-minato" class="related-card">
+      <h3>港区 平和都市宣言40周年</h3>
+      <p>記念ロゴ・映像の制作と、港区平和青年団での戦災VRのワークショップ。</p>
     </a>
-    <a href="#" class="related-card">
-      <h3>零式水上偵察機VR</h3>
-      <p>大阪・関西万博 国連パビリオン展示。TBSとの共同制作。</p>
+    <a href="../#work-gdp-map" class="related-card">
+      <h3>核兵器GDPリスクマップ</h3>
+      <p>都市と供給網のつながりをたどる可視化。渡邉英徳研究室の協力。</p>
     </a>
-    <a href="#" class="related-card">
-      <h3>古写真VR</h3>
-      <p>古写真と証言から戦災の記憶をVR空間に復元する次世代継承プロジェクト。</p>
+    <a href="../#work-vr-dtx" class="related-card">
+      <h3>うつ病向けVRデジタル療法</h3>
+      <p>株式会社BiPSEEで開発を統括しているVRデジタル療法。</p>
     </a>
   </div>
 </div>
