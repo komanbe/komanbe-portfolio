@@ -282,6 +282,7 @@ section{padding:clamp(5rem,10vw,10rem) clamp(2rem,5vw,5rem);position:relative;z-
 .section-inner{max-width:1100px;margin:0 auto}
 .section-layout{display:grid;grid-template-columns:280px 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
 @media(max-width:900px){.section-layout{grid-template-columns:1fr;gap:1.5rem}}
+.section-layout>div{min-width:0}
 .section-left{position:sticky;top:calc(var(--nav-h) + 2rem)}
 @media(max-width:900px){.section-left{position:static}}
 .section-label{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:900;
@@ -1218,8 +1219,8 @@ document.querySelectorAll('.reel-card iframe').forEach(iframe=>{
 
 // ===== VANTA.JS RINGS BACKGROUND =====
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" integrity="sha512-334uBDwY0iZ2TklV1OtDtBW9vp7jjP7SWRzT7Ehu1fdtPIjTpCwTSFb8HI/YBau9L1/kRBEOALrS229Kry4yFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js" integrity="sha384-fs5VqUnBAfynHwt9bbuBxdgqyNG/vUAEV0bbNR1WkKlgIJLlK+jPRNHPNcpKUkKg" crossorigin="anonymous"></script>
 <script>
 if(typeof VANTA!=='undefined'&&VANTA.WAVES){
   VANTA.WAVES({
