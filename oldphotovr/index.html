@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古写真VR（アバター・フレーム） — Shohei Komatsu</title>
+<meta name="description" content="AVATARIUM（株式会社POCKET RD）で3Dスキャンした来場者のアバターで、古写真・戦中写真や映画の場面の中に入り込む体験。東京大学大学院 渡邉英徳研究室・株式会社POCKET RD。">
+<meta property="og:title" content="古写真VR（アバター・フレーム） — Shohei Komatsu">
+<meta property="og:description" content="AVATARIUM（株式会社POCKET RD）で3Dスキャンした来場者のアバターで、古写真・戦中写真や映画の場面の中に入り込む体験。東京大学大学院 渡邉英徳研究室・株式会社POCKET RD。">
+<meta property="og:image" content="https://komanbe.com/oldphotovr/img/avatar-in-photo.jpg">
+<meta property="og:image:width" content="1046">
+<meta property="og:image:height" content="720">
+<meta property="og:url" content="https://komanbe.com/oldphotovr/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="小松尚平 / Shohei Komatsu">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="古写真VR（アバター・フレーム） — Shohei Komatsu">
+<meta name="twitter:image" content="https://komanbe.com/oldphotovr/img/avatar-in-photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Yuji+Mai&family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafaf8;
+  --bg-alt:#f2f1ed;
+  --surface:#fff;
+  --border:#e5e4e0;
+  --border-light:#eeede9;
+  --text:#1a1a18;
+  --text-secondary:#6b6b66;
+  --text-tertiary:#9c9c96;
+  --accent-warm:#8b5e3c;
+  --font-body:'Zen Kaku Gothic New','Sora',system-ui,sans-serif;
+  --font-display:'Sora',system-ui,sans-serif;
+  --font-serif:'Shippori Mincho B1',serif;
+  --font-mono:'IBM Plex Mono',monospace;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --nav-h:64px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:none}
+a,button{cursor:pointer}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:#1a1a18;color:#fafaf8}
+
+/* GEOMETRIC CANVAS */
+#geo-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  background:rgba(250,250,248,.85);backdrop-filter:blur(20px) saturate(1.4);
+  border-bottom:1px solid var(--border-light)}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:.9rem;letter-spacing:-.03em}
+.nav-back{font-size:.8rem;font-weight:500;color:var(--text-secondary);display:flex;align-items:center;gap:.4rem;
+  transition:color .3s}
+.nav-back:hover{color:var(--text)}
+
+/* HERO */
+.work-hero{padding:calc(var(--nav-h) + 4rem) clamp(1.5rem,4vw,4rem) 3rem;
+  position:relative;overflow:hidden;z-index:1}
+.work-hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(var(--border-light) 1px,transparent 1px),linear-gradient(90deg,var(--border-light) 1px,transparent 1px);
+  background-size:80px 80px;opacity:.4;pointer-events:none}
+.work-hero-content{position:relative;max-width:720px;
+  opacity:0;transform:translateY(24px);animation:revealUp .8s .2s var(--ease-out) forwards}
+.work-badge{font-family:var(--font-mono);font-size:.68rem;font-weight:500;
+  color:var(--text-tertiary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.work-title{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;
+  line-height:1.15;letter-spacing:-.02em;margin-bottom:.8rem}
+.work-title .title-sub{display:block;font-size:.5em;font-weight:700;letter-spacing:.02em;margin-top:.4rem}
+.work-subtitle{font-size:.9rem;color:var(--text-secondary);line-height:2;max-width:560px}
+@keyframes revealUp{to{opacity:1;transform:translateY(0)}}
+
+/* CONTENT */
+.work-content{max-width:720px;margin:0 auto;padding:2rem clamp(1.5rem,4vw,4rem) 4rem;position:relative;z-index:1}
+.work-section{margin-bottom:3rem;opacity:0;transform:translateY(24px);transition:all .7s var(--ease-out)}
+.work-section.visible{opacity:1;transform:none}
+.work-section h2{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:.8rem;
+  padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.work-section p{font-size:.88rem;color:var(--text-secondary);line-height:2}
+.work-section p+p{margin-top:.8rem}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}
+@media(max-width:640px){.info-grid{grid-template-columns:1fr}}
+.info-card{padding:1rem;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
+.info-card .label{font-family:var(--font-mono);font-size:.62rem;font-weight:600;color:var(--text-tertiary);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+.info-card .value{font-size:.82rem;font-weight:500;line-height:1.5}
+
+/* IMAGE PLACEHOLDER */
+.image-placeholder{width:100%;aspect-ratio:16/9;border-radius:6px;
+  background:var(--bg-alt);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-tertiary);font-size:.78rem;margin:2rem 0;text-align:center}
+
+/* TECH TAGS */
+.tech-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.8rem}
+.tech-tag{font-family:var(--font-mono);font-size:.62rem;font-weight:500;padding:.25rem .55rem;
+  border-radius:4px;border:1px solid var(--border);color:var(--text-secondary);letter-spacing:.03em}
+
+/* RELATED */
+.related-section{padding:3rem clamp(1.5rem,4vw,4rem);background:var(--bg-alt);position:relative;z-index:1}
+.related-section h2{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;text-align:center;margin-bottom:1.5rem}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.6rem;max-width:720px;margin:0 auto}
+.related-card{padding:1.2rem;border:1px solid var(--border);border-radius:6px;background:var(--surface);
+  transition:all .3s var(--ease-out);display:block}
+.related-card:hover{border-color:var(--text-tertiary);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.related-card h3{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
+.related-card p{font-size:.75rem;color:var(--text-secondary);line-height:1.6}
+
+/* FIGURES */
+.work-figure{margin:0 0 3rem}
+.work-figure img{width:100%;display:block;border-radius:6px;border:1px solid var(--border)}
+.work-figure figcaption,.fig-grid figcaption{font-size:.72rem;color:var(--text-tertiary);margin-top:.5rem;line-height:1.6}
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.6rem}
+@media(max-width:640px){.fig-grid{grid-template-columns:1fr}}
+.fig-grid figure{margin:0}
+.fig-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:6px;border:1px solid var(--border)}
+.credit{display:block;font-size:.64rem}
+.step-figure{margin:1.6rem 0 0}
+.step-figure img{width:100%;display:block;border-radius:6px;border:1px solid var(--border)}
+.step-figure figcaption{font-size:.72rem;color:var(--text-tertiary);margin-top:.5rem;line-height:1.6}
+/* STEPS */
+.step-list{list-style:none;display:grid;gap:1rem;margin-top:1rem}
+.step{display:grid;grid-template-columns:2.2rem 1fr;gap:.8rem;align-items:start}
+.step-num{font-family:var(--font-mono);font-size:.72rem;font-weight:600;width:2.2rem;height:2.2rem;border-radius:50%;
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);background:var(--surface)}
+.step h3{font-size:.92rem;font-weight:700;margin-bottom:.15rem}
+.step p{font-size:.84rem;color:var(--text-secondary);line-height:1.9}
+.work-section p.step-note{margin-top:1.2rem;font-size:.84rem}
+.step-note a,.work-section p a{border-bottom:1px solid var(--border);transition:border-color .3s}
+.step-note a:hover,.work-section p a:hover{border-color:var(--text)}
+/* ROW LISTS */
+.row-list{list-style:none;margin-top:.4rem}
+.row-list li{display:grid;grid-template-columns:4.8rem 1fr;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border-light);font-size:.84rem;line-height:1.7}
+.row-year{font-family:var(--font-mono);font-size:.7rem;color:var(--text-tertiary);padding-top:.15rem}
+.row-text a{border-bottom:1px solid var(--border);transition:border-color .3s}
+.row-text a:hover{border-color:var(--text)}
+.row-sub{display:block;font-size:.74rem;color:var(--text-tertiary)}
+/* FOOTER */
+footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px solid var(--border-light);
+  font-size:.7rem;color:var(--text-tertiary);position:relative;z-index:1}
+
+/* CURSOR LENS */
+.cursor-lens{position:fixed;width:130px;height:130px;pointer-events:none;z-index:9999;
+  border:1px solid rgba(100,180,200,.25);
+  background:radial-gradient(circle at 35% 35%,rgba(100,200,220,.08),rgba(160,120,200,.06),transparent 70%);
+  backdrop-filter:hue-rotate(160deg) saturate(1.8) brightness(1.08) contrast(1.05);
+  -webkit-backdrop-filter:hue-rotate(160deg) saturate(1.8) brightness(1.08) contrast(1.05);
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform .4s var(--ease-out),opacity .4s,border-radius .6s;
+  opacity:0;animation:blobMorph 5s ease-in-out infinite;
+  will-change:transform,left,top,border-radius}
+.cursor-lens.active{transform:translate(-50%,-50%) scale(1);opacity:1}
+.cursor-lens.on-btn{transform:translate(-50%,-50%) scale(.25);opacity:.2;
+  backdrop-filter:none;-webkit-backdrop-filter:none;background:none;
+  border-color:var(--text);animation:none;border-radius:50%}
+.cursor-lens::before{content:'';position:absolute;inset:-1px;
+  border:1px solid rgba(200,220,255,.12);
+  animation:blobMorph 5s .8s ease-in-out infinite;pointer-events:none}
+.cursor-lens::after{content:'';position:absolute;
+  top:18%;left:22%;width:28%;height:18%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.18),transparent);
+  filter:blur(4px);pointer-events:none}
+@keyframes blobMorph{
+  0%{border-radius:42% 58% 62% 38% / 46% 52% 48% 54%}
+  14%{border-radius:54% 46% 38% 62% / 58% 42% 58% 42%}
+  28%{border-radius:38% 62% 54% 46% / 42% 58% 38% 62%}
+  42%{border-radius:62% 38% 46% 54% / 54% 38% 62% 46%}
+  57%{border-radius:46% 54% 58% 42% / 38% 62% 42% 58%}
+  71%{border-radius:58% 42% 42% 58% / 62% 46% 54% 38%}
+  85%{border-radius:48% 52% 56% 44% / 52% 44% 56% 48%}
+  100%{border-radius:42% 58% 62% 38% / 46% 52% 48% 54%}
+}
+@media(hover:none){.cursor-lens{display:none}html,body,a,button{cursor:auto !important}}
+
+/* TATEGAKI */
+.tategaki{position:fixed;writing-mode:vertical-rl;z-index:2;pointer-events:none;user-select:none}
+.tategaki-left{left:clamp(.8rem,1.5vw,1.5rem);top:50%;transform:translateY(-50%)}
+.tategaki-jp{font-family:var(--font-serif);font-size:clamp(.85rem,1.2vw,1.05rem);font-weight:600;
+  color:var(--text);opacity:.35;letter-spacing:.35em;text-orientation:mixed;line-height:1}
+.tategaki-en{position:absolute;bottom:-.5em;left:0;
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.6vw,1.4rem);font-weight:300;font-style:italic;
+  color:#8a7a6a;opacity:.38;letter-spacing:.05em;text-orientation:mixed;
+  text-transform:lowercase;line-height:1;transform:translateX(-.1em)}
+@media(max-width:1000px){.tategaki{display:none}}
+</style>
+</head>
+<body>
+
+<div class="cursor-lens" id="cursorLens"></div>
+<div class="tategaki tategaki-left">
+  <span class="tategaki-jp">研究とテクノロジーの間で</span>
+  <span class="tategaki-en">research and technology</span>
+</div>
+
+<canvas id="geo-canvas"></canvas>
+
+<nav>
+  <a href="../" class="nav-logo" style="display:flex;flex-direction:column;line-height:1.2;position:relative;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.04em">Shohei Komatsu <span style="font-weight:400;color:var(--text-tertiary)">/ Komanbe</span><span style="font-size:.52rem;font-weight:500;letter-spacing:.08em;color:var(--text-tertiary);text-transform:uppercase;margin-top:.1rem">VR Researcher & Design Engineer</span></a>
+  <a href="../" class="nav-back">&larr; Back</a>
+</nav>
+
+<div class="work-hero">
+  <div class="work-hero-grid"></div>
+  <div class="work-hero-content">
+    <div class="work-badge">Works / Research Project</div>
+    <h1 class="work-title">古写真VR<span class="title-sub">アバター・フレーム</span></h1>
+    <p class="work-subtitle">
+      AVATARIUM（株式会社POCKET RD）で3Dスキャンした来場者のアバターで、古写真・戦中写真や映画の場面の中に入り込む体験。
+      東京大学大学院 渡邉英徳研究室と株式会社POCKET RDによる作品で、開発を担当しています。
+    </p>
+  </div>
+</div>
+
+<div class="work-content">
+
+  <div class="work-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Affiliation</div>
+        <div class="value">東京大学大学院 情報学環<br>渡邉英徳研究室</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Partner</div>
+        <div class="value">株式会社POCKET RD<br>（AVATARIUM）</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Role</div>
+        <div class="value">開発</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Period</div>
+        <div class="value">2023 — Present</div>
+      </div>
+    </div>
+  </div>
+
+  <figure class="work-figure work-section">
+    <img src="img/avatar-in-photo.jpg" alt="立体にした広島の戦災写真の中を歩くアバター">
+    <figcaption>立体にした広島の戦災写真の中を、アバターで歩く</figcaption>
+  </figure>
+
+  <div class="work-section">
+    <h2>概要</h2>
+    <p>
+      来場者をAVATARIUM（株式会社POCKET RD）で3Dスキャンし、本人のアバターを古写真・戦中写真や映画の場面の中に置いて、
+      写真の中を歩いたり当時の人物に扮したりできるようにした体験です。
+      写真に地面や歩ける範囲を設定して、奥行きのある空間にしています。
+    </p>
+    <p>
+      2026年の「ミライの平和活動展 in 長崎」では、「ナガサキ・アーカイブ」の古写真に入り込む新しいコンテンツを公開しました。
+    </p>
+  </div>
+
+  <div class="work-section">
+    <h2>制作工程</h2>
+    <ol class="step-list"><li class="step"><span class="step-num">01</span><div><h3>写真を立体にする</h3><p>古写真や戦中写真に地面・歩ける範囲・遮蔽物を設定し、2Dの写真を奥行きのある空間にします（Unity）。</p></div></li><li class="step"><span class="step-num">02</span><div><h3>自分の身体を入れる</h3><p>AVATARIUM（株式会社POCKET RD）で来場者を3Dスキャンし、本人のアバターとして写真の中を歩けるようにします。</p></div></li></ol>
+    <figure class="step-figure"><img src="img/scan-booth.jpg" alt="来場者を3Dスキャンするブース（AVATARIUM）" loading="lazy"><figcaption>来場者を3Dスキャンするブース（AVATARIUM）</figcaption></figure>
+    <p class="step-note">地図上に配置した戦災の空間に複数人がVRで集まるシステムは、<a href="../wardamagevr/">戦災VR</a>として別にまとめています。</p>
+  </div>
+
+  <div class="work-section">
+    <h2>展示</h2>
+    <ul class="row-list"><li><span class="row-year">2026</span><span class="row-text"><a href="https://pocket-rd.com/information/20260811_avatarium-nagasaki2026/" target="_blank" rel="noopener">ミライの平和活動展 in 長崎 〜テクノロジーでつながる世界〜</a>（AVATARIUMによる「ナガサキ・アーカイブ」の古写真に入り込むコンテンツを初公開）<span class="row-sub">長崎原爆資料館・ベネックス長崎ブリックホール, 2026年8月11日〜17日</span></span></li><li><span class="row-year">2025</span><span class="row-text"><a href="https://prtimes.jp/main/html/rd/p/000000053.000069815.html" target="_blank" rel="noopener">ミライの平和活動展 in 長崎 〜テクノロジーでつながる世界〜</a>（来場者のアバターが映画『長崎―閃光の影で―』の場面や戦時写真に入り込む展示）<span class="row-sub">長崎原爆資料館, 2025年8月11日〜17日</span></span></li><li><span class="row-year">2025</span><span class="row-text"><a href="https://symposium2025.jca1971.com/sessions.html" target="_blank" rel="noopener">「古写真VR」／「戦災VR」体験ブース</a><span class="row-sub">日本コミュニケーション学会 第54回年次大会 関連展示企画「『原爆の絵』とVR」, 広島修道大学, 2025年6月7日〜8日</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://www.u-tokyo.ac.jp/focus/ja/events/z0115_00057.html" target="_blank" rel="noopener">ミライの平和活動展 in 長崎 〜テクノロジーでつながる世界〜</a><span class="row-sub">長崎市役所, 2024年8月4日〜8日</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://pocket-rd.com/information/vivatechnology2024/" target="_blank" rel="noopener">「アバター・フレーム」観光版（株式会社Pocket RDの出展。研究室として協力）</a><span class="row-sub">VivaTechnology 2024（Japan Pavilion）, パリ, 2024年5月22日〜25日</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://pocket-rd.com/information/sushi-tech-tokyo-2024-global-startup-program/" target="_blank" rel="noopener">「戦災VR｜アバター・フレーム」観光版（自分のアバターで日本各地を観光できる版）</a><span class="row-sub">SusHi Tech Tokyo 2024 Global Startup Program, 東京ビッグサイト, 2024年5月15日〜16日</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://www.iii.u-tokyo.ac.jp/research/20240527" target="_blank" rel="noopener">ミライ世代と読む戦中写真―データを紡いで平和につなぐ―</a><span class="row-sub">東京大学 福武ラーニングシアター, 2024年3月31日</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://prtimes.jp/main/html/rd/p/000000031.000069815.html" target="_blank" rel="noopener">「戦災VR｜アバター・フレーム」の体験展示</a><span class="row-sub">Tokyo Innovation Base（東京・丸の内）, 2024年2月14日〜28日</span></span></li><li><span class="row-year">2023</span><span class="row-text"><a href="https://www.beams.co.jp/news/3802/" target="_blank" rel="noopener">BEAMS JAPAN テレポーテーション？</a>（BEAMS JAPAN・株式会社Pocket RD・東京大学大学院 渡邉英徳研究室のコラボ）<span class="row-sub">ビームスジャパン新宿, 2023年11月17日〜28日</span></span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>メディア</h2>
+    <ul class="row-list"><li><span class="row-year">2025</span><span class="row-text"><a href="https://x.com/komanbe/status/1955606629933891719" target="_blank" rel="noopener">長崎国際テレビ「『マインクラフト』で原爆投下前の浦上天主堂を再現！長崎原爆資料館で『ミライの平和活動展』《長崎》」</a><span class="row-sub">2025年8月13日（戦災VRと、映画『長崎―閃光の影で―』と株式会社Pocket RDのコラボの取材）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1821322632660447699" target="_blank" rel="noopener">長崎国際テレビ「“ゲーム”活用し当時の生活をリアルに体感 被爆者の“記憶” “願い”未来につなぐ平和活動《長崎》」</a><span class="row-sub">2024年8月6日（「ミライの平和活動展 in 長崎」での戦災VR・アバター・フレームの紹介）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1796178749345378349" target="_blank" rel="noopener">東京都「Tokyo Updates」&quot;Innovation with the World&#x27;s Most Advanced Avatar Technology&quot;</a><span class="row-sub">2024年5月29日（株式会社Pocket RDの紹介記事。「アバター・フレーム」の体験の様子を掲載）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1793459236955128106" target="_blank" rel="noopener">NHK「おはよう日本」・NHK WORLD-JAPAN</a><span class="row-sub">2024年5月23日（VivaTechnology 2024での「アバター・フレーム」と、富士通とのコラボアニメーションの紹介）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1791704081603661982" target="_blank" rel="noopener">NHK WORLD-JAPAN</a><span class="row-sub">2024年5月17日（SusHi Tech Tokyo 2024で展示した「アバター・フレーム」観光版の紹介）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1782610395704016992" target="_blank" rel="noopener">毎日小学生新聞「戦争中をデジタル技術で体感 小中学生ら180人、東京大学で『戦中写真』から再現」</a><span class="row-sub">2024年4月23日（「戦災VR｜アバター・フレーム」の紹介）</span></span></li><li><span class="row-year">2024</span><span class="row-text"><a href="https://x.com/komanbe/status/1757937588038746257" target="_blank" rel="noopener">フジテレビ「News α」「最新技術『体感型ピッチ』に熱視線 気鋭のスタートアップが集合」</a><span class="row-sub">2024年2月（株式会社Pocket RDのAVATARIUMの紹介の中で「戦災VR｜アバター・フレーム」を紹介）</span></span></li><li><span class="row-year">2023</span><span class="row-text"><a href="https://x.com/komanbe/status/1711536279027142890" target="_blank" rel="noopener">日本経済新聞 電子版「動画やVRで戦争記憶を継承 最新技術で次世代に」</a><span class="row-sub">2023年（古写真VRの動画を掲載）</span></span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>論文</h2>
+    <ul class="row-list"><li><span class="row-year">2024</span><span class="row-text"><a href="https://doi.org/10.24506/jsda.8.1_21" target="_blank" rel="noopener">小松尚平, 渡邉英徳「「戦災写真内を歩行可能なアバター・フレームシステム」の実展示」</a>デジタルアーカイブ学会誌, Vol.8, No.1, pp.21-24（招待）</span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>ワークショップ</h2>
+    <ul class="row-list"><li><span class="row-year">2025</span><span class="row-text"><a href="https://x.com/komanbe/status/1960679836550357441" target="_blank" rel="noopener">広島女学院高等学校の生徒向けワークショップ</a><span class="row-sub">2025年8月27日（映画『長崎―閃光の影で―』とのコラボで、自分のアバターがエキストラとして映画に登場するコンテンツの実習を担当）</span></span></li></ul>
+  </div>
+
+  <div class="work-section">
+    <h2>技術</h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Unity</span>
+      <span class="tech-tag">3D Scanning (AVATARIUM)</span>
+      <span class="tech-tag">Digital Archive</span>
+      <span class="tech-tag">VR Interaction Design</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="related-section">
+  <h2>関連プロジェクト</h2>
+  <div class="related-grid">
+    <a href="../wardamagevr/" class="related-card">
+      <h3>戦災VR</h3>
+      <p>戦災の写真や3Dデータ、報道映像から生成した空間を地図上に配置し、VRで複数人が同じ場所に集まって体験できるシステム。</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Shohei Komatsu</p>
+  <p><a href="../">Shohei Komatsu Portfolio</a></p>
+</footer>
+
+<script>
+(function(){
+  const els=document.querySelectorAll('.work-section');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
+  },{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+// ===== GEOMETRIC MOTION ANIMATION =====
+(function(){
+  const canvas=document.getElementById('geo-canvas');
+  const ctx=canvas.getContext('2d');
+  let w,h;
+  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}
+  window.addEventListener('resize',resize);resize();
+
+  const palette=[
+    {r:140,g:94,b:60,a:.06},{r:90,g:110,b:130,a:.05},
+    {r:120,g:140,b:100,a:.04},{r:160,g:120,b:80,a:.05},{r:100,g:90,b:120,a:.04}
+  ];
+
+  class Geo{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*w;this.y=Math.random()*h*2;this.size=Math.random()*18+6;
+      this.sides=Math.floor(Math.random()*3)+3;this.rot=Math.random()*Math.PI*2;
+      this.rotV=(Math.random()-.5)*.003;this.vy=-(Math.random()*.08+.02);
+      this.col=palette[Math.floor(Math.random()*palette.length)];
+      this.phase=Math.random()*Math.PI*2;this.filled=Math.random()>.7;
+      this.lineW=Math.random()>.5?1:.6;
+    }
+    update(t){
+      this.rot+=this.rotV;this.y+=this.vy;
+      this.x+=Math.sin(t*.0003+this.phase)*.15;
+      if(this.y<-this.size*3){this.y=h+this.size*3+Math.random()*200;this.x=Math.random()*w}
+    }
+    draw(){
+      ctx.save();ctx.translate(this.x,this.y-window.scrollY*.15);ctx.rotate(this.rot);
+      ctx.beginPath();
+      for(let i=0;i<this.sides;i++){
+        const a=(Math.PI*2/this.sides)*i-Math.PI/2;
+        const px=Math.cos(a)*this.size,py=Math.sin(a)*this.size;
+        i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+      }
+      ctx.closePath();const{r,g,b,a}=this.col;
+      if(this.filled){ctx.fillStyle=`rgba(${r},${g},${b},${a*.5})`;ctx.fill()}
+      ctx.strokeStyle=`rgba(${r},${g},${b},${a*1.5})`;ctx.lineWidth=this.lineW;ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  const geos=[];for(let i=0;i<30;i++)geos.push(new Geo());
+  const dots=[];
+  for(let i=0;i<40;i++){
+    dots.push({x:Math.random()*w,y:Math.random()*h*2,r:Math.random()*2+.5,
+      vy:-(Math.random()*.04+.01),col:palette[Math.floor(Math.random()*palette.length)],
+      phase:Math.random()*Math.PI*2});
+  }
+
+  let t=0;
+  function animate(){
+    t++;ctx.clearRect(0,0,w,h);
+    for(let i=0;i<geos.length;i++){
+      for(let j=i+1;j<geos.length;j++){
+        const ax=geos[i].x,ay=geos[i].y-window.scrollY*.15;
+        const bx=geos[j].x,by=geos[j].y-window.scrollY*.15;
+        const dx=ax-bx,dy=ay-by,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<180){ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);
+          ctx.strokeStyle=`rgba(140,120,100,${.025*(1-dist/180)})`;ctx.lineWidth=.4;ctx.stroke()}
+      }
+    }
+    geos.forEach(g=>{g.update(t);g.draw()});
+    dots.forEach(d=>{
+      d.y+=d.vy;d.x+=Math.sin(t*.0006+d.phase)*.08;
+      if(d.y<-10){d.y=h+10;d.x=Math.random()*w}
+      const{r,g,b,a}=d.col;ctx.beginPath();
+      ctx.arc(d.x,d.y-window.scrollY*.08,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${r},${g},${b},${a*1.5})`;ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+<script>
+(function(){
+  const lens=document.getElementById('cursorLens');
+  if(!lens||!matchMedia('(hover:hover)').matches)return;
+  let mx=0,my=0,lx=0,ly=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
+    if(!lens.classList.contains('active'))lens.classList.add('active')});
+  document.addEventListener('mouseleave',()=>lens.classList.remove('active'));
+  document.querySelectorAll('a,button,.btn,.related-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>lens.classList.add('on-btn'));
+    el.addEventListener('mouseleave',()=>lens.classList.remove('on-btn'));
+  });
+  (function raf(){
+    lx+=(mx-lx)*.15;ly+=(my-ly)*.15;
+    lens.style.left=lx+'px';lens.style.top=ly+'px';
+    requestAnimationFrame(raf);
+  })();
+})();
+</script>
+</body>
+</html>
