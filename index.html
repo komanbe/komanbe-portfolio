@@ -666,6 +666,17 @@ body:has(nav.hidden) .sec-jump{top:0}
 .sec-jump a:hover{color:var(--text)}
 #talks,#exhibitions,#lectures,#pub-journal,#pub-intl,#pub-domestic,#pub-articles,#pub-book,#pub-thesis,#media-tv,#media-press,#media-web,#media-video,.works-group{scroll-margin-top:calc(var(--nav-h) + 3.6rem)}
 }
+
+/* スマホ：長い一覧は最初の数件だけ見せ、「もっと見る」で開く。見出しの帯は折り返して全部見せる */
+.fold-toggle{display:none}
+@media(max-width:768px){
+.sec-jump{flex-wrap:wrap;white-space:normal;overflow-x:visible;column-gap:.9rem;row-gap:.25rem;padding:.55rem 0}
+.sec-jump a{font-size:.75rem;line-height:1.55}
+#talks,#exhibitions,#lectures,#pub-journal,#pub-intl,#pub-domestic,#pub-articles,#pub-book,#pub-thesis,#media-tv,#media-press,#media-web,#media-video,.works-group{scroll-margin-top:calc(var(--nav-h) + 5.5rem)}
+.is-collapsed>.fold-item{display:none!important}
+.fold-toggle{display:block;width:100%;margin:.9rem 0 2rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:.82rem;font-weight:600;letter-spacing:.02em}
+.fold-toggle:active{background:var(--bg-alt)}
+}
 </style>
 </head>
 <body>
@@ -1239,6 +1250,66 @@ if(typeof VANTA!=='undefined'&&VANTA.WAVES){
     zoom:.78
   });
 }
+</script>
+<script>
+// ===== スマホ：長い一覧をたたむ（「もっと見る」で開く。#リンク先が隠れていれば自動で開く） =====
+(function(){
+  var mq=window.matchMedia('(max-width: 768px)');
+  var SPECS=[['.pub-list','.pub-item',5,10],['.media-list','.media-item',5,10],['.works-grid','.work-card',3,6]];
+  var toggles=[];
+  function isEn(){return document.documentElement.lang==='en';}
+  function render(t){
+    var open=!t.list.classList.contains('is-collapsed');
+    t.btn.textContent=open?(isEn()?'Show less':'閉じる'):(isEn()?'Show '+t.rest+' more':'もっと見る（残り'+t.rest+'件）');
+    t.btn.setAttribute('aria-expanded',open?'true':'false');
+  }
+  function openFor(el){
+    var item=el&&el.closest('.fold-item');
+    if(!item)return false;
+    toggles.forEach(function(t){
+      if(t.list.contains(item)&&t.list.classList.contains('is-collapsed')){t.list.classList.remove('is-collapsed');render(t);}
+    });
+    return true;
+  }
+  function reveal(){
+    if(!location.hash)return;
+    var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(openFor(el))setTimeout(function(){el.scrollIntoView({block:'start'});},60);
+  }
+  // ページ内リンク（#…）で隠れた項目へ飛ぶときは、先に一覧を開く（既存のなめらかスクロールより先に動く）
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a&&a.getAttribute('href').length>1)openFor(document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))));
+  },true);
+  // 外からリンクで来たとき：読み込みが終わってからも位置を合わせる
+  window.addEventListener('load',function(){setTimeout(reveal,300);});
+  function setup(){
+    if(!mq.matches||toggles.length)return;
+    SPECS.forEach(function(s){
+      document.querySelectorAll(s[0]).forEach(function(list){
+        var items=[].filter.call(list.children,function(c){return c.matches(s[1]);});
+        if(items.length<s[3])return;
+        items.slice(s[2]).forEach(function(el){el.classList.add('fold-item');});
+        list.classList.add('is-collapsed');
+        var btn=document.createElement('button');
+        btn.type='button';btn.className='fold-toggle';
+        var t={list:list,btn:btn,rest:items.length-s[2]};
+        btn.addEventListener('click',function(){
+          var closing=!list.classList.contains('is-collapsed');
+          list.classList.toggle('is-collapsed');render(t);
+          if(closing)window.scrollTo({top:list.getBoundingClientRect().top+window.scrollY-140});
+        });
+        list.insertAdjacentElement('afterend',btn);
+        toggles.push(t);render(t);
+      });
+    });
+    reveal();
+  }
+  new MutationObserver(function(){toggles.forEach(render);}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  window.addEventListener('hashchange',reveal);
+  if(mq.addEventListener)mq.addEventListener('change',setup);else mq.addListener(setup);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
 </script>
 </body>
 </html>
