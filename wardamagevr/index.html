@@ -120,7 +120,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
 @media(max-width:640px){.fig-grid{grid-template-columns:1fr}}
 .fig-grid figure{margin:0}
 .fig-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:6px;border:1px solid var(--border)}
-.fig-grid figure.span{grid-column:1/-1}.fig-grid figure.span img{aspect-ratio:auto}
+.fig-grid figure.span{grid-column:1/-1}.fig-grid figure.span img,.fig-grid figure.natural img{aspect-ratio:auto}
 .credit{display:block;font-size:.64rem}
 /* STEPS */
 .step-list{list-style:none;display:grid;gap:1rem;margin-top:1rem}
@@ -259,7 +259,7 @@ footer{padding:2rem clamp(1.5rem,4vw,4rem);text-align:center;border-top:1px soli
     <h2>制作工程</h2>
     <ol class="step-list"><li class="step"><span class="step-num">01</span><div><h3>映像から3D空間へ</h3><p>アルジャジーラとの共同開発（東京大学大学院情報学環 メディア・コンテンツ総合研究機構とアルジャジーラ・メディア・ネットワークのMOUに基づく。2024年9月から開発責任者を担当）では、数秒の報道映像から3D Gaussian Splattingで空間を生成し、映像に映っていない建物の奥まで歩いて入れるようにしています。</p></div></li><li class="step"><span class="step-num">02</span><div><h3>複数人で同じ場所へ</h3><p>3D Tiles／Cesium for Unityで地図上に配置した空間に、複数人がアバターで集まれるようにしています。</p></div></li></ol>
     <p class="step-note">来場者のアバターで古写真の中を歩く体験は、<a href="../oldphotovr/">古写真VR（アバター・フレーム）</a>として別にまとめています。</p>
-    <div class="fig-grid"><figure class="span"><img src="img/footage-to-3dgs.jpg" alt="報道映像（左）と、3D Gaussian Splattingで生成した空間（右）" loading="lazy"><figcaption>報道映像（左）と、3D Gaussian Splattingで生成した空間（右）<span class="credit">Original footage provided by Al Jazeera</span></figcaption></figure><figure><img src="img/metaverse-award.jpg" alt="JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）" loading="lazy"><figcaption>JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）</figcaption></figure></div>
+    <div class="fig-grid"><figure class="span"><img src="img/footage-to-3dgs.jpg" alt="報道映像（左）と、3D Gaussian Splattingで生成した空間（右）" loading="lazy"><figcaption>報道映像（左）と、3D Gaussian Splattingで生成した空間（右）<span class="credit">Original footage provided by Al Jazeera</span></figcaption></figure><figure class="natural"><img src="img/metaverse-award.jpg" alt="JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）" loading="lazy"><figcaption>JAPAN Metaverse Awards 2025（ベストプロトタイプ賞）</figcaption></figure></div>
   </div>
 
   <div class="work-section">
